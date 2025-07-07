@@ -27,3 +27,8 @@ export type BugStore = {
   updateBugNotes: (id: string, notes: string) => void;
   getBugById: (id: string) => Bug | undefined;
 };
+
+export type SettingsStore = {
+  friendGender: 'boy' | 'girl';
+  setFriendGender: (gender: 'boy' | 'girl') => void;
+};
