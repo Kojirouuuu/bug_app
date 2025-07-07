@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Alert } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { chatWithBugDoctor, chatWithFriend } from '@/services/mockApi';
@@ -29,6 +29,7 @@ export default function ChatScreen() {
   const [chatHistory, setChatHistory] = useState<ChatTurn[]>([]);
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
+  const insets = useSafeAreaInsets();
   const { addBug, bugs } = useBugStore();
 
   // Check if this bug is already in the collection
@@ -163,6 +164,7 @@ export default function ChatScreen() {
       <KeyboardAvoidingView
         style={styles.keyboardAvoid}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={insets.bottom}
       >
         {/* Header */}
         <View style={styles.header}>

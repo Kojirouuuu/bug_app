@@ -85,19 +85,19 @@ export default function QuizScreen() {
     setShowResult(true);
 
     // 結果表示アニメーション
-    Animated.sequence([
-      Animated.timing(resultAnimation, {
-        toValue: 1,
-        duration: 300,
-        useNativeDriver: true,
-      }),
-      Animated.timing(resultAnimation, {
-        toValue: 0,
-        duration: 200,
-        delay: 2000,
-        useNativeDriver: true,
-      }),
-    ]).start();
+    Animated.timing(resultAnimation, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => {
+      setTimeout(() => {
+        Animated.timing(resultAnimation, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }).start();
+      }, 1500);
+    });
 
     if (answerIndex === currentQuestion.correctAnswer) {
       setScore(score + 1);
@@ -400,22 +400,22 @@ const styles = StyleSheet.create({
   },
   resultOverlay: {
     position: 'absolute',
-    top: '40%',
+    top: '50%',
     left: '50%',
-    transform: [{ translateX: -75 }, { translateY: -75 }],
+    transform: [{ translateX: -50 }, { translateY: -50 }],
     zIndex: 1000,
   },
   resultBadge: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
     shadowColor: Colors.shadow,
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 8,
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
   },
   correctBadge: {
     backgroundColor: Colors.success,

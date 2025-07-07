@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollViewx, Alert } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useBugStore } from '@/store/bugStore';
+import { useSettingsStore } from '@/store/settingsStore';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 export default function ProfileScreen() {
   const { bugs } = useBugStore();
+  const { friendGender, setFriendGender } = useSettingsStore();
 
   const stats = [
     { icon: 'bug', label: '発見した虫', value: bugs.length },
@@ -53,14 +56,25 @@ export default function ProfileScreen() {
     });
   };
 
+  const handleSettingsPress = () => {
+    Alert.alert('むしむしフレンドの設定', 'どちらを選びますか？', [
+      { text: '男の子', onPress: () => setFriendGender('boy') },
+      { text: '女の子', onPress: () => setFriendGender('girl') },
+      { text: 'キャンセル', style: 'cancel' },
+    ]);
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <ScrollView style={styles.content}>
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>プロフィール</Text>
-          <Text style={styles.subtitle}>虫博士への道</Text>
+          <TouchableOpacity style={styles.settingsButton} onPress={handleSettingsPress}>
+            <Ionicons name="settings" size={24} color={Colors.primary} />
+          </TouchableOpacity>
         </View>
+        <Text style={styles.subtitle}>虫博士への道</Text>
 
         {/* Avatar */}
         <View style={styles.avatarContainer}>
@@ -146,8 +160,10 @@ const styles = StyleSheet.create({
     padding: Spacing.lg,
   },
   header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: Spacing.xl,
+    marginBottom: Spacing.sm,
   },
   title: {
     fontSize: Typography.extraLarge,
@@ -159,6 +175,10 @@ const styles = StyleSheet.create({
     fontSize: Typography.medium,
     color: Colors.gray,
     textAlign: 'center',
+    marginBottom: Spacing.xl,
+  },
+  settingsButton: {
+    padding: Spacing.sm,
   },
   avatarContainer: {
     alignItems: 'center',

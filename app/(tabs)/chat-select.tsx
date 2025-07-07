@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
+import { useSettingsStore } from '@/store/settingsStore';
 
 type ChatOption = {
   id: string;
@@ -16,6 +17,8 @@ type ChatOption = {
 };
 
 export default function ChatSelectScreen() {
+  const { friendGender } = useSettingsStore();
+  const friendIcon = friendGender === 'girl' ? 'woman' : 'man';
   const chatOptions: ChatOption[] = [
     {
       id: 'doctor',
@@ -30,7 +33,7 @@ export default function ChatSelectScreen() {
       id: 'friend',
       title: 'むしむしフレンド',
       description: '虫が大好きな元気なお友達AIです。一緒に虫について楽しくおしゃべりしましょう！',
-      icon: 'happy',
+      icon: friendIcon,
       color: Colors.accent,
       route: '/chat',
       params: { chatType: 'friend' },
