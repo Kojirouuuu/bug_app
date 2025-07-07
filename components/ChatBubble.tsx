@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { ChatTurn } from '@/types';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
+import { useSettingsStore } from '@/store/settingsStore';
 
 interface ChatBubbleProps {
   turn: ChatTurn;
@@ -9,17 +11,26 @@ interface ChatBubbleProps {
   chatType?: 'doctor' | 'friend';
 }
 
-const DOCTOR_AVATAR = 'https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=200';
-const FRIEND_AVATAR = 'https://images.pexels.com/photos/326055/pexels-photo-326055.jpeg?auto=compress&cs=tinysrgb&w=200';
+const DOCTOR_ICON = 'man';
 
 export default function ChatBubble({ turn, isLast = false, chatType = 'doctor' }: ChatBubbleProps) {
+  const { friendGender } = useSettingsStore();
   const isBot = turn.role === 'doctor' || turn.role === 'friend';
-  const avatar = turn.role === 'friend' ? FRIEND_AVATAR : DOCTOR_AVATAR;
+  const iconName = turn.role === 'doctor'
+    ? DOCTOR_ICON
+    : friendGender === 'girl'
+      ? 'woman'
+      : 'man';
 
   return (
     <View style={[styles.container, isLast && styles.lastMessage]}>
       {isBot && (
-        <Image source={{ uri: avatar }} style={styles.avatar} />
+        <View style={[
+          styles.avatar,
+          turn.role === 'friend' ? styles.friendAvatar : styles.doctorAvatar,
+        ]}>
+          <Ionicons name={iconName as any} size={20} color={Colors.white} />
+        </View>
       )}
       <View
         style={[
@@ -56,7 +67,14 @@ const styles = StyleSheet.create({
     height: 32,
     borderRadius: 16,
     marginRight: Spacing.sm,
-    backgroundColor: Colors.lightGray,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  doctorAvatar: {
+    backgroundColor: Colors.doctorBubble,
+  },
+  friendAvatar: {
+    backgroundColor: Colors.accent,
   },
   bubble: {
     maxWidth: '75%',

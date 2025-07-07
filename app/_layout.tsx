@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { View } from 'react-native';
 import { useFrameworkReady } from '@/hooks/useFrameworkReady';
+import { Colors } from '@/constants/colors';
 
 export default function RootLayout() {
   useFrameworkReady();
 
   return (
-    <>
+    <View style={{ flex: 1, backgroundColor: Colors.background }}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="capture" />
@@ -17,7 +19,7 @@ export default function RootLayout() {
         <Stack.Screen name="achievement" />
         <Stack.Screen name="+not-found" />
       </Stack>
-      <StatusBar style="auto" />
-    </>
+      <StatusBar style="dark" backgroundColor={Colors.background} />
+    </View>
   );
 }
