@@ -6,11 +6,13 @@ import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useBugStore } from '@/store/bugStore';
 import { useSettingsStore } from '@/store/settingsStore';
+import { useRewardStore } from '@/store/rewardStore';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 export default function ProfileScreen() {
   const { bugs } = useBugStore();
   const { friendGender, setFriendGender } = useSettingsStore();
+  const { points } = useRewardStore();
 
   const stats = [
     { icon: 'bug', label: '発見した虫', value: bugs.length },
@@ -83,6 +85,7 @@ export default function ProfileScreen() {
             <Ionicons name="person" size={48} color={Colors.white} />
           </View>
           <Text style={styles.username}>虫博士</Text>
+          <Text style={styles.points}>ポイント: {points}</Text>
         </View>
 
         {/* Stats */}
@@ -198,6 +201,12 @@ const styles = StyleSheet.create({
     fontSize: Typography.large,
     fontWeight: 'bold',
     color: Colors.darkGray,
+  },
+  points: {
+    fontSize: Typography.medium,
+    color: Colors.accent,
+    marginTop: Spacing.sm,
+    fontWeight: '600',
   },
   statsContainer: {
     flexDirection: 'row',

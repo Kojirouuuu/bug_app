@@ -16,14 +16,12 @@ export default function ChatScreen() {
     bugName, 
     imageUri, 
     chatType = 'doctor',
-    quickQuestion,
-    fromQuiz 
-  } = useLocalSearchParams<{ 
+    quickQuestion
+  } = useLocalSearchParams<{
     bugName?: string; 
     imageUri?: string;
     chatType?: 'doctor' | 'friend';
     quickQuestion?: string;
-    fromQuiz?: string;
   }>();
   
   const [chatHistory, setChatHistory] = useState<ChatTurn[]>([]);
@@ -53,11 +51,7 @@ export default function ChatScreen() {
     // Initial greeting based on chat type and context
     let initialMessage = '';
     
-    if (fromQuiz === 'true' && bugName) {
-      initialMessage = chatType === 'doctor' 
-        ? `クイズお疲れさま！${bugName}についてもっと詳しく知りたいことはありますか？`
-        : `クイズお疲れさま！${bugName}について一緒にお話ししよう！`;
-    } else if (quickQuestion) {
+    if (quickQuestion) {
       // Quick question was provided
       sendMessage(quickQuestion);
       return;
@@ -77,7 +71,7 @@ export default function ChatScreen() {
         message: initialMessage,
       },
     ]);
-  }, [bugName, chatType, quickQuestion, fromQuiz]);
+  }, [bugName, chatType, quickQuestion]);
 
   const sendMessage = async (message: string) => {
     if (!message.trim() || loading) return;

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useBugStore } from '@/store/bugStore';
+import { useRewardStore } from '@/store/rewardStore';
+import { getNearbyBugs } from '@/services/mockApi';
 import BugCard from '@/components/BugCard';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 export default function HomeScreen() {
   const { bugs } = useBugStore();
+  const { boostLevel } = useRewardStore();
+  const [nearby, setNearby] = useState<string[]>([]);
   const recentBugs = bugs.slice(0, 3);
 
   const handleCapture = () => {
@@ -22,6 +26,10 @@ export default function HomeScreen() {
   const handleViewAll = () => {
     router.push('/(tabs)/notebook');
   };
+
+  useEffect(() => {
+    getNearbyBugs(boostLevel).then(setNearby);
+  }, [boostLevel]);
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
@@ -74,6 +82,18 @@ export default function HomeScreen() {
             </View>
           )}
         </View>
+
+        {/* Nearby Recommendations */}
+        {nearby.length > 0 && (
+          <View style={styles.section}>
+            <View style={styles.sectionHeader}>
+              <Text style={styles.sectionTitle}>近くで見つかるかも?</Text>
+            </View>
+            {nearby.map((name, idx) => (
+              <Text key={idx} style={styles.recommendItem}>• {name}</Text>
+            ))}
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -158,4 +178,8 @@ const styles = StyleSheet.create({
     marginTop: Spacing.sm,
     textAlign: 'center',
   },
-});
+  recommendItem: {
+    fontSize: Typography.medium,
+    color: Colors.darkGray,
+    marginBottom: Spacing.xs,
+  },});
