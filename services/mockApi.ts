@@ -100,5 +100,28 @@ export async function chatWithFriend(message: string): Promise<ChatTurn[]> {
       role: "friend", 
       message: friendQuestions[Math.floor(Math.random() * friendQuestions.length)]
     },
-  ];
+  ];}
+// Mock posting of discovery data to backend
+export async function postDiscovery(imageUri: string, location: { lat: number; lon: number }) {
+  await delay(500);
+  // normally would save to backend and award points
+  return { pointsAwarded: 5 };
+}
+
+// Mock gacha draw
+export async function drawGacha(): Promise<'大当たり' | 'あたり' | 'ハズレ'> {
+  await delay(800);
+  const roll = Math.random();
+  if (roll < 0.1) return '大当たり';
+  if (roll < 0.4) return 'あたり';
+  return 'ハズレ';
+}
+
+// Mock nearby bug recommendation
+export async function getNearbyBugs(boostLevel: number): Promise<string[]> {
+  await delay(500);
+  const bugs = ['ダンゴムシ', 'ナナホシテントウ', 'モンシロチョウ', 'カブトムシ', 'クワガタ'];
+  const count = 3 + boostLevel;
+  const shuffled = bugs.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
 }
