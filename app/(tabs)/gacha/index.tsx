@@ -1,35 +1,33 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { drawGacha } from '@/services/mockApi';
 import { useRewardStore } from '@/store/rewardStore';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 export default function GachaScreen() {
-  const [result, setResult] = useState<string | null>(null);
   const { points, consumePoints, setBoost } = useRewardStore();
 
   const handleDraw = async () => {
     if (!consumePoints(10)) return;
-    const res = await drawGacha();
-    setResult(res);
-    if (res === '大当たり') setBoost(2);
-    else if (res === 'あたり') setBoost(1);
-    else setBoost(0);
+    router.push({
+      pathname: '/gacha/movie',
+    });
   };
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <View style={styles.content}>
         <Text style={styles.points}>ポイント: {points}</Text>
-        <TouchableOpacity style={styles.button} onPress={handleDraw} activeOpacity={0.8}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleDraw}
+          activeOpacity={0.8}
+        >
           <Ionicons name="gift" size={40} color={Colors.white} />
           <Text style={styles.buttonText}>ガチャを回す (10pt)</Text>
         </TouchableOpacity>
-        {result && (
-          <Text style={styles.result}>結果: {result}</Text>
-        )}
       </View>
     </SafeAreaView>
   );
@@ -74,4 +72,3 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 });
-

@@ -1,7 +1,13 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import { router, RelativePathString } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 import { useSettingsStore } from '@/store/settingsStore';
@@ -12,7 +18,7 @@ type ChatOption = {
   description: string;
   icon: string;
   color: string;
-  route: string;
+  route: RelativePathString;
   params?: any;
 };
 
@@ -23,19 +29,21 @@ export default function ChatSelectScreen() {
     {
       id: 'doctor',
       title: '虫博士',
-      description: '虫について何でも知っている優しい博士です。虫の生態や特徴について詳しく教えてくれます。',
+      description:
+        '虫について何でも知っている優しい博士です。虫の生態や特徴について詳しく教えてくれます。',
       icon: 'medical',
       color: Colors.primary,
-      route: '/chat',
+      route: '/chat' as RelativePathString,
       params: { chatType: 'doctor' },
     },
     {
       id: 'friend',
       title: 'むしむしフレンド',
-      description: '虫が大好きな元気なお友達AIです。一緒に虫について楽しくおしゃべりしましょう！',
+      description:
+        '虫が大好きな元気なお友達AIです。一緒に虫について楽しくおしゃべりしましょう！',
       icon: friendIcon,
       color: Colors.accent,
-      route: '/chat',
+      route: '/chat' as RelativePathString,
       params: { chatType: 'friend' },
     },
   ];
@@ -53,9 +61,7 @@ export default function ChatSelectScreen() {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>チャット相手を選ぼう</Text>
-          <Text style={styles.subtitle}>
-            誰とお話ししたいですか？
-          </Text>
+          <Text style={styles.subtitle}>誰とお話ししたいですか？</Text>
         </View>
 
         {/* Chat Options */}
@@ -67,15 +73,26 @@ export default function ChatSelectScreen() {
               onPress={() => handleChatSelect(option)}
               activeOpacity={0.8}
             >
-              <View style={[styles.iconContainer, { backgroundColor: option.color }]}>
-                <Ionicons name={option.icon as any} size={48} color={Colors.white} />
+              <View
+                style={[
+                  styles.iconContainer,
+                  { backgroundColor: option.color },
+                ]}
+              >
+                <Ionicons
+                  name={option.icon as any}
+                  size={48}
+                  color={Colors.white}
+                />
               </View>
-              
+
               <View style={styles.optionContent}>
                 <Text style={styles.optionTitle}>{option.title}</Text>
-                <Text style={styles.optionDescription}>{option.description}</Text>
+                <Text style={styles.optionDescription}>
+                  {option.description}
+                </Text>
               </View>
-              
+
               <Ionicons name="chevron-forward" size={24} color={Colors.gray} />
             </TouchableOpacity>
           ))}
@@ -84,44 +101,50 @@ export default function ChatSelectScreen() {
         {/* Quick Actions */}
         <View style={styles.quickActionsContainer}>
           <Text style={styles.quickActionsTitle}>クイックアクション</Text>
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
             style={styles.quickActionCard}
-            onPress={() => router.push({
-              pathname: '/chat',
-              params: { 
-                chatType: 'doctor',
-                quickQuestion: 'この虫は何を食べるの？'
-              },
-            })}
+            onPress={() =>
+              router.push({
+                pathname: '/chat',
+                params: {
+                  chatType: 'doctor',
+                  quickQuestion: 'この虫は何を食べるの？',
+                },
+              })
+            }
           >
             <Ionicons name="restaurant" size={24} color={Colors.primary} />
             <Text style={styles.quickActionText}>虫の食べ物について聞く</Text>
           </TouchableOpacity>
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
             style={styles.quickActionCard}
-            onPress={() => router.push({
-              pathname: '/chat',
-              params: { 
-                chatType: 'doctor',
-                quickQuestion: 'この虫はどこに住んでいるの？'
-              },
-            })}
+            onPress={() =>
+              router.push({
+                pathname: '/chat',
+                params: {
+                  chatType: 'doctor',
+                  quickQuestion: 'この虫はどこに住んでいるの？',
+                },
+              })
+            }
           >
             <Ionicons name="home" size={24} color={Colors.primary} />
             <Text style={styles.quickActionText}>虫の住む場所について聞く</Text>
           </TouchableOpacity>
-          
-          <TouchableOpacity 
+
+          <TouchableOpacity
             style={styles.quickActionCard}
-            onPress={() => router.push({
-              pathname: '/chat',
-              params: { 
-                chatType: 'friend',
-                quickQuestion: '一緒に虫探しをしよう！'
-              },
-            })}
+            onPress={() =>
+              router.push({
+                pathname: '/chat',
+                params: {
+                  chatType: 'friend',
+                  quickQuestion: '一緒に虫探しをしよう！',
+                },
+              })
+            }
           >
             <Ionicons name="search" size={24} color={Colors.accent} />
             <Text style={styles.quickActionText}>虫探しの相談をする</Text>
@@ -134,7 +157,9 @@ export default function ChatSelectScreen() {
           <View style={styles.tipsList}>
             <View style={styles.tipItem}>
               <Text style={styles.tipBullet}>•</Text>
-              <Text style={styles.tipText}>分からないことは何でも聞いてみよう</Text>
+              <Text style={styles.tipText}>
+                分からないことは何でも聞いてみよう
+              </Text>
             </View>
             <View style={styles.tipItem}>
               <Text style={styles.tipBullet}>•</Text>
