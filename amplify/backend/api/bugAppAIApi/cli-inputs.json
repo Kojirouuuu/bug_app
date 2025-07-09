@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/summary": {
+      "name": "/summary",
+      "lambdaFunction": "imageAnalysisAI",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

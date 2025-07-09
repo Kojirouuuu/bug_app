@@ -1,16 +1,25 @@
 import React from 'react';
 
-import { View, Text, StyleSheet, TouchableOpacity, ScrollViewx, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useBugStore } from '@/store/bugStore';
 import { useSettingsStore } from '@/store/settingsStore';
+import { useRewardStore } from '@/store/rewardStore';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 export default function ProfileScreen() {
   const { bugs } = useBugStore();
   const { friendGender, setFriendGender } = useSettingsStore();
+  const { points } = useRewardStore();
 
   const stats = [
     { icon: 'bug', label: '発見した虫', value: bugs.length },
@@ -30,16 +39,25 @@ export default function ProfileScreen() {
       id: 'bug-apprentice',
       icon: 'trophy',
       title: '虫博士見習い',
-      description: bugs.length >= 5 ? '達成済み' : `5匹発見しよう (${bugs.length}/5)`,
+      description:
+        bugs.length >= 5 ? '達成済み' : `5匹発見しよう (${bugs.length}/5)`,
       isUnlocked: bugs.length >= 5,
     },
     {
       id: 'note-taker',
       icon: 'document-text',
       title: 'メモマスター',
-      description: bugs.filter(bug => bug.notes && bug.notes.trim().length > 0).length >= 3 ? 
-        '達成済み' : `3匹にメモを書こう (${bugs.filter(bug => bug.notes && bug.notes.trim().length > 0).length}/3)`,
-      isUnlocked: bugs.filter(bug => bug.notes && bug.notes.trim().length > 0).length >= 3,
+      description:
+        bugs.filter((bug) => bug.notes && bug.notes.trim().length > 0).length >=
+        3
+          ? '達成済み'
+          : `3匹にメモを書こう (${
+              bugs.filter((bug) => bug.notes && bug.notes.trim().length > 0)
+                .length
+            }/3)`,
+      isUnlocked:
+        bugs.filter((bug) => bug.notes && bug.notes.trim().length > 0).length >=
+        3,
     },
     {
       id: 'curious-explorer',
@@ -71,7 +89,10 @@ export default function ProfileScreen() {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>プロフィール</Text>
-          <TouchableOpacity style={styles.settingsButton} onPress={handleSettingsPress}>
+          <TouchableOpacity
+            style={styles.settingsButton}
+            onPress={handleSettingsPress}
+          >
             <Ionicons name="settings" size={24} color={Colors.primary} />
           </TouchableOpacity>
         </View>
@@ -83,13 +104,18 @@ export default function ProfileScreen() {
             <Ionicons name="person" size={48} color={Colors.white} />
           </View>
           <Text style={styles.username}>虫博士</Text>
+          <Text style={styles.points}>ポイント: {points}</Text>
         </View>
 
         {/* Stats */}
         <View style={styles.statsContainer}>
           {stats.map((stat, index) => (
             <View key={index} style={styles.statCard}>
-              <Ionicons name={stat.icon as any} size={32} color={Colors.primary} />
+              <Ionicons
+                name={stat.icon as any}
+                size={32}
+                color={Colors.primary}
+              />
               <Text style={styles.statValue}>{stat.value}</Text>
               <Text style={styles.statLabel}>{stat.label}</Text>
             </View>
@@ -100,20 +126,22 @@ export default function ProfileScreen() {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>実績</Text>
           {achievements.map((achievement, index) => (
-            <TouchableOpacity 
-              key={index} 
+            <TouchableOpacity
+              key={index}
               style={styles.achievementCard}
               onPress={() => handleAchievementPress(achievement.id)}
               activeOpacity={0.8}
             >
-              <Ionicons 
-                name={achievement.icon as any} 
-                size={24} 
-                color={achievement.isUnlocked ? Colors.accent : Colors.gray} 
+              <Ionicons
+                name={achievement.icon as any}
+                size={24}
+                color={achievement.isUnlocked ? Colors.accent : Colors.gray}
               />
               <View style={styles.achievementText}>
                 <Text style={styles.achievementTitle}>{achievement.title}</Text>
-                <Text style={styles.achievementDesc}>{achievement.description}</Text>
+                <Text style={styles.achievementDesc}>
+                  {achievement.description}
+                </Text>
               </View>
               <Ionicons name="chevron-forward" size={20} color={Colors.gray} />
             </TouchableOpacity>
@@ -125,24 +153,23 @@ export default function ProfileScreen() {
           <Text style={styles.sectionTitle}>虫博士レベル</Text>
           <View style={styles.levelCard}>
             <View style={styles.levelHeader}>
-              <Text style={styles.levelTitle}>レベル {Math.floor(bugs.length / 3) + 1}</Text>
-              <Text style={styles.levelProgress}>
-                {bugs.length % 3}/3
+              <Text style={styles.levelTitle}>
+                レベル {Math.floor(bugs.length / 3) + 1}
               </Text>
+              <Text style={styles.levelProgress}>{bugs.length % 3}/3</Text>
             </View>
             <View style={styles.progressBarContainer}>
-              <View 
+              <View
                 style={[
                   styles.progressBar,
-                  { width: `${((bugs.length % 3) / 3) * 100}%` }
-                ]} 
+                  { width: `${((bugs.length % 3) / 3) * 100}%` },
+                ]}
               />
             </View>
             <Text style={styles.levelDescription}>
-              {bugs.length < 3 ? 
-                `あと${3 - (bugs.length % 3)}匹でレベルアップ！` :
-                '次のレベルまであと少し！'
-              }
+              {bugs.length < 3
+                ? `あと${3 - (bugs.length % 3)}匹でレベルアップ！`
+                : '次のレベルまであと少し！'}
             </Text>
           </View>
         </View>
@@ -198,6 +225,12 @@ const styles = StyleSheet.create({
     fontSize: Typography.large,
     fontWeight: 'bold',
     color: Colors.darkGray,
+  },
+  points: {
+    fontSize: Typography.medium,
+    color: Colors.accent,
+    marginTop: Spacing.sm,
+    fontWeight: '600',
   },
   statsContainer: {
     flexDirection: 'row',

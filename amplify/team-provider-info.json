@@ -1,0 +1,30 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bugapp-dev-505e8-authRole",
+      "UnauthRoleArn": "arn:aws:iam::266735802934:role/amplify-bugapp-dev-505e8-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::266735802934:role/amplify-bugapp-dev-505e8-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-bugapp-dev-505e8-deployment",
+      "UnauthRoleName": "amplify-bugapp-dev-505e8-unauthRole",
+      "StackName": "amplify-bugapp-dev-505e8",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:266735802934:stack/amplify-bugapp-dev-505e8/0e48edb0-5ba4-11f0-b4a3-06392c9b4051",
+      "AmplifyAppId": "dv22i3sohr1hf",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-bugapp-dev-505e8-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "function": {
+        "imageAnalysisAI": {
+          "deploymentBucketName": "amplify-bugapp-dev-505e8-deployment",
+          "s3Key": "amplify-builds/imageAnalysisAI-6355622f4b5633547a49-build.zip"
+        }
+      },
+      "auth": {
+        "bugapp": {}
+      },
+      "api": {
+        "bugAppAIApi": {}
+      }
+    }
+  }
+}

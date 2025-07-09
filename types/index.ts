@@ -30,5 +30,11 @@ export type BugStore = {
 
 export type SettingsStore = {
   friendGender: 'boy' | 'girl';
-  setFriendGender: (gender: 'boy' | 'girl') => void;
+  setFriendGender: (gender: 'boy' | 'girl') => void;};
+export type RewardStore = {
+  points: number;
+  boostLevel: number;
+  addPoints: (amount: number) => void;
+  consumePoints: (amount: number) => boolean;
+  setBoost: (level: number) => void;
 };
