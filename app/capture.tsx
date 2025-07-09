@@ -37,23 +37,33 @@ export default function CaptureScreen() {
   const takePicture = async () => {
     if (cameraRef.current) {
       try {
-        // TODO: Replace with actual camera capture and AWS S3 upload
-        // const photo = await cameraRef.current.takePictureAsync();
-        // Upload to S3 and get URL
-        const mockImageUri = `https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg?auto=compress&cs=tinysrgb&w=400&t=${Date.now()}`;
-        
+        // カメラで写真を撮影
+        const photo = await cameraRef.current.takePictureAsync({
+          quality: 0.8,
+          base64: false,
+        });
+
+        console.log('Photo taken:', photo.uri);
+
+        // TODO: S3へのアップロード処理を後で実装
+        // const s3Url = await uploadToS3(photo.uri);
+
+        // 結果画面に遷移
         router.push({
           pathname: '/result',
-          params: { imageUri: mockImageUri },
+          params: {
+            imageUri: photo.uri,
+          },
         });
       } catch (error) {
-        Alert.alert('エラー', '写真を撮影できませんでした');
+        console.error('Error taking picture or creating summary:', error);
+        Alert.alert('エラー', '写真の処理中にエラーが発生しました');
       }
     }
   };
 
   const toggleCameraFacing = () => {
-    setFacing(current => (current === 'back' ? 'front' : 'back'));
+    setFacing((current) => (current === 'back' ? 'front' : 'back'));
   };
 
   const handleBack = () => {
@@ -69,7 +79,10 @@ export default function CaptureScreen() {
             <Ionicons name="arrow-back" size={24} color={Colors.white} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>虫を撮影</Text>
-          <TouchableOpacity style={styles.flipButton} onPress={toggleCameraFacing}>
+          <TouchableOpacity
+            style={styles.flipButton}
+            onPress={toggleCameraFacing}
+          >
             <Ionicons name="camera-reverse" size={24} color={Colors.white} />
           </TouchableOpacity>
         </View>
@@ -83,10 +96,7 @@ export default function CaptureScreen() {
 
         {/* Camera Controls */}
         <View style={styles.controls}>
-          <TouchableOpacity
-            style={styles.captureButton}
-            onPress={takePicture}
-          >
+          <TouchableOpacity style={styles.captureButton} onPress={takePicture}>
             <View style={styles.captureButtonInner} />
           </TouchableOpacity>
         </View>

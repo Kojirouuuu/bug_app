@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { analyzeBugImage, postDiscovery } from '@/services/mockApi';
 import { useBugStore } from '@/store/bugStore';
-import { useRewardStore } from '@/store/rewardStore';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { AnalyzeResult } from '@/types';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
+import { createSummary } from '@/lib/AI/summary';
 
 export default function ResultScreen() {
   const { imageUri } = useLocalSearchParams<{ imageUri: string }>();
   const [result, setResult] = useState<AnalyzeResult | null>(null);
   const [loading, setLoading] = useState(true);
   const { addBug } = useBugStore();
-  const { addPoints } = useRewardStore();
 
   useEffect(() => {
     if (imageUri) {
@@ -27,8 +32,15 @@ export default function ResultScreen() {
     try {
       setLoading(true);
       // TODO: Replace with actual AWS Bedrock Vision API call
-      const analysisResult = await analyzeBugImage(imageUri!);
-      setResult(analysisResult);
+      const summaryData = await createSummary(imageUri);
+
+      console.log('Summary data received:', summaryData);
+      setResult({
+        scientificName: summaryData.scientificName,
+        japaneseName: summaryData.japaneseName,
+        family: summaryData.family,
+        img: imageUri,
+      });
     } catch (error) {
       Alert.alert('エラー', '画像を分析できませんでした');
       router.back();
@@ -37,7 +49,7 @@ export default function ResultScreen() {
     }
   };
 
-  const handleSaveBug = async () => {
+  const handleSaveBug = () => {
     if (result) {
       addBug({
         scientificName: result.scientificName,
@@ -46,25 +58,12 @@ export default function ResultScreen() {
         img: result.img,
       });
 
-      try {
-        // Mock location; normally we'd use device GPS
-        const location = { lat: 35 + Math.random(), lon: 139 + Math.random() };
-        const { pointsAwarded } = await postDiscovery(result.img, location);
-        addPoints(pointsAwarded);
-      } catch (e) {
-        // ignore errors in mock
-      }
-
-      Alert.alert(
-        '保存完了',
-        '虫図鑑に追加されました！',
-        [
-          {
-            text: 'OK',
-            onPress: () => router.push('/(tabs)/'),
-          },
-        ]
-      );
+      Alert.alert('保存完了', '虫図鑑に追加されました！', [
+        {
+          text: 'OK',
+          onPress: () => router.push('/(tabs)/profile'),
+        },
+      ]);
     }
   };
 
@@ -72,7 +71,7 @@ export default function ResultScreen() {
     if (result) {
       router.push({
         pathname: '/chat',
-        params: { 
+        params: {
           bugName: result.japaneseName,
           imageUri: result.img,
         },
@@ -107,7 +106,7 @@ export default function ResultScreen() {
         {/* Result Card */}
         <View style={styles.resultCard}>
           <Image source={{ uri: result.img }} style={styles.bugImage} />
-          
+
           <View style={styles.bugInfo}>
             <Text style={styles.japaneseName}>{result.japaneseName}</Text>
             <Text style={styles.scientificName}>{result.scientificName}</Text>
@@ -115,7 +114,11 @@ export default function ResultScreen() {
           </View>
 
           <View style={styles.successBadge}>
-            <Ionicons name="checkmark-circle" size={32} color={Colors.success} />
+            <Ionicons
+              name="checkmark-circle"
+              size={32}
+              color={Colors.success}
+            />
             <Text style={styles.successText}>発見！</Text>
           </View>
         </View>
