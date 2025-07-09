@@ -42,20 +42,20 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="quiz"
-        options={{
-          title: 'クイズ',
-          tabBarIcon: ({ size, color }) => (
-            <Ionicons name="help-circle" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="chat-select"
         options={{
           title: 'チャット',
           tabBarIcon: ({ size, color }) => (
             <Ionicons name="chatbubbles" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="gacha"
+        options={{
+          title: 'ガチャ',
+          tabBarIcon: ({ size, color }) => (
+            <Ionicons name="gift" size={size} color={color} />
           ),
         }}
       />
@@ -69,5 +69,4 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
-  );
-}
+  );}

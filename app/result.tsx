@@ -3,8 +3,9 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, Alert } from 'react-na
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { analyzeBugImage } from '@/services/mockApi';
+import { analyzeBugImage, postDiscovery } from '@/services/mockApi';
 import { useBugStore } from '@/store/bugStore';
+import { useRewardStore } from '@/store/rewardStore';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { AnalyzeResult } from '@/types';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
@@ -14,6 +15,7 @@ export default function ResultScreen() {
   const [result, setResult] = useState<AnalyzeResult | null>(null);
   const [loading, setLoading] = useState(true);
   const { addBug } = useBugStore();
+  const { addPoints } = useRewardStore();
 
   useEffect(() => {
     if (imageUri) {
@@ -35,7 +37,7 @@ export default function ResultScreen() {
     }
   };
 
-  const handleSaveBug = () => {
+  const handleSaveBug = async () => {
     if (result) {
       addBug({
         scientificName: result.scientificName,
@@ -43,7 +45,16 @@ export default function ResultScreen() {
         family: result.family,
         img: result.img,
       });
-      
+
+      try {
+        // Mock location; normally we'd use device GPS
+        const location = { lat: 35 + Math.random(), lon: 139 + Math.random() };
+        const { pointsAwarded } = await postDiscovery(result.img, location);
+        addPoints(pointsAwarded);
+      } catch (e) {
+        // ignore errors in mock
+      }
+
       Alert.alert(
         '保存完了',
         '虫図鑑に追加されました！',
