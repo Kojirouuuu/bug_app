@@ -46,7 +46,7 @@
       "function": {
         "imageAnalysisAI": {
           "deploymentBucketName": "amplify-bugapp-hdev-a28fd-deployment",
-          "s3Key": "amplify-builds/imageAnalysisAI-2b5850334b745a543947-build.zip"
+          "s3Key": "amplify-builds/imageAnalysisAI-30724931384b6f766e4e-build.zip"
         }
       },
       "api": {
