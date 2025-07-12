@@ -47,7 +47,12 @@ try {
       summaryMarkdown = (result as any).url.href;
     }
   } catch (e) {
-    console.error(`写真 "${photo.id}" のsummaryPath取得に失敗:`, e);
+summaryMarkdown = (result as any).url.href;
+    }
+  } catch (e) {
+    console.error('写真のsummaryPath取得に失敗:', e);
+    summaryMarkdown = '';
+  }
     summaryMarkdown = '';
   }
   return summaryMarkdown;
