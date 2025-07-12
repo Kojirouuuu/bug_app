@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TextInput, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useBugStore } from '@/store/bugStore';
+import { useArticleStore } from '@/store/articleStore';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 export default function DetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { getBugById, updateBugNotes } = useBugStore();
-  const bug = getBugById(id!);
+  const { getInsect, updateInsectNotes } = useArticleStore();
+  const bug = getInsect(id!);
   const [notes, setNotes] = useState(bug?.notes || '');
   const [isEditing, setIsEditing] = useState(false);
 
@@ -24,7 +33,7 @@ export default function DetailScreen() {
   }
 
   const handleSaveNotes = () => {
-    updateBugNotes(bug.id, notes);
+    updateInsectNotes(bug.id, notes);
     setIsEditing(false);
     Alert.alert('保存完了', 'メモを保存しました！');
   };
@@ -36,9 +45,9 @@ export default function DetailScreen() {
   const handleChat = () => {
     router.push({
       pathname: '/chat',
-      params: { 
+      params: {
         bugName: bug.japaneseName,
-        imageUri: bug.img,
+        imageUri: bug.s3path,
       },
     });
   };
@@ -67,7 +76,7 @@ export default function DetailScreen() {
 
         {/* Bug Image */}
         <View style={styles.imageContainer}>
-          <Image source={{ uri: bug.img }} style={styles.bugImage} />
+          <Image source={{ uri: bug.s3path }} style={styles.bugImage} />
         </View>
 
         {/* Bug Information */}
@@ -75,11 +84,11 @@ export default function DetailScreen() {
           <Text style={styles.japaneseName}>{bug.japaneseName}</Text>
           <Text style={styles.scientificName}>{bug.scientificName}</Text>
           <Text style={styles.family}>{bug.family}</Text>
-          
+
           <View style={styles.dateContainer}>
             <Ionicons name="calendar" size={16} color={Colors.gray} />
             <Text style={styles.dateText}>
-              発見日: {formatDate(bug.discoveredAt)}
+              発見日: {formatDate(bug.foundAt)}
             </Text>
           </View>
         </View>
@@ -121,7 +130,8 @@ export default function DetailScreen() {
             </View>
           ) : (
             <Text style={styles.notesText}>
-              {notes || 'まだメモがありません。鉛筆ボタンを押してメモを書いてみましょう！'}
+              {notes ||
+                'まだメモがありません。鉛筆ボタンを押してメモを書いてみましょう！'}
             </Text>
           )}
         </View>

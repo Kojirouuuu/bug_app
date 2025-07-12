@@ -1,9 +1,16 @@
 import React from 'react';
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useBugStore } from '@/store/bugStore';
+import { useArticleStore } from '@/store/articleStore';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 type Achievement = {
@@ -21,39 +28,41 @@ type Achievement = {
 
 export default function AchievementScreen() {
   const { achievementId } = useLocalSearchParams<{ achievementId: string }>();
-  const { bugs } = useBugStore();
+  const { insects } = useArticleStore();
 
   const achievements: Achievement[] = [
     {
       id: 'first-discovery',
       title: 'はじめての発見',
-      description: '初めて虫を発見して図鑑に登録しました！虫の世界への第一歩です。',
+      description:
+        '初めて虫を発見して図鑑に登録しました！虫の世界への第一歩です。',
       icon: 'star',
       requirement: '最初の虫を発見する',
       reward: '虫博士への道がスタート！',
       tips: [
         'カメラボタンを押して虫を撮影してみよう',
         '庭や公園で虫を探してみよう',
-        '小さな虫でも大発見です！'
+        '小さな虫でも大発見です！',
       ],
-      isUnlocked: bugs.length > 0,
-      progress: Math.min(bugs.length, 1),
+      isUnlocked: insects.length > 0,
+      progress: Math.min(insects.length, 1),
       maxProgress: 1,
     },
     {
       id: 'bug-apprentice',
       title: '虫博士見習い',
-      description: '5匹の虫を発見して、虫の世界に詳しくなってきました。素晴らしい観察力です！',
+      description:
+        '5匹の虫を発見して、虫の世界に詳しくなってきました。素晴らしい観察力です！',
       icon: 'trophy',
       requirement: '5匹の虫を発見する',
       reward: '虫博士見習いの称号を獲得！',
       tips: [
         '違う場所で虫を探してみよう',
         '時間帯を変えて観察してみよう',
-        '虫博士に質問して知識を深めよう'
+        '虫博士に質問して知識を深めよう',
       ],
-      isUnlocked: bugs.length >= 5,
-      progress: Math.min(bugs.length, 5),
+      isUnlocked: insects.length >= 5,
+      progress: Math.min(insects.length, 5),
       maxProgress: 5,
     },
     {
@@ -66,10 +75,18 @@ export default function AchievementScreen() {
       tips: [
         '虫の色や形について書いてみよう',
         'どこで見つけたか記録しよう',
-        '気づいたことを何でも書いてみよう'
+        '気づいたことを何でも書いてみよう',
       ],
-      isUnlocked: bugs.filter(bug => bug.notes && bug.notes.trim().length > 0).length >= 3,
-      progress: Math.min(bugs.filter(bug => bug.notes && bug.notes.trim().length > 0).length, 3),
+      isUnlocked:
+        insects.filter(
+          (insect) => insect.notes && insect.notes.trim().length > 0
+        ).length >= 3,
+      progress: Math.min(
+        insects.filter(
+          (insect) => insect.notes && insect.notes.trim().length > 0
+        ).length,
+        3
+      ),
       maxProgress: 3,
     },
     {
@@ -82,7 +99,7 @@ export default function AchievementScreen() {
       tips: [
         '「博士に質問」ボタンを押してみよう',
         '虫の生態について聞いてみよう',
-        '疑問に思ったことは何でも質問しよう'
+        '疑問に思ったことは何でも質問しよう',
       ],
       isUnlocked: false, // チャット機能を使った場合にtrueになる
       progress: 0,
@@ -90,7 +107,7 @@ export default function AchievementScreen() {
     },
   ];
 
-  const achievement = achievements.find(a => a.id === achievementId);
+  const achievement = achievements.find((a) => a.id === achievementId);
 
   if (!achievement) {
     return (
@@ -106,8 +123,9 @@ export default function AchievementScreen() {
     router.back();
   };
 
-  const progressPercentage = achievement.maxProgress ? 
-    (achievement.progress! / achievement.maxProgress) * 100 : 0;
+  const progressPercentage = achievement.maxProgress
+    ? (achievement.progress! / achievement.maxProgress) * 100
+    : 0;
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
@@ -124,22 +142,34 @@ export default function AchievementScreen() {
         {/* Achievement Card */}
         <View style={styles.achievementCard}>
           <View style={styles.achievementHeader}>
-            <View style={[
-              styles.iconContainer,
-              { backgroundColor: achievement.isUnlocked ? Colors.accent : Colors.lightGray }
-            ]}>
-              <Ionicons 
-                name={achievement.icon as any} 
-                size={48} 
-                color={achievement.isUnlocked ? Colors.white : Colors.gray} 
+            <View
+              style={[
+                styles.iconContainer,
+                {
+                  backgroundColor: achievement.isUnlocked
+                    ? Colors.accent
+                    : Colors.lightGray,
+                },
+              ]}
+            >
+              <Ionicons
+                name={achievement.icon as any}
+                size={48}
+                color={achievement.isUnlocked ? Colors.white : Colors.gray}
               />
             </View>
             <View style={styles.achievementInfo}>
               <Text style={styles.achievementTitle}>{achievement.title}</Text>
-              <Text style={[
-                styles.achievementStatus,
-                { color: achievement.isUnlocked ? Colors.success : Colors.gray }
-              ]}>
+              <Text
+                style={[
+                  styles.achievementStatus,
+                  {
+                    color: achievement.isUnlocked
+                      ? Colors.success
+                      : Colors.gray,
+                  },
+                ]}
+              >
                 {achievement.isUnlocked ? '達成済み' : '未達成'}
               </Text>
             </View>
@@ -159,11 +189,11 @@ export default function AchievementScreen() {
                 </Text>
               </View>
               <View style={styles.progressBarContainer}>
-                <View 
+                <View
                   style={[
                     styles.progressBar,
-                    { width: `${progressPercentage}%` }
-                  ]} 
+                    { width: `${progressPercentage}%` },
+                  ]}
                 />
               </View>
             </View>
@@ -214,7 +244,11 @@ export default function AchievementScreen() {
 
         {achievement.isUnlocked && (
           <View style={styles.congratsCard}>
-            <Ionicons name="checkmark-circle" size={24} color={Colors.success} />
+            <Ionicons
+              name="checkmark-circle"
+              size={24}
+              color={Colors.success}
+            />
             <Text style={styles.congratsText}>
               おめでとう！この実績を達成しました！
             </Text>
