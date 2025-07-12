@@ -10,8 +10,8 @@ import {
 } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useRewardStore } from '@/store/rewardStore';
-import { useBugStore } from '@/store/bugStore';
-import { Bug } from '@/types';
+import { useArticleStore } from '@/store/articleStore';
+import { Insect } from '@/src/API';
 
 const { width, height } = Dimensions.get('window');
 
@@ -25,7 +25,7 @@ export default function GachaResults() {
   const [animation] = useState(new Animated.Value(0));
 
   const { addPoints } = useRewardStore();
-  const { addBug } = useBugStore();
+  const { addInsect } = useArticleStore();
 
   useEffect(() => {
     // パラメータから結果を取得
@@ -45,7 +45,7 @@ export default function GachaResults() {
 
   const giveReward = (gachaResult: GachaResult) => {
     let points = 0;
-    let bug: Bug | null = null;
+    let bug: Insect | null = null;
 
     switch (gachaResult) {
       case 'jackpot':
@@ -55,8 +55,9 @@ export default function GachaResults() {
           scientificName: 'Papilio machaon',
           japaneseName: 'アゲハチョウ',
           family: 'Papilionidae',
-          img: 'https://images.pexels.com/photos/672142/pexels-photo-672142.jpeg?auto=compress&cs=tinysrgb&w=400',
-          discoveredAt: new Date(),
+          s3path:
+            'https://images.pexels.com/photos/672142/pexels-photo-672142.jpeg?auto=compress&cs=tinysrgb&w=400',
+          foundAt: new Date(),
           notes: '大当たりで見つけた美しい蝶！',
         };
         break;
@@ -67,8 +68,9 @@ export default function GachaResults() {
           scientificName: 'Coccinella septempunctata',
           japaneseName: 'ナナホシテントウ',
           family: 'Coccinellidae',
-          img: 'https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg?auto=compress&cs=tinysrgb&w=400',
-          discoveredAt: new Date(),
+          s3path:
+            'https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg?auto=compress&cs=tinysrgb&w=400',
+          foundAt: new Date(),
           notes: 'ガチャで見つけた幸運の虫！',
         };
         break;
@@ -79,7 +81,7 @@ export default function GachaResults() {
 
     addPoints(points);
     if (bug) {
-      addBug(bug);
+      addInsect(bug);
       setRewardBug(bug);
     }
   };

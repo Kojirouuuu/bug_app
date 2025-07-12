@@ -166,7 +166,8 @@ export const createPhoto = /* GraphQL */ `mutation CreatePhoto(
       updatedAt
       __typename
     }
-    s3path
+    imagePath
+    summaryPath
     createdAt
     updatedAt
     photoAnalysisId
@@ -225,7 +226,8 @@ export const updatePhoto = /* GraphQL */ `mutation UpdatePhoto(
       updatedAt
       __typename
     }
-    s3path
+    imagePath
+    summaryPath
     createdAt
     updatedAt
     photoAnalysisId
@@ -284,7 +286,8 @@ export const deletePhoto = /* GraphQL */ `mutation DeletePhoto(
       updatedAt
       __typename
     }
-    s3path
+    imagePath
+    summaryPath
     createdAt
     updatedAt
     photoAnalysisId
@@ -309,7 +312,8 @@ export const createAIAnalysis = /* GraphQL */ `mutation CreateAIAnalysis(
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -351,7 +355,8 @@ export const updateAIAnalysis = /* GraphQL */ `mutation UpdateAIAnalysis(
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -393,7 +398,8 @@ export const deleteAIAnalysis = /* GraphQL */ `mutation DeleteAIAnalysis(
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -899,7 +905,8 @@ export const createInsect = /* GraphQL */ `mutation CreateInsect(
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -948,7 +955,8 @@ export const updateInsect = /* GraphQL */ `mutation UpdateInsect(
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -997,7 +1005,8 @@ export const deleteInsect = /* GraphQL */ `mutation DeleteInsect(
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId

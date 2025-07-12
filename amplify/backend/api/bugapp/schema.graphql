@@ -29,7 +29,8 @@ type Photo @model {
   location: String
   analysis: AIAnalysis @hasOne
   insect: Insect @hasOne
-  s3path: String!
+  imagePath: String!
+  summaryPath: String!
 }
 
 # AI解析結果

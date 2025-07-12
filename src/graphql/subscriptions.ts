@@ -154,7 +154,8 @@ export const onCreatePhoto = /* GraphQL */ `subscription OnCreatePhoto($filter: 
       updatedAt
       __typename
     }
-    s3path
+    imagePath
+    summaryPath
     createdAt
     updatedAt
     photoAnalysisId
@@ -210,7 +211,8 @@ export const onUpdatePhoto = /* GraphQL */ `subscription OnUpdatePhoto($filter: 
       updatedAt
       __typename
     }
-    s3path
+    imagePath
+    summaryPath
     createdAt
     updatedAt
     photoAnalysisId
@@ -266,7 +268,8 @@ export const onDeletePhoto = /* GraphQL */ `subscription OnDeletePhoto($filter: 
       updatedAt
       __typename
     }
-    s3path
+    imagePath
+    summaryPath
     createdAt
     updatedAt
     photoAnalysisId
@@ -290,7 +293,8 @@ export const onCreateAIAnalysis = /* GraphQL */ `subscription OnCreateAIAnalysis
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -331,7 +335,8 @@ export const onUpdateAIAnalysis = /* GraphQL */ `subscription OnUpdateAIAnalysis
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -372,7 +377,8 @@ export const onDeleteAIAnalysis = /* GraphQL */ `subscription OnDeleteAIAnalysis
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -851,7 +857,8 @@ export const onCreateInsect = /* GraphQL */ `subscription OnCreateInsect($filter
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -897,7 +904,8 @@ export const onUpdateInsect = /* GraphQL */ `subscription OnUpdateInsect($filter
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -943,7 +951,8 @@ export const onDeleteInsect = /* GraphQL */ `subscription OnDeleteInsect($filter
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId

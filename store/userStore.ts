@@ -5,12 +5,12 @@ import {
   signOutFromCognito,
   confirmSignUpWithCognito,
   resendConfirmationCode,
-  getAdminStatus,
   getCurrentUserFromDynamo,
   handleResetPassword,
   handleConfirmResetPassword,
 } from '@/lib/aws/auth';
 import { User as APIUser } from '@/src/API';
+import { useArticleStore } from './articleStore';
 
 type UserStore = {
   user: Omit<APIUser, '__typename' | 'updatedAt' | 'createdAt'>;
@@ -18,13 +18,14 @@ type UserStore = {
   loading: boolean;
   error: string | null;
   //　認証機能
-  signUp: (email: string, password: string) => Promise<void>;
+  signUp: (name: string, email: string, password: string) => Promise<void>;
   login: (
     email: string,
     password: string,
     cognitoIdVerrification: string | null
   ) => Promise<void>;
   logout: () => Promise<void>;
+  nameVerification: string | null;
 
   cognitoIdVerrification: string | null;
 
@@ -43,7 +44,7 @@ type UserStore = {
 
 export const useUserStore = create<UserStore>((set, get) => ({
   user: {
-    id: 'guest',
+    id: '',
     name: '',
     cognitosub: '',
     lastLogin: '',
@@ -51,7 +52,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
     points: 0,
     rank: '',
   },
-  email: null,
+  nameVerification: null,
   isAuthenticated: false,
   loading: false,
   error: null,
@@ -70,17 +71,33 @@ export const useUserStore = create<UserStore>((set, get) => ({
     set({ loading: true, error: null });
     try {
       await signOutFromCognito();
+      console.log('signOutFromCognito');
 
       const isSignInComplete = await signInWithCognito(email, password);
+      console.log('isSignInComplete', isSignInComplete);
       if (isSignInComplete) {
         // TODO: dynamoDBからユーザー情報を取得する時に引数がemailなのか？
-        const currentUser = await getCurrentUserFromDynamo(email);
-        const isAdmin = await getAdminStatus();
+        const currentUser = await getCurrentUserFromDynamo(
+          get().nameVerification || ''
+        );
+        console.log('currentUser', currentUser);
+
+        // ユーザー情報を設定
         set({
           user: currentUser,
           isAuthenticated: true,
           loading: false,
         });
+
+        // articleStoreにユーザーデータを読み込み
+        try {
+          const articleStore = useArticleStore.getState();
+          await articleStore.loadUserData(currentUser.id);
+          console.log('ArticleStore loaded with user data');
+        } catch (articleError) {
+          console.error('Error loading article data:', articleError);
+          // articleStoreのエラーはログインを妨げない
+        }
       } else {
         set({ error: 'ユーザーが見つかりません', loading: false });
         return;
@@ -93,8 +110,8 @@ export const useUserStore = create<UserStore>((set, get) => ({
       }
     }
   },
-  signUp: async (email: string, password: string) => {
-    set({ loading: true, error: null });
+  signUp: async (name: string, email: string, password: string) => {
+    set({ loading: true, error: null, nameVerification: name });
     try {
       const result = await signUpWithCognito(email, password);
       set({
@@ -115,6 +132,17 @@ export const useUserStore = create<UserStore>((set, get) => ({
     set({ loading: true, error: null });
     try {
       await signOutFromCognito();
+
+      // articleStoreをクリア
+      try {
+        const articleStore = useArticleStore.getState();
+        articleStore.setLoading(false);
+        articleStore.setError(null);
+        // 記事データは保持（ログアウト時も表示可能）
+      } catch (articleError) {
+        console.error('Error clearing article store:', articleError);
+      }
+
       set({
         user: {
           id: '',

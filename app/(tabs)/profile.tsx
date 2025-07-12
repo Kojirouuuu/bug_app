@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { router, useRootNavigationState } from 'expo-router';
+import { useRouter } from 'expo-router';
 import { useArticleStore } from '@/store/articleStore';
 import { useSettingsStore } from '@/store/settingsStore';
 import { useRewardStore } from '@/store/rewardStore';
@@ -20,46 +20,71 @@ import { useUserStore } from '@/store/userStore';
 import { User } from '@/src/API';
 
 export default function ProfileScreen() {
-  const { insects, photos } = useArticleStore();
-  const { user } = useUserStore();
+  const articleStore = useArticleStore();
+  const router = useRouter();
+  const { user, isAuthenticated } = useUserStore();
   const { friendGender, setFriendGender } = useSettingsStore();
   const { points } = useRewardStore();
   const [isLoading, setIsLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   const [userData, setUserData] = useState<User[]>([]);
-  const rootNavigation = useRootNavigationState();
+  const [isNavigationReady, setIsNavigationReady] = useState(false);
+
+  // ストアが初期化されているかチェック
+  const articles = articleStore?.articles || [];
 
   useEffect(() => {
-    setIsLoading(true);
-    if (!rootNavigation?.key) return;
+    // ナビゲーションの準備状態を確認
+    const checkNavigationReady = () => {
+      try {
+        // ナビゲーションが利用可能かチェック
+        if (router && typeof router.replace === 'function') {
+          setIsNavigationReady(true);
+        }
+      } catch (error) {
+        console.log('Navigation not ready yet:', error);
+      }
+    };
 
-    // 未認証ならリダイレクト（これだけでよい）
+    // 少し遅延させてナビゲーションの準備を待つ
+    const timer = setTimeout(checkNavigationReady, 100);
+    return () => clearTimeout(timer);
+  }, [router]);
+
+  useEffect(() => {
+    // ナビゲーションが準備できていない場合は待つ
+    if (!isNavigationReady) {
+      return;
+    }
+
+    // 認証状態をチェック
     if (isAuthenticated === false) {
       router.replace('/(auth)/login');
       return;
     }
-    // ユーザーデータが取得済みで、IDが一致しているか確認
-    if (user && userData?.[0]?.id === user.id) {
-      setIsLoading(false);
-    }
 
-    // 認証されていても ID が一致しない → 不正ユーザーと見なしてログアウト処理
-    if (user && userData?.[0]?.id && userData?.[0]?.id !== user.id) {
-      router.replace('/(auth)/login');
-    }
-  }, [isAuthenticated, rootNavigation?.key, user, userData]);
+    // ローディング状態を解除
+    setIsLoading(false);
+  }, [isAuthenticated, isNavigationReady, router]);
 
-  if (isAuthenticated === null || isAuthenticated === undefined || isLoading) {
+  // ナビゲーションが準備できていない場合はローディングを表示
+  if (!isNavigationReady) {
     return <ActivityIndicator size="large" color={Colors.primary} />;
   }
+
+  // 認証されていない場合は何も表示しない（リダイレクト中）
   if (isAuthenticated === false) {
     return null;
   }
 
+  // ローディング中
+  if (isLoading) {
+    return <ActivityIndicator size="large" color={Colors.primary} />;
+  }
+
   const stats = [
-    { icon: 'bug', label: '発見した虫', value: insects.length },
-    { icon: 'camera', label: '撮影回数', value: insects.length },
-    { icon: 'book', label: '図鑑の項目', value: insects.length },
+    { icon: 'bug', label: '発見した虫', value: articles.length },
+    { icon: 'camera', label: '撮影回数', value: articles.length },
+    { icon: 'book', label: '図鑑の項目', value: articles.length },
   ];
 
   const achievements = [
@@ -67,36 +92,42 @@ export default function ProfileScreen() {
       id: 'first-discovery',
       icon: 'star',
       title: 'はじめての発見',
-      description: insects.length > 0 ? '達成済み' : '最初の虫を発見しよう',
-      isUnlocked: insects.length > 0,
+      description: articles.length > 0 ? '達成済み' : '最初の虫を発見しよう',
+      isUnlocked: articles.length > 0,
     },
     {
       id: 'bug-apprentice',
       icon: 'trophy',
       title: '虫博士見習い',
       description:
-        insects.length >= 5
+        articles.length >= 5
           ? '達成済み'
-          : `5匹発見しよう (${insects.length}/5)`,
-      isUnlocked: insects.length >= 5,
+          : `5匹発見しよう (${articles.length}/5)`,
+      isUnlocked: articles.length >= 5,
     },
     {
       id: 'note-taker',
       icon: 'document-text',
       title: 'メモマスター',
       description:
-        insects.filter(
-          (insect) => insect.notes && insect.notes.trim().length > 0
+        articles.filter(
+          (article) =>
+            article.article.insects[0]?.notes &&
+            article.article.insects[0].notes.trim().length > 0
         ).length >= 3
           ? '達成済み'
           : `3匹にメモを書こう (${
-              insects.filter(
-                (insect) => insect.notes && insect.notes.trim().length > 0
+              articles.filter(
+                (article) =>
+                  article.article.insects[0]?.notes &&
+                  article.article.insects[0].notes.trim().length > 0
               ).length
             }/3)`,
       isUnlocked:
-        insects.filter(
-          (insect) => insect.notes && insect.notes.trim().length > 0
+        articles.filter(
+          (article) =>
+            article.article.insects[0]?.notes &&
+            article.article.insects[0].notes.trim().length > 0
         ).length >= 3,
     },
     {
@@ -143,8 +174,8 @@ export default function ProfileScreen() {
           <View style={styles.avatar}>
             <Ionicons name="person" size={48} color={Colors.white} />
           </View>
-          <Text style={styles.username}>虫博士</Text>
-          <Text style={styles.points}>ポイント: {points}</Text>
+          <Text style={styles.username}>{user.name}</Text>
+          <Text style={styles.points}>ポイント: {user.points}</Text>
         </View>
 
         {/* Stats */}
@@ -194,21 +225,21 @@ export default function ProfileScreen() {
           <View style={styles.levelCard}>
             <View style={styles.levelHeader}>
               <Text style={styles.levelTitle}>
-                レベル {Math.floor(insects.length / 3) + 1}
+                レベル {Math.floor(articles.length / 3) + 1}
               </Text>
-              <Text style={styles.levelProgress}>{insects.length % 3}/3</Text>
+              <Text style={styles.levelProgress}>{articles.length % 3}/3</Text>
             </View>
             <View style={styles.progressBarContainer}>
               <View
                 style={[
                   styles.progressBar,
-                  { width: `${((insects.length % 3) / 3) * 100}%` },
+                  { width: `${((articles.length % 3) / 3) * 100}%` },
                 ]}
               />
             </View>
             <Text style={styles.levelDescription}>
-              {insects.length < 3
-                ? `あと${3 - (insects.length % 3)}匹でレベルアップ！`
+              {articles.length < 3
+                ? `あと${3 - (articles.length % 3)}匹でレベルアップ！`
                 : '次のレベルまであと少し！'}
             </Text>
           </View>

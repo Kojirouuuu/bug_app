@@ -59,7 +59,7 @@ export default function AuthFormLayout({
           )}
         </TouchableOpacity>
 
-        {helpText && <Text style={styles.formHelpText}>{helpText}</Text>}
+        {helpText && <View style={styles.formHelpTextContainer}>{helpText}</View>}
 
         {error && <Text style={styles.formError}>{error}</Text>}
       </View>
@@ -117,6 +117,10 @@ const styles = StyleSheet.create({
     color: Colors.gray,
     textAlign: 'center',
     lineHeight: 20,
+    marginBottom: Spacing.sm,
+  },
+  formHelpTextContainer: {
+    alignItems: 'center',
     marginBottom: Spacing.sm,
   },
   formError: {

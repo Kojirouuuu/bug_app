@@ -30,5 +30,11 @@ export type AmplifyDependentResourcesAttributes = {
       "Name": "string",
       "Region": "string"
     }
+  },
+  "storage": {
+    "bugApp": {
+      "BucketName": "string",
+      "Region": "string"
+    }
   }
 }

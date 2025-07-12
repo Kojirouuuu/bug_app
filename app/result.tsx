@@ -10,7 +10,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useBugStore } from '@/store/bugStore';
+import { useArticleStore } from '@/store/articleStore';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { AnalyzeResult } from '@/types';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
@@ -20,7 +20,7 @@ export default function ResultScreen() {
   const { imageUri } = useLocalSearchParams<{ imageUri: string }>();
   const [result, setResult] = useState<AnalyzeResult | null>(null);
   const [loading, setLoading] = useState(true);
-  const { addBug } = useBugStore();
+  const { addInsect } = useArticleStore();
 
   useEffect(() => {
     if (imageUri) {
@@ -51,11 +51,11 @@ export default function ResultScreen() {
 
   const handleSaveBug = () => {
     if (result) {
-      addBug({
+      addInsect({
         scientificName: result.scientificName,
         japaneseName: result.japaneseName,
         family: result.family,
-        img: result.img,
+        s3path: result.img,
       });
 
       Alert.alert('保存完了', '虫図鑑に追加されました！', [
@@ -73,7 +73,7 @@ export default function ResultScreen() {
         pathname: '/chat',
         params: {
           bugName: result.japaneseName,
-          imageUri: result.img,
+          imageUri: result.s3path,
         },
       });
     }
@@ -105,7 +105,7 @@ export default function ResultScreen() {
 
         {/* Result Card */}
         <View style={styles.resultCard}>
-          <Image source={{ uri: result.img }} style={styles.bugImage} />
+          <Image source={{ uri: result.s3path }} style={styles.bugImage} />
 
           <View style={styles.bugInfo}>
             <Text style={styles.japaneseName}>{result.japaneseName}</Text>

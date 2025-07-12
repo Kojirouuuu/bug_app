@@ -106,7 +106,8 @@ export const getPhoto = /* GraphQL */ `query GetPhoto($id: ID!) {
       updatedAt
       __typename
     }
-    s3path
+    imagePath
+    summaryPath
     createdAt
     updatedAt
     photoAnalysisId
@@ -127,7 +128,8 @@ export const listPhotos = /* GraphQL */ `query ListPhotos(
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -152,7 +154,8 @@ export const getAIAnalysis = /* GraphQL */ `query GetAIAnalysis($id: ID!) {
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -463,7 +466,8 @@ export const getInsect = /* GraphQL */ `query GetInsect($id: ID!) {
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -661,7 +665,8 @@ export const photosByUserID = /* GraphQL */ `query PhotosByUserID(
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId
@@ -696,7 +701,8 @@ export const photosByTakenAt = /* GraphQL */ `query PhotosByTakenAt(
       userID
       takenAt
       location
-      s3path
+      imagePath
+      summaryPath
       createdAt
       updatedAt
       photoAnalysisId

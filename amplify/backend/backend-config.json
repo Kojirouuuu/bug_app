@@ -85,5 +85,12 @@
         }
       ]
     }
+  },
+  "storage": {
+    "bugApp": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }

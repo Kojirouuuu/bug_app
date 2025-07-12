@@ -10,7 +10,7 @@ export default function LoginScreen() {
   const { login, loading, error, cognitoIdVerrification, isAuthenticated } =
     useUserStore();
 
-  const [email, setEmail] = useState('admin@example.com');
+  const [email, setEmail] = useState('bugappuser@example.com');
   const [password, setPassword] = useState('12345678');
 
   const handleLogin = async () => {
@@ -26,21 +26,24 @@ export default function LoginScreen() {
 
   const helpText = (
     <>
-      アカウントをお持ちでない方：
-      <Link
-        href="/(auth)/signup"
-        style={{ color: '#3DBA8E', textDecorationLine: 'underline' }}
-      >
-        <Text>新規登録（無料）</Text>
-      </Link>
-      {'\n'}
-      パスワードを忘れた方：
-      <Link
-        href="/(auth)/forgot"
-        style={{ color: '#3DBA8E', textDecorationLine: 'underline' }}
-      >
-        <Text>パスワードを再発行</Text>
-      </Link>
+      <Text style={{ fontSize: 14, color: '#666', textAlign: 'center', marginBottom: 8 }}>
+        アカウントをお持ちでない方：
+        <Link
+          href="/(auth)/signup"
+          style={{ color: '#3DBA8E', textDecorationLine: 'underline' }}
+        >
+          <Text>新規登録（無料）</Text>
+        </Link>
+      </Text>
+      <Text style={{ fontSize: 14, color: '#666', textAlign: 'center' }}>
+        パスワードを忘れた方：
+        <Link
+          href="/(auth)/forgot"
+          style={{ color: '#3DBA8E', textDecorationLine: 'underline' }}
+        >
+          <Text>パスワードを再発行</Text>
+        </Link>
+      </Text>
     </>
   );
 

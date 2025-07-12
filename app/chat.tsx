@@ -1,70 +1,91 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform, Alert } from 'react-native';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import {
+  View,
+  Text,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+} from 'react-native';
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { chatWithBugDoctor, chatWithFriend } from '@/services/mockApi';
-import { useBugStore } from '@/store/bugStore';
+import { useArticleStore } from '@/store/articleStore';
 import ChatBubble from '@/components/ChatBubble';
 import QuestionCard from '@/components/QuestionCard';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { ChatTurn } from '@/types';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
+import { Insect } from '@/src/API';
 
 export default function ChatScreen() {
-  const { 
-    bugName, 
-    imageUri, 
+  const {
+    bugName,
+    imageUri,
     chatType = 'doctor',
-    quickQuestion
+    quickQuestion,
   } = useLocalSearchParams<{
-    bugName?: string; 
+    bugName?: string;
     imageUri?: string;
     chatType?: 'doctor' | 'friend';
     quickQuestion?: string;
   }>();
-  
+
   const [chatHistory, setChatHistory] = useState<ChatTurn[]>([]);
   const [inputText, setInputText] = useState('');
   const [loading, setLoading] = useState(false);
   const insets = useSafeAreaInsets();
-  const { addBug, bugs } = useBugStore();
+  const { addInsect, insects } = useArticleStore();
 
   // Check if this bug is already in the collection
-  const isAlreadySaved = bugName ? bugs.some(bug => bug.japaneseName === bugName) : false;
+  const isAlreadySaved = bugName
+    ? insects.some((insect) => insect.japaneseName === bugName)
+    : false;
 
-  const suggestedQuestions = chatType === 'doctor' ? [
-    'この虫は何を食べるの？',
-    'どこに住んでいるの？',
-    'なぜこんな色をしているの？',
-    '危険な虫なの？',
-    '似ている虫はいる？',
-  ] : [
-    '一緒に虫探しをしよう！',
-    'どんな虫が好き？',
-    '虫の面白い話を聞かせて！',
-    '虫の鳴き声を真似してみて！',
-    '虫になったらどんな気持ち？',
-  ];
+  const suggestedQuestions =
+    chatType === 'doctor'
+      ? [
+          'この虫は何を食べるの？',
+          'どこに住んでいるの？',
+          'なぜこんな色をしているの？',
+          '危険な虫なの？',
+          '似ている虫はいる？',
+        ]
+      : [
+          '一緒に虫探しをしよう！',
+          'どんな虫が好き？',
+          '虫の面白い話を聞かせて！',
+          '虫の鳴き声を真似してみて！',
+          '虫になったらどんな気持ち？',
+        ];
 
   useEffect(() => {
     // Initial greeting based on chat type and context
     let initialMessage = '';
-    
+
     if (quickQuestion) {
       // Quick question was provided
       sendMessage(quickQuestion);
       return;
     } else if (bugName) {
-      initialMessage = chatType === 'doctor'
-        ? `こんにちは！${bugName}について何か知りたいことはありますか？`
-        : `やっほー！${bugName}について一緒にお話ししよう！`;
+      initialMessage =
+        chatType === 'doctor'
+          ? `こんにちは！${bugName}について何か知りたいことはありますか？`
+          : `やっほー！${bugName}について一緒にお話ししよう！`;
     } else {
-      initialMessage = chatType === 'doctor'
-        ? 'こんにちは！虫について何か知りたいことはありますか？'
-        : 'やっほー！虫について一緒にお話ししよう！何が好き？';
+      initialMessage =
+        chatType === 'doctor'
+          ? 'こんにちは！虫について何か知りたいことはありますか？'
+          : 'やっほー！虫について一緒にお話ししよう！何が好き？';
     }
-    
+
     setChatHistory([
       {
         role: chatType === 'doctor' ? 'doctor' : 'friend',
@@ -79,10 +100,11 @@ export default function ChatScreen() {
     setLoading(true);
     try {
       // Choose the appropriate chat function based on chat type
-      const response = chatType === 'doctor' 
-        ? await chatWithBugDoctor(message)
-        : await chatWithFriend(message);
-      setChatHistory(prev => [...prev, ...response]);
+      const response =
+        chatType === 'doctor'
+          ? await chatWithBugDoctor(message)
+          : await chatWithFriend(message);
+      setChatHistory((prev) => [...prev, ...response]);
     } catch (error) {
       console.error('Chat error:', error);
     } finally {
@@ -107,18 +129,34 @@ export default function ChatScreen() {
 
     // Create mock bug data based on the bug name
     const mockBugData = {
-      scientificName: bugName === 'ダンゴムシ' ? 'Armadillidium vulgare' : 
-                     bugName === 'ナナホシテントウ' ? 'Coccinella septempunctata' :
-                     bugName === 'モンシロチョウ' ? 'Pieris rapae' : 'Unknown species',
+      scientificName:
+        bugName === 'ダンゴムシ'
+          ? 'Armadillidium vulgare'
+          : bugName === 'ナナホシテントウ'
+          ? 'Coccinella septempunctata'
+          : bugName === 'モンシロチョウ'
+          ? 'Pieris rapae'
+          : 'Unknown species',
       japaneseName: bugName || '不明な虫',
-      family: bugName === 'ダンゴムシ' ? 'Armadillidiidae' : 
-              bugName === 'ナナホシテントウ' ? 'Coccinellidae' :
-              bugName === 'モンシロチョウ' ? 'Pieridae' : 'Unknown family',
-      img: imageUri || `https://images.pexels.com/photos/${Math.floor(Math.random() * 1000000)}/pexels-photo-${Math.floor(Math.random() * 1000000)}.jpeg?auto=compress&cs=tinysrgb&w=400`,
+      family:
+        bugName === 'ダンゴムシ'
+          ? 'Armadillidiidae'
+          : bugName === 'ナナホシテントウ'
+          ? 'Coccinellidae'
+          : bugName === 'モンシロチョウ'
+          ? 'Pieridae'
+          : 'Unknown family',
+      img:
+        imageUri ||
+        `https://images.pexels.com/photos/${Math.floor(
+          Math.random() * 1000000
+        )}/pexels-photo-${Math.floor(
+          Math.random() * 1000000
+        )}.jpeg?auto=compress&cs=tinysrgb&w=400`,
     };
 
-    addBug(mockBugData);
-    
+    addInsect(mockBugData as unknown as Insect);
+
     Alert.alert(
       '図鑑に保存しました！',
       `${bugName}が虫図鑑に追加されました。`,
@@ -170,15 +208,18 @@ export default function ChatScreen() {
             <Text style={styles.headerSubtitle}>{getChatSubtitle()}</Text>
           </View>
           {bugName && (
-            <TouchableOpacity 
-              style={[styles.saveButton, isAlreadySaved && styles.saveButtonDisabled]} 
+            <TouchableOpacity
+              style={[
+                styles.saveButton,
+                isAlreadySaved && styles.saveButtonDisabled,
+              ]}
               onPress={handleSaveToBugBook}
               disabled={isAlreadySaved}
             >
-              <Ionicons 
-                name={isAlreadySaved ? "checkmark" : "bookmark-outline"} 
-                size={24} 
-                color={isAlreadySaved ? Colors.gray : Colors.primary} 
+              <Ionicons
+                name={isAlreadySaved ? 'checkmark' : 'bookmark-outline'}
+                size={24}
+                color={isAlreadySaved ? Colors.gray : Colors.primary}
               />
             </TouchableOpacity>
           )}
@@ -186,7 +227,7 @@ export default function ChatScreen() {
         </View>
 
         {/* Chat Messages */}
-        <ScrollView 
+        <ScrollView
           style={styles.chatContainer}
           contentContainerStyle={styles.chatContent}
           showsVerticalScrollIndicator={false}
@@ -199,7 +240,7 @@ export default function ChatScreen() {
               chatType={chatType}
             />
           ))}
-          
+
           {loading && (
             <View style={styles.loadingContainer}>
               <LoadingSpinner size="small" />
@@ -213,7 +254,7 @@ export default function ChatScreen() {
             <Text style={styles.suggestionsTitle}>
               {chatType === 'doctor' ? '質問例:' : 'おしゃべりのきっかけ:'}
             </Text>
-            <ScrollView 
+            <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
               contentContainerStyle={styles.suggestionsContent}
@@ -233,7 +274,11 @@ export default function ChatScreen() {
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.textInput}
-            placeholder={chatType === 'doctor' ? '質問を入力してください...' : 'メッセージを入力してください...'}
+            placeholder={
+              chatType === 'doctor'
+                ? '質問を入力してください...'
+                : 'メッセージを入力してください...'
+            }
             placeholderTextColor={Colors.gray}
             value={inputText}
             onChangeText={setInputText}
@@ -244,10 +289,11 @@ export default function ChatScreen() {
           <TouchableOpacity
             style={[
               styles.sendButton,
-              { 
+              {
                 opacity: inputText.trim() && !loading ? 1 : 0.5,
-                backgroundColor: chatType === 'friend' ? Colors.accent : Colors.primary,
-              }
+                backgroundColor:
+                  chatType === 'friend' ? Colors.accent : Colors.primary,
+              },
             ]}
             onPress={handleSendMessage}
             disabled={!inputText.trim() || loading}

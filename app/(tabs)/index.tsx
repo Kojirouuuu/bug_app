@@ -10,17 +10,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useArticleStore } from '@/store/articleStore';
-import { Insect } from '@/src/API';
+import { ArticleForFrontend } from '@/types';
 import { useRewardStore } from '@/store/rewardStore';
 import { getNearbyBugs } from '@/services/mockApi';
 import BugCard from '@/components/BugCard';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 export default function HomeScreen() {
-  const { insects } = useArticleStore();
+  const { articles } = useArticleStore();
   const { boostLevel } = useRewardStore();
   const [nearby, setNearby] = useState<string[]>([]);
-  const recentBugs = insects.slice(0, 3);
+  const recentBugs = articles.slice(0, 3);
 
   const handleCapture = () => {
     router.push('/capture');
@@ -64,7 +64,7 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>最近の発見</Text>
-            {insects.length > 3 && (
+            {articles.length > 3 && (
               <TouchableOpacity onPress={handleViewAll}>
                 <Text style={styles.viewAllText}>すべて見る</Text>
               </TouchableOpacity>
@@ -72,11 +72,11 @@ export default function HomeScreen() {
           </View>
 
           {recentBugs.length > 0 ? (
-            recentBugs.map((bug: Insect) => (
+            recentBugs.map((article: ArticleForFrontend) => (
               <BugCard
-                key={bug.id}
-                bug={bug}
-                onPress={() => handleBugPress(bug.id)}
+                key={article.article.insects[0].id}
+                article={article}
+                onPress={() => handleBugPress(article.article.insects[0].id)}
                 showDate
               />
             ))

@@ -1,15 +1,19 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import { Bug } from '@/types';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
+import { ArticleForFrontend } from '@/types';
 
-interface BugCardProps {
-  bug: Bug;
+interface InsectCardProps {
+  article: ArticleForFrontend;
   onPress?: () => void;
   showDate?: boolean;
 }
 
-export default function BugCard({ bug, onPress, showDate = false }: BugCardProps) {
+export default function InsectCard({
+  article,
+  onPress,
+  showDate = false,
+}: InsectCardProps) {
   const formatDate = (date: Date) => {
     return date.toLocaleDateString('ja-JP', {
       year: 'numeric',
@@ -20,19 +24,23 @@ export default function BugCard({ bug, onPress, showDate = false }: BugCardProps
 
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.8}>
-      <Image source={{ uri: bug.img }} style={styles.image} />
+      <Image source={{ uri: article.image }} style={styles.image} />
       <View style={styles.content}>
-        <Text style={styles.japaneseName}>{bug.japaneseName}</Text>
-        <Text style={styles.scientificName}>{bug.scientificName}</Text>
-        <Text style={styles.family}>{bug.family}</Text>
+        <Text style={styles.japaneseName}>
+          {article.article.insects[0].japaneseName}
+        </Text>
+        <Text style={styles.scientificName}>
+          {article.article.insects[0].scientificName}
+        </Text>
+        <Text style={styles.family}>{article.article.insects[0].family}</Text>
         {showDate && (
           <Text style={styles.date}>
-            発見日: {formatDate(bug.discoveredAt)}
+            発見日: {formatDate(new Date(article.article.insects[0].foundAt))}
           </Text>
         )}
-        {bug.notes && (
+        {article.article.insects[0].notes && (
           <Text style={styles.notes} numberOfLines={2}>
-            {bug.notes}
+            {article.article.insects[0].notes}
           </Text>
         )}
       </View>

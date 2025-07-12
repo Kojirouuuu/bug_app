@@ -9,6 +9,7 @@ export default function SignUpScreen() {
   const router = useRouter();
   const { signUp, loading, error } = useUserStore();
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('12345678');
   const [confirmPassword, setConfirmPassword] = useState('12345678');
@@ -16,10 +17,10 @@ export default function SignUpScreen() {
   const [agreeToPrivacy, setAgreeToPrivacy] = useState(false);
 
   const handleSignUp = async () => {
-    if (!email || !password || !confirmPassword) {
+    if (!name || !email || !password || !confirmPassword) {
       Platform.OS === 'web'
-        ? window.alert('メールアドレスとパスワードを入力してください')
-        : Alert.alert('メールアドレスとパスワードを入力してください');
+        ? window.alert('お名前、メールアドレス、パスワードを入力してください')
+        : Alert.alert('お名前、メールアドレス、パスワードを入力してください');
       return;
     }
 
@@ -37,7 +38,7 @@ export default function SignUpScreen() {
       return;
     }
 
-    await signUp(email, password);
+    await signUp(name, email, password);
     router.push('/(auth)/confirm');
   };
 
@@ -62,6 +63,14 @@ export default function SignUpScreen() {
       error={error || undefined}
       helpText={helpText}
     >
+      <AuthFormField
+        label="お名前"
+        placeholder="表示名を入力してください"
+        value={name}
+        onChangeText={setName}
+        keyboardType="default"
+        autoCapitalize="none"
+      />
       <AuthFormField
         label="メールアドレス"
         placeholder="example@example.com"
