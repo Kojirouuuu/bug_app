@@ -24,7 +24,21 @@ export const getSummaryMarkdownByPhoto = async (photo: Photo) => {
   let summaryMarkdown = '';
   try {
     if (!photo.summaryPath) {
-      console.warn(`写真 "${photo.id}" のsummaryPathが設定されていません`);
+try {
+    if (!photo.summaryPath) {
+      // Import the 'he' package for HTML entity encoding
+      console.warn(`写真 "${he.encode(photo.id)}" のsummaryPathが設定されていません`); // import he
+      summaryMarkdown = '';
+    } else {
+      const result = await getUrl({
+        path: photo.summaryPath,
+      });
+      summaryMarkdown = (result as any).url.href;
+    }
+  } catch (e) {
+    console.error(`写真 "${he.encode(photo.id)}" のsummaryPath取得に失敗:`, e); // import he
+    summaryMarkdown = '';
+  }
       summaryMarkdown = '';
     } else {
       const result = await getUrl({
