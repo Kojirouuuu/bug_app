@@ -3,8 +3,111 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
-type Todo @model {
+# ユーザー情報
+type User @model {
   id: ID!
-  name: String!
+  name: String! @index(name: "byName")
+  cognitosub: String @index(name: "byCognitoSub")
+  createdAt: AWSDateTime!
+  lastLogin: AWSDateTime
+  region: String @index(name: "byRegion")
+  photos: [Photo] @hasMany(indexName: "byUser", fields: ["id"])
+  points: Int!
+  tickets: [Ticket] @hasMany(indexName: "byUser", fields: ["id"])
+  rank: String @index(name: "byRank")
+  gachaResults: [GachaResult] @hasMany(indexName: "byUser", fields: ["id"])
+  insects: [Insect] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+# 撮影された写真
+type Photo @model {
+  id: ID!
+  url: AWSURL!
+  userID: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userID"])
+  takenAt: AWSDateTime! @index(name: "byDate")
+  location: String
+  analysis: AIAnalysis @hasOne
+  insect: Insect @hasOne
+  s3path: String!
+}
+
+# AI解析結果
+type AIAnalysis @model {
+  id: ID!
+  photoID: ID! @index(name: "byPhoto")
+  photo: Photo @belongsTo(fields: ["photoID"])
+  result: String!
+  analyzedAt: AWSDateTime! @index(name: "byDate")
+  awardedPoints: PointsAward @hasOne
+}
+
+# ポイント付与情報
+type PointsAward @model {
+  id: ID!
+  analysisID: ID @index(name: "byAnalysis")
+  analysis: AIAnalysis @belongsTo(fields: ["analysisID"])
+  value: Int!
+  awardedAt: AWSDateTime! @index(name: "byDate")
+  reason: String
+}
+
+# ガチャイベント
+type Gacha @model {
+  id: ID!
+  name: String! @index(name: "byName")
+  costPoints: Int!
+  availableTickets: [TicketType!]
+  results: [GachaResult] @hasMany(indexName: "byGacha", fields: ["id"])
+  isActive: Boolean
+}
+
+# ガチャ結果
+type GachaResult @model {
+  id: ID!
+  userID: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userID"])
+  gachaID: ID! @index(name: "byGacha")
+  gacha: Gacha @belongsTo(fields: ["gachaID"])
+  exchangedPoints: Int!
+  obtainedTicket: Ticket @hasOne
+  resultAt: AWSDateTime! @index(name: "byDate")
+}
+
+# チケット
+type Ticket @model {
+  id: ID!
+  type: TicketType! @index(name: "byType")
+  userID: ID! @index(name: "byUser")
+  user: User @belongsTo(fields: ["userID"])
+  gachaResultID: ID @index(name: "byGachaResult")
+  gachaResult: GachaResult @belongsTo(fields: ["gachaResultID"])
+  expiresAt: AWSDate @index(name: "byExpiry")
+  isUsed: Boolean
+}
+
+# チケットの種類
+enum TicketType {
+  COMMON_GACHA_TICKET
+  RARE_GACHA_TICKET
+  LEGENDARY_GACHA_TICKET
+  ITEM_TICKET
+  EVENT_TICKET
+}
+
+# 発見された昆虫
+type Insect @model {
+  id: ID!
+  species: String! @index(name: "bySpecies")
+  scientificName: String! @index(name: "byScientificName")
+  japaneseName: String! @index(name: "byJapaneseName")
+  family: String! @index(name: "byFamily")
   description: String
+  notes: String
+  userID: ID @index(name: "byUser")
+  user: User @belongsTo(fields: ["userID"])
+  location: String @index(name: "byLocation")
+  foundAt: AWSDate! @index(name: "byDate")
+  photoID: ID @index(name: "byPhoto")
+  photo: Photo @belongsTo(fields: ["photoID"])
 }

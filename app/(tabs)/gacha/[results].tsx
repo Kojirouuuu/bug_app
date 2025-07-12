@@ -29,7 +29,7 @@ export default function GachaResults() {
 
   useEffect(() => {
     // パラメータから結果を取得
-    const gachaResult = (params.result as GachaResult) || 'lose';
+    const gachaResult = (params.results as GachaResult) || 'lose';
     setResult(gachaResult);
 
     // アニメーション開始
