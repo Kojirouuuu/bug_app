@@ -270,7 +270,50 @@ export default function CreateDataScreen() {
       );
     }
 
+// Import the sanitization function
+// React Native doesn't have built-in XSS protection, so we'll use a custom function
+// import { sanitizeInput } from './utils/sanitizer';
+
+                setInsectData({ ...insectData, family: sanitizeInput(text) })
+              }
+              placeholder="コガネムシ科"
+            />
+          </View>
+
+          <TouchableOpacity
+            style={[styles.submitButton, loading && styles.disabledButton]}
+            onPress={handleCreateInsect}
+            disabled={loading}
+          >
+            <Text style={styles.submitButtonText}>
+              {loading ? '作成中...' : '昆虫データを作成'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+
     return (
+      <View style={styles.formContainer}>
+        <Text style={styles.formTitle}>写真データ作成</Text>
+
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>画像URL *</Text>
+          <TextInput
+            style={styles.input}
+            value={photoData.url}
+            onChangeText={(text) => setPhotoData({ ...photoData, url: sanitizeInput(text) })}
+            placeholder="https://example.com/image.jpg"
+          />
+        </View>
+
+        <View style={styles.inputGroup}>
+          <Text style={styles.label}>ユーザーID *</Text>
+          <TextInput
+            style={styles.input}
+            value={photoData.userID}
+            onChangeText={(text) =>
+              setPhotoData({ ...photoData, userID: sanitizeInput(text) })
       <View style={styles.formContainer}>
         <Text style={styles.formTitle}>写真データ作成</Text>
 
