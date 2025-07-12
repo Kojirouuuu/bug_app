@@ -55,6 +55,10 @@ ssh -t -i ${KEY_PATH}/${YOUR_KEY}.pem ${EC2_USER}@${EC2_HOST} << EOF
     npx expo install expo-dev-client
     eas build --profile development --platform all --clear-cache
 
+    sudo yum install -y tmux
+    tmux new -s expo
+    npx expo start --tunnel
+
 
 
     # プロジェクトのインストール

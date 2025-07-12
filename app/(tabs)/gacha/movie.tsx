@@ -48,7 +48,6 @@ export default function GachaMovie() {
   const { status, error } = useEvent(player, 'statusChange', {
     status: player.status,
   });
-  console.log('status', status);
 
   // 動画準備完了を監視
   useEffect(() => {
@@ -57,10 +56,10 @@ export default function GachaMovie() {
     }
   }, [status, isLooping]);
 
-  // 準備できたら1/4区間ループ再生
+  // 準備できたら1/5区間ループ再生
   useEventListener(player, 'timeUpdate', ({ currentTime }) => {
     // 押下前のループ
-    if (isLooping && player.duration && currentTime >= player.duration / 4) {
+    if (isLooping && player.duration && currentTime >= player.duration / 5) {
       player.currentTime = 0;
       return;
     }
@@ -76,14 +75,13 @@ export default function GachaMovie() {
     }
   });
 
-  // 1/4区間でループ
+  // 1/5区間でループ
   useEffect(() => {
     if (
       isLooping &&
       player.duration > 0 &&
-      player.currentTime >= player.duration / 8
+      player.currentTime >= player.duration / 5
     ) {
-      console.log('ループ');
       player.currentTime = 0;
       player.play();
     }
