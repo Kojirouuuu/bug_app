@@ -98,7 +98,6 @@ enum TicketType {
 # 発見された昆虫
 type Insect @model {
   id: ID!
-  species: String! @index(name: "bySpecies")
   scientificName: String! @index(name: "byScientificName")
   japaneseName: String! @index(name: "byJapaneseName")
   family: String! @index(name: "byFamily")

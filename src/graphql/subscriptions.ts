@@ -18,30 +18,23 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: Mo
     region
     photos {
       nextToken
-      startedAt
       __typename
     }
     points
     tickets {
       nextToken
-      startedAt
       __typename
     }
     rank
     gachaResults {
       nextToken
-      startedAt
       __typename
     }
     insects {
       nextToken
-      startedAt
       __typename
     }
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -59,30 +52,23 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: Mo
     region
     photos {
       nextToken
-      startedAt
       __typename
     }
     points
     tickets {
       nextToken
-      startedAt
       __typename
     }
     rank
     gachaResults {
       nextToken
-      startedAt
       __typename
     }
     insects {
       nextToken
-      startedAt
       __typename
     }
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -100,30 +86,23 @@ export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: Mo
     region
     photos {
       nextToken
-      startedAt
       __typename
     }
     points
     tickets {
       nextToken
-      startedAt
       __typename
     }
     rank
     gachaResults {
       nextToken
-      startedAt
       __typename
     }
     insects {
       nextToken
-      startedAt
       __typename
     }
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -146,9 +125,6 @@ export const onCreatePhoto = /* GraphQL */ `subscription OnCreatePhoto($filter: 
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     takenAt
@@ -160,15 +136,11 @@ export const onCreatePhoto = /* GraphQL */ `subscription OnCreatePhoto($filter: 
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     insect {
       id
-      species
       scientificName
       japaneseName
       family
@@ -180,17 +152,11 @@ export const onCreatePhoto = /* GraphQL */ `subscription OnCreatePhoto($filter: 
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     s3path
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     photoAnalysisId
     photoInsectId
     __typename
@@ -215,9 +181,6 @@ export const onUpdatePhoto = /* GraphQL */ `subscription OnUpdatePhoto($filter: 
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     takenAt
@@ -229,15 +192,11 @@ export const onUpdatePhoto = /* GraphQL */ `subscription OnUpdatePhoto($filter: 
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     insect {
       id
-      species
       scientificName
       japaneseName
       family
@@ -249,17 +208,11 @@ export const onUpdatePhoto = /* GraphQL */ `subscription OnUpdatePhoto($filter: 
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     s3path
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     photoAnalysisId
     photoInsectId
     __typename
@@ -284,9 +237,6 @@ export const onDeletePhoto = /* GraphQL */ `subscription OnDeletePhoto($filter: 
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     takenAt
@@ -298,15 +248,11 @@ export const onDeletePhoto = /* GraphQL */ `subscription OnDeletePhoto($filter: 
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     insect {
       id
-      species
       scientificName
       japaneseName
       family
@@ -318,17 +264,11 @@ export const onDeletePhoto = /* GraphQL */ `subscription OnDeletePhoto($filter: 
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     s3path
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     photoAnalysisId
     photoInsectId
     __typename
@@ -353,9 +293,6 @@ export const onCreateAIAnalysis = /* GraphQL */ `subscription OnCreateAIAnalysis
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
@@ -370,16 +307,10 @@ export const onCreateAIAnalysis = /* GraphQL */ `subscription OnCreateAIAnalysis
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     aIAnalysisAwardedPointsId
     __typename
   }
@@ -403,9 +334,6 @@ export const onUpdateAIAnalysis = /* GraphQL */ `subscription OnUpdateAIAnalysis
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
@@ -420,16 +348,10 @@ export const onUpdateAIAnalysis = /* GraphQL */ `subscription OnUpdateAIAnalysis
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     aIAnalysisAwardedPointsId
     __typename
   }
@@ -453,9 +375,6 @@ export const onDeleteAIAnalysis = /* GraphQL */ `subscription OnDeleteAIAnalysis
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
@@ -470,16 +389,10 @@ export const onDeleteAIAnalysis = /* GraphQL */ `subscription OnDeleteAIAnalysis
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     aIAnalysisAwardedPointsId
     __typename
   }
@@ -501,9 +414,6 @@ export const onCreatePointsAward = /* GraphQL */ `subscription OnCreatePointsAwa
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
@@ -512,9 +422,6 @@ export const onCreatePointsAward = /* GraphQL */ `subscription OnCreatePointsAwa
     reason
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -535,9 +442,6 @@ export const onUpdatePointsAward = /* GraphQL */ `subscription OnUpdatePointsAwa
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
@@ -546,9 +450,6 @@ export const onUpdatePointsAward = /* GraphQL */ `subscription OnUpdatePointsAwa
     reason
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -569,9 +470,6 @@ export const onDeletePointsAward = /* GraphQL */ `subscription OnDeletePointsAwa
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
@@ -580,9 +478,6 @@ export const onDeletePointsAward = /* GraphQL */ `subscription OnDeletePointsAwa
     reason
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -598,15 +493,11 @@ export const onCreateGacha = /* GraphQL */ `subscription OnCreateGacha($filter: 
     availableTickets
     results {
       nextToken
-      startedAt
       __typename
     }
     isActive
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -622,15 +513,11 @@ export const onUpdateGacha = /* GraphQL */ `subscription OnUpdateGacha($filter: 
     availableTickets
     results {
       nextToken
-      startedAt
       __typename
     }
     isActive
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -646,15 +533,11 @@ export const onDeleteGacha = /* GraphQL */ `subscription OnDeleteGacha($filter: 
     availableTickets
     results {
       nextToken
-      startedAt
       __typename
     }
     isActive
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -678,9 +561,6 @@ export const onCreateGachaResult = /* GraphQL */ `subscription OnCreateGachaResu
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaID
@@ -692,9 +572,6 @@ export const onCreateGachaResult = /* GraphQL */ `subscription OnCreateGachaResu
       isActive
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     exchangedPoints
@@ -707,17 +584,11 @@ export const onCreateGachaResult = /* GraphQL */ `subscription OnCreateGachaResu
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     resultAt
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     gachaResultObtainedTicketId
     __typename
   }
@@ -742,9 +613,6 @@ export const onUpdateGachaResult = /* GraphQL */ `subscription OnUpdateGachaResu
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaID
@@ -756,9 +624,6 @@ export const onUpdateGachaResult = /* GraphQL */ `subscription OnUpdateGachaResu
       isActive
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     exchangedPoints
@@ -771,17 +636,11 @@ export const onUpdateGachaResult = /* GraphQL */ `subscription OnUpdateGachaResu
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     resultAt
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     gachaResultObtainedTicketId
     __typename
   }
@@ -806,9 +665,6 @@ export const onDeleteGachaResult = /* GraphQL */ `subscription OnDeleteGachaResu
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaID
@@ -820,9 +676,6 @@ export const onDeleteGachaResult = /* GraphQL */ `subscription OnDeleteGachaResu
       isActive
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     exchangedPoints
@@ -835,17 +688,11 @@ export const onDeleteGachaResult = /* GraphQL */ `subscription OnDeleteGachaResu
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     resultAt
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     gachaResultObtainedTicketId
     __typename
   }
@@ -869,9 +716,6 @@ export const onCreateTicket = /* GraphQL */ `subscription OnCreateTicket($filter
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaResultID
@@ -883,9 +727,6 @@ export const onCreateTicket = /* GraphQL */ `subscription OnCreateTicket($filter
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
@@ -893,9 +734,6 @@ export const onCreateTicket = /* GraphQL */ `subscription OnCreateTicket($filter
     isUsed
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -918,9 +756,6 @@ export const onUpdateTicket = /* GraphQL */ `subscription OnUpdateTicket($filter
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaResultID
@@ -932,9 +767,6 @@ export const onUpdateTicket = /* GraphQL */ `subscription OnUpdateTicket($filter
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
@@ -942,9 +774,6 @@ export const onUpdateTicket = /* GraphQL */ `subscription OnUpdateTicket($filter
     isUsed
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -967,9 +796,6 @@ export const onDeleteTicket = /* GraphQL */ `subscription OnDeleteTicket($filter
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaResultID
@@ -981,9 +807,6 @@ export const onDeleteTicket = /* GraphQL */ `subscription OnDeleteTicket($filter
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
@@ -991,9 +814,6 @@ export const onDeleteTicket = /* GraphQL */ `subscription OnDeleteTicket($filter
     isUsed
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -1004,7 +824,6 @@ export const onDeleteTicket = /* GraphQL */ `subscription OnDeleteTicket($filter
 export const onCreateInsect = /* GraphQL */ `subscription OnCreateInsect($filter: ModelSubscriptionInsectFilterInput) {
   onCreateInsect(filter: $filter) {
     id
-    species
     scientificName
     japaneseName
     family
@@ -1021,9 +840,6 @@ export const onCreateInsect = /* GraphQL */ `subscription OnCreateInsect($filter
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     location
@@ -1038,18 +854,12 @@ export const onCreateInsect = /* GraphQL */ `subscription OnCreateInsect($filter
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -1060,7 +870,6 @@ export const onCreateInsect = /* GraphQL */ `subscription OnCreateInsect($filter
 export const onUpdateInsect = /* GraphQL */ `subscription OnUpdateInsect($filter: ModelSubscriptionInsectFilterInput) {
   onUpdateInsect(filter: $filter) {
     id
-    species
     scientificName
     japaneseName
     family
@@ -1077,9 +886,6 @@ export const onUpdateInsect = /* GraphQL */ `subscription OnUpdateInsect($filter
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     location
@@ -1094,18 +900,12 @@ export const onUpdateInsect = /* GraphQL */ `subscription OnUpdateInsect($filter
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -1116,7 +916,6 @@ export const onUpdateInsect = /* GraphQL */ `subscription OnUpdateInsect($filter
 export const onDeleteInsect = /* GraphQL */ `subscription OnDeleteInsect($filter: ModelSubscriptionInsectFilterInput) {
   onDeleteInsect(filter: $filter) {
     id
-    species
     scientificName
     japaneseName
     family
@@ -1133,9 +932,6 @@ export const onDeleteInsect = /* GraphQL */ `subscription OnDeleteInsect($filter
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     location
@@ -1150,18 +946,12 @@ export const onDeleteInsect = /* GraphQL */ `subscription OnDeleteInsect($filter
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }

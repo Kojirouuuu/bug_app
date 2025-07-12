@@ -21,30 +21,23 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
     region
     photos {
       nextToken
-      startedAt
       __typename
     }
     points
     tickets {
       nextToken
-      startedAt
       __typename
     }
     rank
     gachaResults {
       nextToken
-      startedAt
       __typename
     }
     insects {
       nextToken
-      startedAt
       __typename
     }
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -65,30 +58,23 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
     region
     photos {
       nextToken
-      startedAt
       __typename
     }
     points
     tickets {
       nextToken
-      startedAt
       __typename
     }
     rank
     gachaResults {
       nextToken
-      startedAt
       __typename
     }
     insects {
       nextToken
-      startedAt
       __typename
     }
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -109,30 +95,23 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
     region
     photos {
       nextToken
-      startedAt
       __typename
     }
     points
     tickets {
       nextToken
-      startedAt
       __typename
     }
     rank
     gachaResults {
       nextToken
-      startedAt
       __typename
     }
     insects {
       nextToken
-      startedAt
       __typename
     }
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -158,9 +137,6 @@ export const createPhoto = /* GraphQL */ `mutation CreatePhoto(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     takenAt
@@ -172,15 +148,11 @@ export const createPhoto = /* GraphQL */ `mutation CreatePhoto(
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     insect {
       id
-      species
       scientificName
       japaneseName
       family
@@ -192,17 +164,11 @@ export const createPhoto = /* GraphQL */ `mutation CreatePhoto(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     s3path
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     photoAnalysisId
     photoInsectId
     __typename
@@ -230,9 +196,6 @@ export const updatePhoto = /* GraphQL */ `mutation UpdatePhoto(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     takenAt
@@ -244,15 +207,11 @@ export const updatePhoto = /* GraphQL */ `mutation UpdatePhoto(
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     insect {
       id
-      species
       scientificName
       japaneseName
       family
@@ -264,17 +223,11 @@ export const updatePhoto = /* GraphQL */ `mutation UpdatePhoto(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     s3path
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     photoAnalysisId
     photoInsectId
     __typename
@@ -302,9 +255,6 @@ export const deletePhoto = /* GraphQL */ `mutation DeletePhoto(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     takenAt
@@ -316,15 +266,11 @@ export const deletePhoto = /* GraphQL */ `mutation DeletePhoto(
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     insect {
       id
-      species
       scientificName
       japaneseName
       family
@@ -336,17 +282,11 @@ export const deletePhoto = /* GraphQL */ `mutation DeletePhoto(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     s3path
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     photoAnalysisId
     photoInsectId
     __typename
@@ -372,9 +312,6 @@ export const createAIAnalysis = /* GraphQL */ `mutation CreateAIAnalysis(
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
@@ -389,16 +326,10 @@ export const createAIAnalysis = /* GraphQL */ `mutation CreateAIAnalysis(
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     aIAnalysisAwardedPointsId
     __typename
   }
@@ -423,9 +354,6 @@ export const updateAIAnalysis = /* GraphQL */ `mutation UpdateAIAnalysis(
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
@@ -440,16 +368,10 @@ export const updateAIAnalysis = /* GraphQL */ `mutation UpdateAIAnalysis(
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     aIAnalysisAwardedPointsId
     __typename
   }
@@ -474,9 +396,6 @@ export const deleteAIAnalysis = /* GraphQL */ `mutation DeleteAIAnalysis(
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
@@ -491,16 +410,10 @@ export const deleteAIAnalysis = /* GraphQL */ `mutation DeleteAIAnalysis(
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     aIAnalysisAwardedPointsId
     __typename
   }
@@ -523,9 +436,6 @@ export const createPointsAward = /* GraphQL */ `mutation CreatePointsAward(
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
@@ -534,9 +444,6 @@ export const createPointsAward = /* GraphQL */ `mutation CreatePointsAward(
     reason
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -558,9 +465,6 @@ export const updatePointsAward = /* GraphQL */ `mutation UpdatePointsAward(
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
@@ -569,9 +473,6 @@ export const updatePointsAward = /* GraphQL */ `mutation UpdatePointsAward(
     reason
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -593,9 +494,6 @@ export const deletePointsAward = /* GraphQL */ `mutation DeletePointsAward(
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
@@ -604,9 +502,6 @@ export const deletePointsAward = /* GraphQL */ `mutation DeletePointsAward(
     reason
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -625,15 +520,11 @@ export const createGacha = /* GraphQL */ `mutation CreateGacha(
     availableTickets
     results {
       nextToken
-      startedAt
       __typename
     }
     isActive
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -652,15 +543,11 @@ export const updateGacha = /* GraphQL */ `mutation UpdateGacha(
     availableTickets
     results {
       nextToken
-      startedAt
       __typename
     }
     isActive
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -679,15 +566,11 @@ export const deleteGacha = /* GraphQL */ `mutation DeleteGacha(
     availableTickets
     results {
       nextToken
-      startedAt
       __typename
     }
     isActive
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -712,9 +595,6 @@ export const createGachaResult = /* GraphQL */ `mutation CreateGachaResult(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaID
@@ -726,9 +606,6 @@ export const createGachaResult = /* GraphQL */ `mutation CreateGachaResult(
       isActive
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     exchangedPoints
@@ -741,17 +618,11 @@ export const createGachaResult = /* GraphQL */ `mutation CreateGachaResult(
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     resultAt
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     gachaResultObtainedTicketId
     __typename
   }
@@ -777,9 +648,6 @@ export const updateGachaResult = /* GraphQL */ `mutation UpdateGachaResult(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaID
@@ -791,9 +659,6 @@ export const updateGachaResult = /* GraphQL */ `mutation UpdateGachaResult(
       isActive
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     exchangedPoints
@@ -806,17 +671,11 @@ export const updateGachaResult = /* GraphQL */ `mutation UpdateGachaResult(
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     resultAt
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     gachaResultObtainedTicketId
     __typename
   }
@@ -842,9 +701,6 @@ export const deleteGachaResult = /* GraphQL */ `mutation DeleteGachaResult(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaID
@@ -856,9 +712,6 @@ export const deleteGachaResult = /* GraphQL */ `mutation DeleteGachaResult(
       isActive
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     exchangedPoints
@@ -871,17 +724,11 @@ export const deleteGachaResult = /* GraphQL */ `mutation DeleteGachaResult(
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     resultAt
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     gachaResultObtainedTicketId
     __typename
   }
@@ -908,9 +755,6 @@ export const createTicket = /* GraphQL */ `mutation CreateTicket(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaResultID
@@ -922,9 +766,6 @@ export const createTicket = /* GraphQL */ `mutation CreateTicket(
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
@@ -932,9 +773,6 @@ export const createTicket = /* GraphQL */ `mutation CreateTicket(
     isUsed
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -960,9 +798,6 @@ export const updateTicket = /* GraphQL */ `mutation UpdateTicket(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaResultID
@@ -974,9 +809,6 @@ export const updateTicket = /* GraphQL */ `mutation UpdateTicket(
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
@@ -984,9 +816,6 @@ export const updateTicket = /* GraphQL */ `mutation UpdateTicket(
     isUsed
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -1012,9 +841,6 @@ export const deleteTicket = /* GraphQL */ `mutation DeleteTicket(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaResultID
@@ -1026,9 +852,6 @@ export const deleteTicket = /* GraphQL */ `mutation DeleteTicket(
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
@@ -1036,9 +859,6 @@ export const deleteTicket = /* GraphQL */ `mutation DeleteTicket(
     isUsed
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -1052,7 +872,6 @@ export const createInsect = /* GraphQL */ `mutation CreateInsect(
 ) {
   createInsect(input: $input, condition: $condition) {
     id
-    species
     scientificName
     japaneseName
     family
@@ -1069,9 +888,6 @@ export const createInsect = /* GraphQL */ `mutation CreateInsect(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     location
@@ -1086,18 +902,12 @@ export const createInsect = /* GraphQL */ `mutation CreateInsect(
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -1111,7 +921,6 @@ export const updateInsect = /* GraphQL */ `mutation UpdateInsect(
 ) {
   updateInsect(input: $input, condition: $condition) {
     id
-    species
     scientificName
     japaneseName
     family
@@ -1128,9 +937,6 @@ export const updateInsect = /* GraphQL */ `mutation UpdateInsect(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     location
@@ -1145,18 +951,12 @@ export const updateInsect = /* GraphQL */ `mutation UpdateInsect(
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -1170,7 +970,6 @@ export const deleteInsect = /* GraphQL */ `mutation DeleteInsect(
 ) {
   deleteInsect(input: $input, condition: $condition) {
     id
-    species
     scientificName
     japaneseName
     family
@@ -1187,9 +986,6 @@ export const deleteInsect = /* GraphQL */ `mutation DeleteInsect(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     location
@@ -1204,18 +1000,12 @@ export const deleteInsect = /* GraphQL */ `mutation DeleteInsect(
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }

@@ -9,11 +9,7 @@
       "apiKeyExpirationDate": "2026-07-12T09:35:34.763Z",
       "keyDescription": "bug_app_graphql_api"
     },
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "AUTOMERGE"
-      }
-    },
+    "conflictResolution": {},
     "additionalAuthTypes": []
   }
 }

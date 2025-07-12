@@ -1,4 +1,15 @@
 // Mock data types for the Bug Encyclopedia app
+import {
+  User,
+  Insect,
+  Photo,
+  AIAnalysis,
+  PointsAward,
+  Gacha,
+  GachaResult,
+  Ticket,
+} from '@/src/API';
+
 export type AnalyzeResult = {
   scientificName: string;
   japaneseName: string;
@@ -6,35 +17,26 @@ export type AnalyzeResult = {
   img: string;
 };
 
-export type ChatTurn = { 
-  role: "doctor" | "child" | "friend"; 
-  message: string; 
+export type ChatTurn = {
+  role: 'doctor' | 'child' | 'friend';
+  message: string;
 };
 
-export type Bug = {
-  id: string;
-  scientificName: string;
-  japaneseName: string;
-  family: string;
-  img: string;
-  discoveredAt: Date;
-  notes?: string;
-};
-
-export type BugStore = {
-  bugs: Bug[];
-  addBug: (bug: Omit<Bug, 'id' | 'discoveredAt'>) => void;
-  updateBugNotes: (id: string, notes: string) => void;
-  getBugById: (id: string) => Bug | undefined;
+export type InsectStore = {
+  insects: Insect[];
+  addInsect: (insect: Omit<Insect, 'id' | 'discoveredAt'>) => void;
+  updateInsectNotes: (id: string, notes: string) => void;
+  getInsectById: (id: string) => Insect | undefined;
 };
 
 export type SettingsStore = {
   friendGender: 'boy' | 'girl';
-  setFriendGender: (gender: 'boy' | 'girl') => void;};
-export type RewardStore = {
-  points: number;
-  boostLevel: number;
-  addPoints: (amount: number) => void;
-  consumePoints: (amount: number) => boolean;
-  setBoost: (level: number) => void;
+  setFriendGender: (gender: 'boy' | 'girl') => void;
+};
+export type UserStore = {
+  users: User[];
+  setUser: (user: User) => void;
+  addUser: (user: Omit<User, 'id' | 'createdAt'>) => void;
+  updateUser: (id: string, user: Partial<User>) => void;
+  getUserById: (id: string) => User | undefined;
 };

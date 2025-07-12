@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   View,
@@ -7,24 +7,59 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router';
-import { useBugStore } from '@/store/bugStore';
+import { router, useRootNavigationState } from 'expo-router';
+import { useArticleStore } from '@/store/articleStore';
 import { useSettingsStore } from '@/store/settingsStore';
 import { useRewardStore } from '@/store/rewardStore';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
+import { useUserStore } from '@/store/userStore';
+import { User } from '@/src/API';
 
 export default function ProfileScreen() {
-  const { bugs } = useBugStore();
+  const { insects, photos } = useArticleStore();
+  const { user } = useUserStore();
   const { friendGender, setFriendGender } = useSettingsStore();
   const { points } = useRewardStore();
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [userData, setUserData] = useState<User[]>([]);
+  const rootNavigation = useRootNavigationState();
+
+  useEffect(() => {
+    setIsLoading(true);
+    if (!rootNavigation?.key) return;
+
+    // 未認証ならリダイレクト（これだけでよい）
+    if (isAuthenticated === false) {
+      router.replace('/(auth)/login');
+      return;
+    }
+    // ユーザーデータが取得済みで、IDが一致しているか確認
+    if (user && userData?.[0]?.id === user.id) {
+      setIsLoading(false);
+    }
+
+    // 認証されていても ID が一致しない → 不正ユーザーと見なしてログアウト処理
+    if (user && userData?.[0]?.id && userData?.[0]?.id !== user.id) {
+      router.replace('/(auth)/login');
+    }
+  }, [isAuthenticated, rootNavigation?.key, user, userData]);
+
+  if (isAuthenticated === null || isAuthenticated === undefined || isLoading) {
+    return <ActivityIndicator size="large" color={Colors.primary} />;
+  }
+  if (isAuthenticated === false) {
+    return null;
+  }
 
   const stats = [
-    { icon: 'bug', label: '発見した虫', value: bugs.length },
-    { icon: 'camera', label: '撮影回数', value: bugs.length },
-    { icon: 'book', label: '図鑑の項目', value: bugs.length },
+    { icon: 'bug', label: '発見した虫', value: insects.length },
+    { icon: 'camera', label: '撮影回数', value: insects.length },
+    { icon: 'book', label: '図鑑の項目', value: insects.length },
   ];
 
   const achievements = [
@@ -32,32 +67,37 @@ export default function ProfileScreen() {
       id: 'first-discovery',
       icon: 'star',
       title: 'はじめての発見',
-      description: bugs.length > 0 ? '達成済み' : '最初の虫を発見しよう',
-      isUnlocked: bugs.length > 0,
+      description: insects.length > 0 ? '達成済み' : '最初の虫を発見しよう',
+      isUnlocked: insects.length > 0,
     },
     {
       id: 'bug-apprentice',
       icon: 'trophy',
       title: '虫博士見習い',
       description:
-        bugs.length >= 5 ? '達成済み' : `5匹発見しよう (${bugs.length}/5)`,
-      isUnlocked: bugs.length >= 5,
+        insects.length >= 5
+          ? '達成済み'
+          : `5匹発見しよう (${insects.length}/5)`,
+      isUnlocked: insects.length >= 5,
     },
     {
       id: 'note-taker',
       icon: 'document-text',
       title: 'メモマスター',
       description:
-        bugs.filter((bug) => bug.notes && bug.notes.trim().length > 0).length >=
-        3
+        insects.filter(
+          (insect) => insect.notes && insect.notes.trim().length > 0
+        ).length >= 3
           ? '達成済み'
           : `3匹にメモを書こう (${
-              bugs.filter((bug) => bug.notes && bug.notes.trim().length > 0)
-                .length
+              insects.filter(
+                (insect) => insect.notes && insect.notes.trim().length > 0
+              ).length
             }/3)`,
       isUnlocked:
-        bugs.filter((bug) => bug.notes && bug.notes.trim().length > 0).length >=
-        3,
+        insects.filter(
+          (insect) => insect.notes && insect.notes.trim().length > 0
+        ).length >= 3,
     },
     {
       id: 'curious-explorer',
@@ -154,21 +194,21 @@ export default function ProfileScreen() {
           <View style={styles.levelCard}>
             <View style={styles.levelHeader}>
               <Text style={styles.levelTitle}>
-                レベル {Math.floor(bugs.length / 3) + 1}
+                レベル {Math.floor(insects.length / 3) + 1}
               </Text>
-              <Text style={styles.levelProgress}>{bugs.length % 3}/3</Text>
+              <Text style={styles.levelProgress}>{insects.length % 3}/3</Text>
             </View>
             <View style={styles.progressBarContainer}>
               <View
                 style={[
                   styles.progressBar,
-                  { width: `${((bugs.length % 3) / 3) * 100}%` },
+                  { width: `${((insects.length % 3) / 3) * 100}%` },
                 ]}
               />
             </View>
             <Text style={styles.levelDescription}>
-              {bugs.length < 3
-                ? `あと${3 - (bugs.length % 3)}匹でレベルアップ！`
+              {insects.length < 3
+                ? `あと${3 - (insects.length % 3)}匹でレベルアップ！`
                 : '次のレベルまであと少し！'}
             </Text>
           </View>

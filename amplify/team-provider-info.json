@@ -40,9 +40,6 @@
       "AmplifyAppId": "d23jw3z03ee2xz"
     },
     "categories": {
-      "auth": {
-        "bugapp": {}
-      },
       "function": {
         "imageAnalysisAI": {
           "deploymentBucketName": "amplify-bugapp-hdev-a28fd-deployment",
@@ -52,6 +49,9 @@
       "api": {
         "bugAppAIApi": {},
         "bugapp": {}
+      },
+      "auth": {
+        "bugapp050fc913": {}
       }
     }
   }

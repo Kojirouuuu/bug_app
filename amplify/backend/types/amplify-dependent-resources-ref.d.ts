@@ -12,7 +12,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "auth": {
-    "bugapp": {
+    "bugapp050fc913": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",

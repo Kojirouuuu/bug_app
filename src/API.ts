@@ -11,7 +11,6 @@ export type CreateUserInput = {
   region?: string | null,
   points: number,
   rank?: string | null,
-  _version?: number | null,
 };
 
 export type ModelUserConditionInput = {
@@ -25,7 +24,6 @@ export type ModelUserConditionInput = {
   and?: Array< ModelUserConditionInput | null > | null,
   or?: Array< ModelUserConditionInput | null > | null,
   not?: ModelUserConditionInput | null,
-  _deleted?: ModelBooleanInput | null,
   updatedAt?: ModelStringInput | null,
 };
 
@@ -81,13 +79,6 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type ModelBooleanInput = {
-  ne?: boolean | null,
-  eq?: boolean | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
 export type User = {
   __typename: "User",
   id: string,
@@ -103,16 +94,12 @@ export type User = {
   gachaResults?: ModelGachaResultConnection | null,
   insects?: ModelInsectConnection | null,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type ModelPhotoConnection = {
   __typename: "ModelPhotoConnection",
   items:  Array<Photo | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type Photo = {
@@ -128,9 +115,6 @@ export type Photo = {
   s3path: string,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   photoAnalysisId?: string | null,
   photoInsectId?: string | null,
 };
@@ -145,9 +129,6 @@ export type AIAnalysis = {
   awardedPoints?: PointsAward | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   aIAnalysisAwardedPointsId?: string | null,
 };
 
@@ -161,15 +142,11 @@ export type PointsAward = {
   reason?: string | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type Insect = {
   __typename: "Insect",
   id: string,
-  species: string,
   scientificName: string,
   japaneseName: string,
   family: string,
@@ -183,16 +160,12 @@ export type Insect = {
   photo?: Photo | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type ModelTicketConnection = {
   __typename: "ModelTicketConnection",
   items:  Array<Ticket | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type Ticket = {
@@ -207,9 +180,6 @@ export type Ticket = {
   isUsed?: boolean | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export enum TicketType {
@@ -233,9 +203,6 @@ export type GachaResult = {
   resultAt: string,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
   gachaResultObtainedTicketId?: string | null,
 };
 
@@ -249,23 +216,18 @@ export type Gacha = {
   isActive?: boolean | null,
   createdAt: string,
   updatedAt: string,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
 };
 
 export type ModelGachaResultConnection = {
   __typename: "ModelGachaResultConnection",
   items:  Array<GachaResult | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelInsectConnection = {
   __typename: "ModelInsectConnection",
   items:  Array<Insect | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type UpdateUserInput = {
@@ -277,12 +239,10 @@ export type UpdateUserInput = {
   region?: string | null,
   points?: number | null,
   rank?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteUserInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreatePhotoInput = {
@@ -292,7 +252,6 @@ export type CreatePhotoInput = {
   takenAt: string,
   location?: string | null,
   s3path: string,
-  _version?: number | null,
   photoAnalysisId?: string | null,
   photoInsectId?: string | null,
 };
@@ -306,7 +265,6 @@ export type ModelPhotoConditionInput = {
   and?: Array< ModelPhotoConditionInput | null > | null,
   or?: Array< ModelPhotoConditionInput | null > | null,
   not?: ModelPhotoConditionInput | null,
-  _deleted?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   photoAnalysisId?: ModelIDInput | null,
@@ -336,14 +294,12 @@ export type UpdatePhotoInput = {
   takenAt?: string | null,
   location?: string | null,
   s3path?: string | null,
-  _version?: number | null,
   photoAnalysisId?: string | null,
   photoInsectId?: string | null,
 };
 
 export type DeletePhotoInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateAIAnalysisInput = {
@@ -351,7 +307,6 @@ export type CreateAIAnalysisInput = {
   photoID: string,
   result: string,
   analyzedAt: string,
-  _version?: number | null,
   aIAnalysisAwardedPointsId?: string | null,
 };
 
@@ -362,7 +317,6 @@ export type ModelAIAnalysisConditionInput = {
   and?: Array< ModelAIAnalysisConditionInput | null > | null,
   or?: Array< ModelAIAnalysisConditionInput | null > | null,
   not?: ModelAIAnalysisConditionInput | null,
-  _deleted?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   aIAnalysisAwardedPointsId?: ModelIDInput | null,
@@ -373,13 +327,11 @@ export type UpdateAIAnalysisInput = {
   photoID?: string | null,
   result?: string | null,
   analyzedAt?: string | null,
-  _version?: number | null,
   aIAnalysisAwardedPointsId?: string | null,
 };
 
 export type DeleteAIAnalysisInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreatePointsAwardInput = {
@@ -388,7 +340,6 @@ export type CreatePointsAwardInput = {
   value: number,
   awardedAt: string,
   reason?: string | null,
-  _version?: number | null,
 };
 
 export type ModelPointsAwardConditionInput = {
@@ -399,7 +350,6 @@ export type ModelPointsAwardConditionInput = {
   and?: Array< ModelPointsAwardConditionInput | null > | null,
   or?: Array< ModelPointsAwardConditionInput | null > | null,
   not?: ModelPointsAwardConditionInput | null,
-  _deleted?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
@@ -410,12 +360,10 @@ export type UpdatePointsAwardInput = {
   value?: number | null,
   awardedAt?: string | null,
   reason?: string | null,
-  _version?: number | null,
 };
 
 export type DeletePointsAwardInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateGachaInput = {
@@ -424,7 +372,6 @@ export type CreateGachaInput = {
   costPoints: number,
   availableTickets?: Array< TicketType > | null,
   isActive?: boolean | null,
-  _version?: number | null,
 };
 
 export type ModelGachaConditionInput = {
@@ -435,7 +382,6 @@ export type ModelGachaConditionInput = {
   and?: Array< ModelGachaConditionInput | null > | null,
   or?: Array< ModelGachaConditionInput | null > | null,
   not?: ModelGachaConditionInput | null,
-  _deleted?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
@@ -447,18 +393,23 @@ export type ModelTicketTypeListInput = {
   notContains?: TicketType | null,
 };
 
+export type ModelBooleanInput = {
+  ne?: boolean | null,
+  eq?: boolean | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
 export type UpdateGachaInput = {
   id: string,
   name?: string | null,
   costPoints?: number | null,
   availableTickets?: Array< TicketType > | null,
   isActive?: boolean | null,
-  _version?: number | null,
 };
 
 export type DeleteGachaInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateGachaResultInput = {
@@ -467,7 +418,6 @@ export type CreateGachaResultInput = {
   gachaID: string,
   exchangedPoints: number,
   resultAt: string,
-  _version?: number | null,
   gachaResultObtainedTicketId?: string | null,
 };
 
@@ -479,7 +429,6 @@ export type ModelGachaResultConditionInput = {
   and?: Array< ModelGachaResultConditionInput | null > | null,
   or?: Array< ModelGachaResultConditionInput | null > | null,
   not?: ModelGachaResultConditionInput | null,
-  _deleted?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
   gachaResultObtainedTicketId?: ModelIDInput | null,
@@ -491,13 +440,11 @@ export type UpdateGachaResultInput = {
   gachaID?: string | null,
   exchangedPoints?: number | null,
   resultAt?: string | null,
-  _version?: number | null,
   gachaResultObtainedTicketId?: string | null,
 };
 
 export type DeleteGachaResultInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateTicketInput = {
@@ -507,7 +454,6 @@ export type CreateTicketInput = {
   gachaResultID?: string | null,
   expiresAt?: string | null,
   isUsed?: boolean | null,
-  _version?: number | null,
 };
 
 export type ModelTicketConditionInput = {
@@ -519,7 +465,6 @@ export type ModelTicketConditionInput = {
   and?: Array< ModelTicketConditionInput | null > | null,
   or?: Array< ModelTicketConditionInput | null > | null,
   not?: ModelTicketConditionInput | null,
-  _deleted?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
@@ -536,17 +481,14 @@ export type UpdateTicketInput = {
   gachaResultID?: string | null,
   expiresAt?: string | null,
   isUsed?: boolean | null,
-  _version?: number | null,
 };
 
 export type DeleteTicketInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type CreateInsectInput = {
   id?: string | null,
-  species: string,
   scientificName: string,
   japaneseName: string,
   family: string,
@@ -556,11 +498,9 @@ export type CreateInsectInput = {
   location?: string | null,
   foundAt: string,
   photoID?: string | null,
-  _version?: number | null,
 };
 
 export type ModelInsectConditionInput = {
-  species?: ModelStringInput | null,
   scientificName?: ModelStringInput | null,
   japaneseName?: ModelStringInput | null,
   family?: ModelStringInput | null,
@@ -573,14 +513,12 @@ export type ModelInsectConditionInput = {
   and?: Array< ModelInsectConditionInput | null > | null,
   or?: Array< ModelInsectConditionInput | null > | null,
   not?: ModelInsectConditionInput | null,
-  _deleted?: ModelBooleanInput | null,
   createdAt?: ModelStringInput | null,
   updatedAt?: ModelStringInput | null,
 };
 
 export type UpdateInsectInput = {
   id: string,
-  species?: string | null,
   scientificName?: string | null,
   japaneseName?: string | null,
   family?: string | null,
@@ -590,12 +528,10 @@ export type UpdateInsectInput = {
   location?: string | null,
   foundAt?: string | null,
   photoID?: string | null,
-  _version?: number | null,
 };
 
 export type DeleteInsectInput = {
   id: string,
-  _version?: number | null,
 };
 
 export type ModelUserFilterInput = {
@@ -611,14 +547,12 @@ export type ModelUserFilterInput = {
   and?: Array< ModelUserFilterInput | null > | null,
   or?: Array< ModelUserFilterInput | null > | null,
   not?: ModelUserFilterInput | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelUserConnection = {
   __typename: "ModelUserConnection",
   items:  Array<User | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelPhotoFilterInput = {
@@ -633,7 +567,6 @@ export type ModelPhotoFilterInput = {
   and?: Array< ModelPhotoFilterInput | null > | null,
   or?: Array< ModelPhotoFilterInput | null > | null,
   not?: ModelPhotoFilterInput | null,
-  _deleted?: ModelBooleanInput | null,
   photoAnalysisId?: ModelIDInput | null,
   photoInsectId?: ModelIDInput | null,
 };
@@ -648,7 +581,6 @@ export type ModelAIAnalysisFilterInput = {
   and?: Array< ModelAIAnalysisFilterInput | null > | null,
   or?: Array< ModelAIAnalysisFilterInput | null > | null,
   not?: ModelAIAnalysisFilterInput | null,
-  _deleted?: ModelBooleanInput | null,
   aIAnalysisAwardedPointsId?: ModelIDInput | null,
 };
 
@@ -656,7 +588,6 @@ export type ModelAIAnalysisConnection = {
   __typename: "ModelAIAnalysisConnection",
   items:  Array<AIAnalysis | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelPointsAwardFilterInput = {
@@ -670,14 +601,12 @@ export type ModelPointsAwardFilterInput = {
   and?: Array< ModelPointsAwardFilterInput | null > | null,
   or?: Array< ModelPointsAwardFilterInput | null > | null,
   not?: ModelPointsAwardFilterInput | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelPointsAwardConnection = {
   __typename: "ModelPointsAwardConnection",
   items:  Array<PointsAward | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelGachaFilterInput = {
@@ -691,14 +620,12 @@ export type ModelGachaFilterInput = {
   and?: Array< ModelGachaFilterInput | null > | null,
   or?: Array< ModelGachaFilterInput | null > | null,
   not?: ModelGachaFilterInput | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelGachaConnection = {
   __typename: "ModelGachaConnection",
   items:  Array<Gacha | null >,
   nextToken?: string | null,
-  startedAt?: number | null,
 };
 
 export type ModelGachaResultFilterInput = {
@@ -712,7 +639,6 @@ export type ModelGachaResultFilterInput = {
   and?: Array< ModelGachaResultFilterInput | null > | null,
   or?: Array< ModelGachaResultFilterInput | null > | null,
   not?: ModelGachaResultFilterInput | null,
-  _deleted?: ModelBooleanInput | null,
   gachaResultObtainedTicketId?: ModelIDInput | null,
 };
 
@@ -728,12 +654,10 @@ export type ModelTicketFilterInput = {
   and?: Array< ModelTicketFilterInput | null > | null,
   or?: Array< ModelTicketFilterInput | null > | null,
   not?: ModelTicketFilterInput | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelInsectFilterInput = {
   id?: ModelIDInput | null,
-  species?: ModelStringInput | null,
   scientificName?: ModelStringInput | null,
   japaneseName?: ModelStringInput | null,
   family?: ModelStringInput | null,
@@ -748,7 +672,6 @@ export type ModelInsectFilterInput = {
   and?: Array< ModelInsectFilterInput | null > | null,
   or?: Array< ModelInsectFilterInput | null > | null,
   not?: ModelInsectFilterInput | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export enum ModelSortDirection {
@@ -769,7 +692,6 @@ export type ModelSubscriptionUserFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionUserFilterInput | null > | null,
   or?: Array< ModelSubscriptionUserFilterInput | null > | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -825,7 +747,6 @@ export type ModelSubscriptionPhotoFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionPhotoFilterInput | null > | null,
   or?: Array< ModelSubscriptionPhotoFilterInput | null > | null,
-  _deleted?: ModelBooleanInput | null,
   photoAnalysisId?: ModelSubscriptionIDInput | null,
   photoInsectId?: ModelSubscriptionIDInput | null,
 };
@@ -839,7 +760,6 @@ export type ModelSubscriptionAIAnalysisFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionAIAnalysisFilterInput | null > | null,
   or?: Array< ModelSubscriptionAIAnalysisFilterInput | null > | null,
-  _deleted?: ModelBooleanInput | null,
   aIAnalysisAwardedPointsId?: ModelSubscriptionIDInput | null,
 };
 
@@ -853,7 +773,6 @@ export type ModelSubscriptionPointsAwardFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionPointsAwardFilterInput | null > | null,
   or?: Array< ModelSubscriptionPointsAwardFilterInput | null > | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionGachaFilterInput = {
@@ -866,7 +785,6 @@ export type ModelSubscriptionGachaFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionGachaFilterInput | null > | null,
   or?: Array< ModelSubscriptionGachaFilterInput | null > | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionBooleanInput = {
@@ -884,7 +802,6 @@ export type ModelSubscriptionGachaResultFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionGachaResultFilterInput | null > | null,
   or?: Array< ModelSubscriptionGachaResultFilterInput | null > | null,
-  _deleted?: ModelBooleanInput | null,
   gachaResultObtainedTicketId?: ModelSubscriptionIDInput | null,
 };
 
@@ -899,12 +816,10 @@ export type ModelSubscriptionTicketFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionTicketFilterInput | null > | null,
   or?: Array< ModelSubscriptionTicketFilterInput | null > | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type ModelSubscriptionInsectFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  species?: ModelSubscriptionStringInput | null,
   scientificName?: ModelSubscriptionStringInput | null,
   japaneseName?: ModelSubscriptionStringInput | null,
   family?: ModelSubscriptionStringInput | null,
@@ -918,7 +833,6 @@ export type ModelSubscriptionInsectFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionInsectFilterInput | null > | null,
   or?: Array< ModelSubscriptionInsectFilterInput | null > | null,
-  _deleted?: ModelBooleanInput | null,
 };
 
 export type CreateUserMutationVariables = {
@@ -938,29 +852,22 @@ export type CreateUserMutation = {
     photos?:  {
       __typename: "ModelPhotoConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     points: number,
     tickets?:  {
       __typename: "ModelTicketConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     rank?: string | null,
     gachaResults?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     insects?:  {
       __typename: "ModelInsectConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -981,29 +888,22 @@ export type UpdateUserMutation = {
     photos?:  {
       __typename: "ModelPhotoConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     points: number,
     tickets?:  {
       __typename: "ModelTicketConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     rank?: string | null,
     gachaResults?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     insects?:  {
       __typename: "ModelInsectConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1024,29 +924,22 @@ export type DeleteUserMutation = {
     photos?:  {
       __typename: "ModelPhotoConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     points: number,
     tickets?:  {
       __typename: "ModelTicketConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     rank?: string | null,
     gachaResults?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     insects?:  {
       __typename: "ModelInsectConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1072,9 +965,6 @@ export type CreatePhotoMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     takenAt: string,
     location?: string | null,
@@ -1086,15 +976,11 @@ export type CreatePhotoMutation = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     insect?:  {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -1106,16 +992,10 @@ export type CreatePhotoMutation = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     s3path: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     photoAnalysisId?: string | null,
     photoInsectId?: string | null,
   } | null,
@@ -1143,9 +1023,6 @@ export type UpdatePhotoMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     takenAt: string,
     location?: string | null,
@@ -1157,15 +1034,11 @@ export type UpdatePhotoMutation = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     insect?:  {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -1177,16 +1050,10 @@ export type UpdatePhotoMutation = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     s3path: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     photoAnalysisId?: string | null,
     photoInsectId?: string | null,
   } | null,
@@ -1214,9 +1081,6 @@ export type DeletePhotoMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     takenAt: string,
     location?: string | null,
@@ -1228,15 +1092,11 @@ export type DeletePhotoMutation = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     insect?:  {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -1248,16 +1108,10 @@ export type DeletePhotoMutation = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     s3path: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     photoAnalysisId?: string | null,
     photoInsectId?: string | null,
   } | null,
@@ -1283,9 +1137,6 @@ export type CreateAIAnalysisMutation = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
@@ -1300,15 +1151,9 @@ export type CreateAIAnalysisMutation = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     aIAnalysisAwardedPointsId?: string | null,
   } | null,
 };
@@ -1333,9 +1178,6 @@ export type UpdateAIAnalysisMutation = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
@@ -1350,15 +1192,9 @@ export type UpdateAIAnalysisMutation = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     aIAnalysisAwardedPointsId?: string | null,
   } | null,
 };
@@ -1383,9 +1219,6 @@ export type DeleteAIAnalysisMutation = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
@@ -1400,15 +1233,9 @@ export type DeleteAIAnalysisMutation = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     aIAnalysisAwardedPointsId?: string | null,
   } | null,
 };
@@ -1431,9 +1258,6 @@ export type CreatePointsAwardMutation = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     value: number,
@@ -1441,9 +1265,6 @@ export type CreatePointsAwardMutation = {
     reason?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1465,9 +1286,6 @@ export type UpdatePointsAwardMutation = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     value: number,
@@ -1475,9 +1293,6 @@ export type UpdatePointsAwardMutation = {
     reason?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1499,9 +1314,6 @@ export type DeletePointsAwardMutation = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     value: number,
@@ -1509,9 +1321,6 @@ export type DeletePointsAwardMutation = {
     reason?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1530,14 +1339,10 @@ export type CreateGachaMutation = {
     results?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     isActive?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1556,14 +1361,10 @@ export type UpdateGachaMutation = {
     results?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     isActive?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1582,14 +1383,10 @@ export type DeleteGachaMutation = {
     results?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     isActive?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1614,9 +1411,6 @@ export type CreateGachaResultMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaID: string,
     gacha?:  {
@@ -1628,9 +1422,6 @@ export type CreateGachaResultMutation = {
       isActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     exchangedPoints: number,
     obtainedTicket?:  {
@@ -1643,16 +1434,10 @@ export type CreateGachaResultMutation = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     resultAt: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     gachaResultObtainedTicketId?: string | null,
   } | null,
 };
@@ -1678,9 +1463,6 @@ export type UpdateGachaResultMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaID: string,
     gacha?:  {
@@ -1692,9 +1474,6 @@ export type UpdateGachaResultMutation = {
       isActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     exchangedPoints: number,
     obtainedTicket?:  {
@@ -1707,16 +1486,10 @@ export type UpdateGachaResultMutation = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     resultAt: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     gachaResultObtainedTicketId?: string | null,
   } | null,
 };
@@ -1742,9 +1515,6 @@ export type DeleteGachaResultMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaID: string,
     gacha?:  {
@@ -1756,9 +1526,6 @@ export type DeleteGachaResultMutation = {
       isActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     exchangedPoints: number,
     obtainedTicket?:  {
@@ -1771,16 +1538,10 @@ export type DeleteGachaResultMutation = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     resultAt: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     gachaResultObtainedTicketId?: string | null,
   } | null,
 };
@@ -1807,9 +1568,6 @@ export type CreateTicketMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaResultID?: string | null,
     gachaResult?:  {
@@ -1821,18 +1579,12 @@ export type CreateTicketMutation = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null,
     expiresAt?: string | null,
     isUsed?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1858,9 +1610,6 @@ export type UpdateTicketMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaResultID?: string | null,
     gachaResult?:  {
@@ -1872,18 +1621,12 @@ export type UpdateTicketMutation = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null,
     expiresAt?: string | null,
     isUsed?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1909,9 +1652,6 @@ export type DeleteTicketMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaResultID?: string | null,
     gachaResult?:  {
@@ -1923,18 +1663,12 @@ export type DeleteTicketMutation = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null,
     expiresAt?: string | null,
     isUsed?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -1947,7 +1681,6 @@ export type CreateInsectMutation = {
   createInsect?:  {
     __typename: "Insect",
     id: string,
-    species: string,
     scientificName: string,
     japaneseName: string,
     family: string,
@@ -1965,9 +1698,6 @@ export type CreateInsectMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     location?: string | null,
     foundAt: string,
@@ -1982,17 +1712,11 @@ export type CreateInsectMutation = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -2005,7 +1729,6 @@ export type UpdateInsectMutation = {
   updateInsect?:  {
     __typename: "Insect",
     id: string,
-    species: string,
     scientificName: string,
     japaneseName: string,
     family: string,
@@ -2023,9 +1746,6 @@ export type UpdateInsectMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     location?: string | null,
     foundAt: string,
@@ -2040,17 +1760,11 @@ export type UpdateInsectMutation = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -2063,7 +1777,6 @@ export type DeleteInsectMutation = {
   deleteInsect?:  {
     __typename: "Insect",
     id: string,
-    species: string,
     scientificName: string,
     japaneseName: string,
     family: string,
@@ -2081,9 +1794,6 @@ export type DeleteInsectMutation = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     location?: string | null,
     foundAt: string,
@@ -2098,17 +1808,11 @@ export type DeleteInsectMutation = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -2128,29 +1832,22 @@ export type GetUserQuery = {
     photos?:  {
       __typename: "ModelPhotoConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     points: number,
     tickets?:  {
       __typename: "ModelTicketConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     rank?: string | null,
     gachaResults?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     insects?:  {
       __typename: "ModelInsectConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -2174,42 +1871,8 @@ export type ListUsersQuery = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncUsersQueryVariables = {
-  filter?: ModelUserFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncUsersQuery = {
-  syncUsers?:  {
-    __typename: "ModelUserConnection",
-    items:  Array< {
-      __typename: "User",
-      id: string,
-      name: string,
-      cognitosub?: string | null,
-      createdAt: string,
-      lastLogin?: string | null,
-      region?: string | null,
-      points: number,
-      rank?: string | null,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -2234,9 +1897,6 @@ export type GetPhotoQuery = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     takenAt: string,
     location?: string | null,
@@ -2248,15 +1908,11 @@ export type GetPhotoQuery = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     insect?:  {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -2268,16 +1924,10 @@ export type GetPhotoQuery = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     s3path: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     photoAnalysisId?: string | null,
     photoInsectId?: string | null,
   } | null,
@@ -2302,45 +1952,10 @@ export type ListPhotosQuery = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncPhotosQueryVariables = {
-  filter?: ModelPhotoFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncPhotosQuery = {
-  syncPhotos?:  {
-    __typename: "ModelPhotoConnection",
-    items:  Array< {
-      __typename: "Photo",
-      id: string,
-      url: string,
-      userID: string,
-      takenAt: string,
-      location?: string | null,
-      s3path: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      photoAnalysisId?: string | null,
-      photoInsectId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -2363,9 +1978,6 @@ export type GetAIAnalysisQuery = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
@@ -2380,15 +1992,9 @@ export type GetAIAnalysisQuery = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     aIAnalysisAwardedPointsId?: string | null,
   } | null,
 };
@@ -2410,41 +2016,9 @@ export type ListAIAnalysesQuery = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncAIAnalysesQueryVariables = {
-  filter?: ModelAIAnalysisFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncAIAnalysesQuery = {
-  syncAIAnalyses?:  {
-    __typename: "ModelAIAnalysisConnection",
-    items:  Array< {
-      __typename: "AIAnalysis",
-      id: string,
-      photoID: string,
-      result: string,
-      analyzedAt: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      aIAnalysisAwardedPointsId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -2465,9 +2039,6 @@ export type GetPointsAwardQuery = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     value: number,
@@ -2475,9 +2046,6 @@ export type GetPointsAwardQuery = {
     reason?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -2499,40 +2067,8 @@ export type ListPointsAwardsQuery = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncPointsAwardsQueryVariables = {
-  filter?: ModelPointsAwardFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncPointsAwardsQuery = {
-  syncPointsAwards?:  {
-    __typename: "ModelPointsAwardConnection",
-    items:  Array< {
-      __typename: "PointsAward",
-      id: string,
-      analysisID?: string | null,
-      value: number,
-      awardedAt: string,
-      reason?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -2550,14 +2086,10 @@ export type GetGachaQuery = {
     results?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     isActive?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -2579,40 +2111,8 @@ export type ListGachasQuery = {
       isActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncGachasQueryVariables = {
-  filter?: ModelGachaFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncGachasQuery = {
-  syncGachas?:  {
-    __typename: "ModelGachaConnection",
-    items:  Array< {
-      __typename: "Gacha",
-      id: string,
-      name: string,
-      costPoints: number,
-      availableTickets?: Array< TicketType > | null,
-      isActive?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -2636,9 +2136,6 @@ export type GetGachaResultQuery = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaID: string,
     gacha?:  {
@@ -2650,9 +2147,6 @@ export type GetGachaResultQuery = {
       isActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     exchangedPoints: number,
     obtainedTicket?:  {
@@ -2665,16 +2159,10 @@ export type GetGachaResultQuery = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     resultAt: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     gachaResultObtainedTicketId?: string | null,
   } | null,
 };
@@ -2697,42 +2185,9 @@ export type ListGachaResultsQuery = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncGachaResultsQueryVariables = {
-  filter?: ModelGachaResultFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncGachaResultsQuery = {
-  syncGachaResults?:  {
-    __typename: "ModelGachaResultConnection",
-    items:  Array< {
-      __typename: "GachaResult",
-      id: string,
-      userID: string,
-      gachaID: string,
-      exchangedPoints: number,
-      resultAt: string,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      gachaResultObtainedTicketId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -2757,9 +2212,6 @@ export type GetTicketQuery = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaResultID?: string | null,
     gachaResult?:  {
@@ -2771,18 +2223,12 @@ export type GetTicketQuery = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null,
     expiresAt?: string | null,
     isUsed?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -2805,41 +2251,8 @@ export type ListTicketsQuery = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncTicketsQueryVariables = {
-  filter?: ModelTicketFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncTicketsQuery = {
-  syncTickets?:  {
-    __typename: "ModelTicketConnection",
-    items:  Array< {
-      __typename: "Ticket",
-      id: string,
-      type: TicketType,
-      userID: string,
-      gachaResultID?: string | null,
-      expiresAt?: string | null,
-      isUsed?: boolean | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -2851,7 +2264,6 @@ export type GetInsectQuery = {
   getInsect?:  {
     __typename: "Insect",
     id: string,
-    species: string,
     scientificName: string,
     japaneseName: string,
     family: string,
@@ -2869,9 +2281,6 @@ export type GetInsectQuery = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     location?: string | null,
     foundAt: string,
@@ -2886,17 +2295,11 @@ export type GetInsectQuery = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -2912,7 +2315,6 @@ export type ListInsectsQuery = {
     items:  Array< {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -2924,46 +2326,8 @@ export type ListInsectsQuery = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type SyncInsectsQueryVariables = {
-  filter?: ModelInsectFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-  lastSync?: number | null,
-};
-
-export type SyncInsectsQuery = {
-  syncInsects?:  {
-    __typename: "ModelInsectConnection",
-    items:  Array< {
-      __typename: "Insect",
-      id: string,
-      species: string,
-      scientificName: string,
-      japaneseName: string,
-      family: string,
-      description?: string | null,
-      notes?: string | null,
-      userID?: string | null,
-      location?: string | null,
-      foundAt: string,
-      photoID?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -2989,12 +2353,8 @@ export type UsersByNameQuery = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3020,12 +2380,8 @@ export type UsersByCognitosubQuery = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3051,12 +2407,8 @@ export type UsersByRegionQuery = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3082,12 +2434,8 @@ export type UsersByRankQuery = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3112,14 +2460,10 @@ export type PhotosByUserIDQuery = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3144,14 +2488,10 @@ export type PhotosByTakenAtQuery = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3174,13 +2514,9 @@ export type AIAnalysesByPhotoIDQuery = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3203,13 +2539,9 @@ export type AIAnalysesByAnalyzedAtQuery = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3233,12 +2565,8 @@ export type PointsAwardsByAnalysisIDQuery = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3262,12 +2590,8 @@ export type PointsAwardsByAwardedAtQuery = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3291,12 +2615,8 @@ export type GachasByNameQuery = {
       isActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3320,13 +2640,9 @@ export type GachaResultsByUserIDQuery = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3350,13 +2666,9 @@ export type GachaResultsByGachaIDQuery = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3380,13 +2692,9 @@ export type GachaResultsByResultAtQuery = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3411,12 +2719,8 @@ export type TicketsByTypeQuery = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3441,12 +2745,8 @@ export type TicketsByUserIDQuery = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3471,12 +2771,8 @@ export type TicketsByGachaResultIDQuery = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3501,47 +2797,8 @@ export type TicketsByExpiresAtQuery = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
-  } | null,
-};
-
-export type InsectsBySpeciesQueryVariables = {
-  species: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelInsectFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type InsectsBySpeciesQuery = {
-  insectsBySpecies?:  {
-    __typename: "ModelInsectConnection",
-    items:  Array< {
-      __typename: "Insect",
-      id: string,
-      species: string,
-      scientificName: string,
-      japaneseName: string,
-      family: string,
-      description?: string | null,
-      notes?: string | null,
-      userID?: string | null,
-      location?: string | null,
-      foundAt: string,
-      photoID?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-    } | null >,
-    nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3559,7 +2816,6 @@ export type InsectsByScientificNameQuery = {
     items:  Array< {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -3571,12 +2827,8 @@ export type InsectsByScientificNameQuery = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3594,7 +2846,6 @@ export type InsectsByJapaneseNameQuery = {
     items:  Array< {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -3606,12 +2857,8 @@ export type InsectsByJapaneseNameQuery = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3629,7 +2876,6 @@ export type InsectsByFamilyQuery = {
     items:  Array< {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -3641,12 +2887,8 @@ export type InsectsByFamilyQuery = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3664,7 +2906,6 @@ export type InsectsByUserIDQuery = {
     items:  Array< {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -3676,12 +2917,8 @@ export type InsectsByUserIDQuery = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3699,7 +2936,6 @@ export type InsectsByLocationQuery = {
     items:  Array< {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -3711,12 +2947,8 @@ export type InsectsByLocationQuery = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3734,7 +2966,6 @@ export type InsectsByFoundAtQuery = {
     items:  Array< {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -3746,12 +2977,8 @@ export type InsectsByFoundAtQuery = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3769,7 +2996,6 @@ export type InsectsByPhotoIDQuery = {
     items:  Array< {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -3781,12 +3007,8 @@ export type InsectsByPhotoIDQuery = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null >,
     nextToken?: string | null,
-    startedAt?: number | null,
   } | null,
 };
 
@@ -3806,29 +3028,22 @@ export type OnCreateUserSubscription = {
     photos?:  {
       __typename: "ModelPhotoConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     points: number,
     tickets?:  {
       __typename: "ModelTicketConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     rank?: string | null,
     gachaResults?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     insects?:  {
       __typename: "ModelInsectConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -3848,29 +3063,22 @@ export type OnUpdateUserSubscription = {
     photos?:  {
       __typename: "ModelPhotoConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     points: number,
     tickets?:  {
       __typename: "ModelTicketConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     rank?: string | null,
     gachaResults?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     insects?:  {
       __typename: "ModelInsectConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -3890,29 +3098,22 @@ export type OnDeleteUserSubscription = {
     photos?:  {
       __typename: "ModelPhotoConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     points: number,
     tickets?:  {
       __typename: "ModelTicketConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     rank?: string | null,
     gachaResults?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     insects?:  {
       __typename: "ModelInsectConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -3937,9 +3138,6 @@ export type OnCreatePhotoSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     takenAt: string,
     location?: string | null,
@@ -3951,15 +3149,11 @@ export type OnCreatePhotoSubscription = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     insect?:  {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -3971,16 +3165,10 @@ export type OnCreatePhotoSubscription = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     s3path: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     photoAnalysisId?: string | null,
     photoInsectId?: string | null,
   } | null,
@@ -4007,9 +3195,6 @@ export type OnUpdatePhotoSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     takenAt: string,
     location?: string | null,
@@ -4021,15 +3206,11 @@ export type OnUpdatePhotoSubscription = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     insect?:  {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -4041,16 +3222,10 @@ export type OnUpdatePhotoSubscription = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     s3path: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     photoAnalysisId?: string | null,
     photoInsectId?: string | null,
   } | null,
@@ -4077,9 +3252,6 @@ export type OnDeletePhotoSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     takenAt: string,
     location?: string | null,
@@ -4091,15 +3263,11 @@ export type OnDeletePhotoSubscription = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     insect?:  {
       __typename: "Insect",
       id: string,
-      species: string,
       scientificName: string,
       japaneseName: string,
       family: string,
@@ -4111,16 +3279,10 @@ export type OnDeletePhotoSubscription = {
       photoID?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     s3path: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     photoAnalysisId?: string | null,
     photoInsectId?: string | null,
   } | null,
@@ -4145,9 +3307,6 @@ export type OnCreateAIAnalysisSubscription = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
@@ -4162,15 +3321,9 @@ export type OnCreateAIAnalysisSubscription = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     aIAnalysisAwardedPointsId?: string | null,
   } | null,
 };
@@ -4194,9 +3347,6 @@ export type OnUpdateAIAnalysisSubscription = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
@@ -4211,15 +3361,9 @@ export type OnUpdateAIAnalysisSubscription = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     aIAnalysisAwardedPointsId?: string | null,
   } | null,
 };
@@ -4243,9 +3387,6 @@ export type OnDeleteAIAnalysisSubscription = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
@@ -4260,15 +3401,9 @@ export type OnDeleteAIAnalysisSubscription = {
       reason?: string | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     aIAnalysisAwardedPointsId?: string | null,
   } | null,
 };
@@ -4290,9 +3425,6 @@ export type OnCreatePointsAwardSubscription = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     value: number,
@@ -4300,9 +3432,6 @@ export type OnCreatePointsAwardSubscription = {
     reason?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4323,9 +3452,6 @@ export type OnUpdatePointsAwardSubscription = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     value: number,
@@ -4333,9 +3459,6 @@ export type OnUpdatePointsAwardSubscription = {
     reason?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4356,9 +3479,6 @@ export type OnDeletePointsAwardSubscription = {
       analyzedAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       aIAnalysisAwardedPointsId?: string | null,
     } | null,
     value: number,
@@ -4366,9 +3486,6 @@ export type OnDeletePointsAwardSubscription = {
     reason?: string | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4386,14 +3503,10 @@ export type OnCreateGachaSubscription = {
     results?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     isActive?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4411,14 +3524,10 @@ export type OnUpdateGachaSubscription = {
     results?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     isActive?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4436,14 +3545,10 @@ export type OnDeleteGachaSubscription = {
     results?:  {
       __typename: "ModelGachaResultConnection",
       nextToken?: string | null,
-      startedAt?: number | null,
     } | null,
     isActive?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4467,9 +3572,6 @@ export type OnCreateGachaResultSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaID: string,
     gacha?:  {
@@ -4481,9 +3583,6 @@ export type OnCreateGachaResultSubscription = {
       isActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     exchangedPoints: number,
     obtainedTicket?:  {
@@ -4496,16 +3595,10 @@ export type OnCreateGachaResultSubscription = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     resultAt: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     gachaResultObtainedTicketId?: string | null,
   } | null,
 };
@@ -4530,9 +3623,6 @@ export type OnUpdateGachaResultSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaID: string,
     gacha?:  {
@@ -4544,9 +3634,6 @@ export type OnUpdateGachaResultSubscription = {
       isActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     exchangedPoints: number,
     obtainedTicket?:  {
@@ -4559,16 +3646,10 @@ export type OnUpdateGachaResultSubscription = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     resultAt: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     gachaResultObtainedTicketId?: string | null,
   } | null,
 };
@@ -4593,9 +3674,6 @@ export type OnDeleteGachaResultSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaID: string,
     gacha?:  {
@@ -4607,9 +3685,6 @@ export type OnDeleteGachaResultSubscription = {
       isActive?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     exchangedPoints: number,
     obtainedTicket?:  {
@@ -4622,16 +3697,10 @@ export type OnDeleteGachaResultSubscription = {
       isUsed?: boolean | null,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     resultAt: string,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     gachaResultObtainedTicketId?: string | null,
   } | null,
 };
@@ -4657,9 +3726,6 @@ export type OnCreateTicketSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaResultID?: string | null,
     gachaResult?:  {
@@ -4671,18 +3737,12 @@ export type OnCreateTicketSubscription = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null,
     expiresAt?: string | null,
     isUsed?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4707,9 +3767,6 @@ export type OnUpdateTicketSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaResultID?: string | null,
     gachaResult?:  {
@@ -4721,18 +3778,12 @@ export type OnUpdateTicketSubscription = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null,
     expiresAt?: string | null,
     isUsed?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4757,9 +3808,6 @@ export type OnDeleteTicketSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     gachaResultID?: string | null,
     gachaResult?:  {
@@ -4771,18 +3819,12 @@ export type OnDeleteTicketSubscription = {
       resultAt: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       gachaResultObtainedTicketId?: string | null,
     } | null,
     expiresAt?: string | null,
     isUsed?: boolean | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4794,7 +3836,6 @@ export type OnCreateInsectSubscription = {
   onCreateInsect?:  {
     __typename: "Insect",
     id: string,
-    species: string,
     scientificName: string,
     japaneseName: string,
     family: string,
@@ -4812,9 +3853,6 @@ export type OnCreateInsectSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     location?: string | null,
     foundAt: string,
@@ -4829,17 +3867,11 @@ export type OnCreateInsectSubscription = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4851,7 +3883,6 @@ export type OnUpdateInsectSubscription = {
   onUpdateInsect?:  {
     __typename: "Insect",
     id: string,
-    species: string,
     scientificName: string,
     japaneseName: string,
     family: string,
@@ -4869,9 +3900,6 @@ export type OnUpdateInsectSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     location?: string | null,
     foundAt: string,
@@ -4886,17 +3914,11 @@ export type OnUpdateInsectSubscription = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };
 
@@ -4908,7 +3930,6 @@ export type OnDeleteInsectSubscription = {
   onDeleteInsect?:  {
     __typename: "Insect",
     id: string,
-    species: string,
     scientificName: string,
     japaneseName: string,
     family: string,
@@ -4926,9 +3947,6 @@ export type OnDeleteInsectSubscription = {
       points: number,
       rank?: string | null,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
     } | null,
     location?: string | null,
     foundAt: string,
@@ -4943,16 +3961,10 @@ export type OnDeleteInsectSubscription = {
       s3path: string,
       createdAt: string,
       updatedAt: string,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       photoAnalysisId?: string | null,
       photoInsectId?: string | null,
     } | null,
     createdAt: string,
     updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
   } | null,
 };

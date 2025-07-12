@@ -18,30 +18,23 @@ export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
     region
     photos {
       nextToken
-      startedAt
       __typename
     }
     points
     tickets {
       nextToken
-      startedAt
       __typename
     }
     rank
     gachaResults {
       nextToken
-      startedAt
       __typename
     }
     insects {
       nextToken
-      startedAt
       __typename
     }
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -62,50 +55,13 @@ export const listUsers = /* GraphQL */ `query ListUsers(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
 ` as GeneratedQuery<APITypes.ListUsersQueryVariables, APITypes.ListUsersQuery>;
-export const syncUsers = /* GraphQL */ `query SyncUsers(
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncUsers(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      name
-      cognitosub
-      createdAt
-      lastLogin
-      region
-      points
-      rank
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      __typename
-    }
-    nextToken
-    startedAt
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.SyncUsersQueryVariables, APITypes.SyncUsersQuery>;
 export const getPhoto = /* GraphQL */ `query GetPhoto($id: ID!) {
   getPhoto(id: $id) {
     id
@@ -121,9 +77,6 @@ export const getPhoto = /* GraphQL */ `query GetPhoto($id: ID!) {
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     takenAt
@@ -135,15 +88,11 @@ export const getPhoto = /* GraphQL */ `query GetPhoto($id: ID!) {
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     insect {
       id
-      species
       scientificName
       japaneseName
       family
@@ -155,17 +104,11 @@ export const getPhoto = /* GraphQL */ `query GetPhoto($id: ID!) {
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     s3path
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     photoAnalysisId
     photoInsectId
     __typename
@@ -187,58 +130,17 @@ export const listPhotos = /* GraphQL */ `query ListPhotos(
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
 ` as GeneratedQuery<
   APITypes.ListPhotosQueryVariables,
   APITypes.ListPhotosQuery
->;
-export const syncPhotos = /* GraphQL */ `query SyncPhotos(
-  $filter: ModelPhotoFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncPhotos(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      url
-      userID
-      takenAt
-      location
-      s3path
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      photoAnalysisId
-      photoInsectId
-      __typename
-    }
-    nextToken
-    startedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SyncPhotosQueryVariables,
-  APITypes.SyncPhotosQuery
 >;
 export const getAIAnalysis = /* GraphQL */ `query GetAIAnalysis($id: ID!) {
   getAIAnalysis(id: $id) {
@@ -253,9 +155,6 @@ export const getAIAnalysis = /* GraphQL */ `query GetAIAnalysis($id: ID!) {
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
@@ -270,16 +169,10 @@ export const getAIAnalysis = /* GraphQL */ `query GetAIAnalysis($id: ID!) {
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     aIAnalysisAwardedPointsId
     __typename
   }
@@ -301,54 +194,16 @@ export const listAIAnalyses = /* GraphQL */ `query ListAIAnalyses(
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
 ` as GeneratedQuery<
   APITypes.ListAIAnalysesQueryVariables,
   APITypes.ListAIAnalysesQuery
->;
-export const syncAIAnalyses = /* GraphQL */ `query SyncAIAnalyses(
-  $filter: ModelAIAnalysisFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncAIAnalyses(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      photoID
-      result
-      analyzedAt
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      aIAnalysisAwardedPointsId
-      __typename
-    }
-    nextToken
-    startedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SyncAIAnalysesQueryVariables,
-  APITypes.SyncAIAnalysesQuery
 >;
 export const getPointsAward = /* GraphQL */ `query GetPointsAward($id: ID!) {
   getPointsAward(id: $id) {
@@ -361,9 +216,6 @@ export const getPointsAward = /* GraphQL */ `query GetPointsAward($id: ID!) {
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
@@ -372,9 +224,6 @@ export const getPointsAward = /* GraphQL */ `query GetPointsAward($id: ID!) {
     reason
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -396,53 +245,15 @@ export const listPointsAwards = /* GraphQL */ `query ListPointsAwards(
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
 ` as GeneratedQuery<
   APITypes.ListPointsAwardsQueryVariables,
   APITypes.ListPointsAwardsQuery
->;
-export const syncPointsAwards = /* GraphQL */ `query SyncPointsAwards(
-  $filter: ModelPointsAwardFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncPointsAwards(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      analysisID
-      value
-      awardedAt
-      reason
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      __typename
-    }
-    nextToken
-    startedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SyncPointsAwardsQueryVariables,
-  APITypes.SyncPointsAwardsQuery
 >;
 export const getGacha = /* GraphQL */ `query GetGacha($id: ID!) {
   getGacha(id: $id) {
@@ -452,15 +263,11 @@ export const getGacha = /* GraphQL */ `query GetGacha($id: ID!) {
     availableTickets
     results {
       nextToken
-      startedAt
       __typename
     }
     isActive
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -479,53 +286,15 @@ export const listGachas = /* GraphQL */ `query ListGachas(
       isActive
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
 ` as GeneratedQuery<
   APITypes.ListGachasQueryVariables,
   APITypes.ListGachasQuery
->;
-export const syncGachas = /* GraphQL */ `query SyncGachas(
-  $filter: ModelGachaFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncGachas(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      name
-      costPoints
-      availableTickets
-      isActive
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      __typename
-    }
-    nextToken
-    startedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SyncGachasQueryVariables,
-  APITypes.SyncGachasQuery
 >;
 export const getGachaResult = /* GraphQL */ `query GetGachaResult($id: ID!) {
   getGachaResult(id: $id) {
@@ -541,9 +310,6 @@ export const getGachaResult = /* GraphQL */ `query GetGachaResult($id: ID!) {
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaID
@@ -555,9 +321,6 @@ export const getGachaResult = /* GraphQL */ `query GetGachaResult($id: ID!) {
       isActive
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     exchangedPoints
@@ -570,17 +333,11 @@ export const getGachaResult = /* GraphQL */ `query GetGachaResult($id: ID!) {
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     resultAt
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     gachaResultObtainedTicketId
     __typename
   }
@@ -603,55 +360,16 @@ export const listGachaResults = /* GraphQL */ `query ListGachaResults(
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
 ` as GeneratedQuery<
   APITypes.ListGachaResultsQueryVariables,
   APITypes.ListGachaResultsQuery
->;
-export const syncGachaResults = /* GraphQL */ `query SyncGachaResults(
-  $filter: ModelGachaResultFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncGachaResults(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      userID
-      gachaID
-      exchangedPoints
-      resultAt
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      gachaResultObtainedTicketId
-      __typename
-    }
-    nextToken
-    startedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SyncGachaResultsQueryVariables,
-  APITypes.SyncGachaResultsQuery
 >;
 export const getTicket = /* GraphQL */ `query GetTicket($id: ID!) {
   getTicket(id: $id) {
@@ -668,9 +386,6 @@ export const getTicket = /* GraphQL */ `query GetTicket($id: ID!) {
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     gachaResultID
@@ -682,9 +397,6 @@ export const getTicket = /* GraphQL */ `query GetTicket($id: ID!) {
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
@@ -692,9 +404,6 @@ export const getTicket = /* GraphQL */ `query GetTicket($id: ID!) {
     isUsed
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -714,13 +423,9 @@ export const listTickets = /* GraphQL */ `query ListTickets(
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -728,45 +433,9 @@ export const listTickets = /* GraphQL */ `query ListTickets(
   APITypes.ListTicketsQueryVariables,
   APITypes.ListTicketsQuery
 >;
-export const syncTickets = /* GraphQL */ `query SyncTickets(
-  $filter: ModelTicketFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncTickets(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      type
-      userID
-      gachaResultID
-      expiresAt
-      isUsed
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      __typename
-    }
-    nextToken
-    startedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SyncTicketsQueryVariables,
-  APITypes.SyncTicketsQuery
->;
 export const getInsect = /* GraphQL */ `query GetInsect($id: ID!) {
   getInsect(id: $id) {
     id
-    species
     scientificName
     japaneseName
     family
@@ -783,9 +452,6 @@ export const getInsect = /* GraphQL */ `query GetInsect($id: ID!) {
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     location
@@ -800,18 +466,12 @@ export const getInsect = /* GraphQL */ `query GetInsect($id: ID!) {
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     createdAt
     updatedAt
-    _version
-    _deleted
-    _lastChangedAt
     __typename
   }
 }
@@ -824,7 +484,6 @@ export const listInsects = /* GraphQL */ `query ListInsects(
   listInsects(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      species
       scientificName
       japaneseName
       family
@@ -836,59 +495,15 @@ export const listInsects = /* GraphQL */ `query ListInsects(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
 ` as GeneratedQuery<
   APITypes.ListInsectsQueryVariables,
   APITypes.ListInsectsQuery
->;
-export const syncInsects = /* GraphQL */ `query SyncInsects(
-  $filter: ModelInsectFilterInput
-  $limit: Int
-  $nextToken: String
-  $lastSync: AWSTimestamp
-) {
-  syncInsects(
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-    lastSync: $lastSync
-  ) {
-    items {
-      id
-      species
-      scientificName
-      japaneseName
-      family
-      description
-      notes
-      userID
-      location
-      foundAt
-      photoID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      __typename
-    }
-    nextToken
-    startedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.SyncInsectsQueryVariables,
-  APITypes.SyncInsectsQuery
 >;
 export const usersByName = /* GraphQL */ `query UsersByName(
   $name: String!
@@ -914,13 +529,9 @@ export const usersByName = /* GraphQL */ `query UsersByName(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -952,13 +563,9 @@ export const usersByCognitosub = /* GraphQL */ `query UsersByCognitosub(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -990,13 +597,9 @@ export const usersByRegion = /* GraphQL */ `query UsersByRegion(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1028,13 +631,9 @@ export const usersByRank = /* GraphQL */ `query UsersByRank(
       points
       rank
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1065,15 +664,11 @@ export const photosByUserID = /* GraphQL */ `query PhotosByUserID(
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1104,15 +699,11 @@ export const photosByTakenAt = /* GraphQL */ `query PhotosByTakenAt(
       s3path
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       photoAnalysisId
       photoInsectId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1141,14 +732,10 @@ export const aIAnalysesByPhotoID = /* GraphQL */ `query AIAnalysesByPhotoID(
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1177,14 +764,10 @@ export const aIAnalysesByAnalyzedAt = /* GraphQL */ `query AIAnalysesByAnalyzedA
       analyzedAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       aIAnalysisAwardedPointsId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1214,13 +797,9 @@ export const pointsAwardsByAnalysisID = /* GraphQL */ `query PointsAwardsByAnaly
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1250,13 +829,9 @@ export const pointsAwardsByAwardedAt = /* GraphQL */ `query PointsAwardsByAwarde
       reason
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1286,13 +861,9 @@ export const gachasByName = /* GraphQL */ `query GachasByName(
       isActive
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1322,14 +893,10 @@ export const gachaResultsByUserID = /* GraphQL */ `query GachaResultsByUserID(
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1359,14 +926,10 @@ export const gachaResultsByGachaID = /* GraphQL */ `query GachaResultsByGachaID(
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1396,14 +959,10 @@ export const gachaResultsByResultAt = /* GraphQL */ `query GachaResultsByResultA
       resultAt
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       gachaResultObtainedTicketId
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1434,13 +993,9 @@ export const ticketsByType = /* GraphQL */ `query TicketsByType(
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1471,13 +1026,9 @@ export const ticketsByUserID = /* GraphQL */ `query TicketsByUserID(
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1508,13 +1059,9 @@ export const ticketsByGachaResultID = /* GraphQL */ `query TicketsByGachaResultI
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1545,61 +1092,15 @@ export const ticketsByExpiresAt = /* GraphQL */ `query TicketsByExpiresAt(
       isUsed
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
 ` as GeneratedQuery<
   APITypes.TicketsByExpiresAtQueryVariables,
   APITypes.TicketsByExpiresAtQuery
->;
-export const insectsBySpecies = /* GraphQL */ `query InsectsBySpecies(
-  $species: String!
-  $sortDirection: ModelSortDirection
-  $filter: ModelInsectFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  insectsBySpecies(
-    species: $species
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      species
-      scientificName
-      japaneseName
-      family
-      description
-      notes
-      userID
-      location
-      foundAt
-      photoID
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-      __typename
-    }
-    nextToken
-    startedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.InsectsBySpeciesQueryVariables,
-  APITypes.InsectsBySpeciesQuery
 >;
 export const insectsByScientificName = /* GraphQL */ `query InsectsByScientificName(
   $scientificName: String!
@@ -1617,7 +1118,6 @@ export const insectsByScientificName = /* GraphQL */ `query InsectsByScientificN
   ) {
     items {
       id
-      species
       scientificName
       japaneseName
       family
@@ -1629,13 +1129,9 @@ export const insectsByScientificName = /* GraphQL */ `query InsectsByScientificN
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1659,7 +1155,6 @@ export const insectsByJapaneseName = /* GraphQL */ `query InsectsByJapaneseName(
   ) {
     items {
       id
-      species
       scientificName
       japaneseName
       family
@@ -1671,13 +1166,9 @@ export const insectsByJapaneseName = /* GraphQL */ `query InsectsByJapaneseName(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1701,7 +1192,6 @@ export const insectsByFamily = /* GraphQL */ `query InsectsByFamily(
   ) {
     items {
       id
-      species
       scientificName
       japaneseName
       family
@@ -1713,13 +1203,9 @@ export const insectsByFamily = /* GraphQL */ `query InsectsByFamily(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1743,7 +1229,6 @@ export const insectsByUserID = /* GraphQL */ `query InsectsByUserID(
   ) {
     items {
       id
-      species
       scientificName
       japaneseName
       family
@@ -1755,13 +1240,9 @@ export const insectsByUserID = /* GraphQL */ `query InsectsByUserID(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1785,7 +1266,6 @@ export const insectsByLocation = /* GraphQL */ `query InsectsByLocation(
   ) {
     items {
       id
-      species
       scientificName
       japaneseName
       family
@@ -1797,13 +1277,9 @@ export const insectsByLocation = /* GraphQL */ `query InsectsByLocation(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1827,7 +1303,6 @@ export const insectsByFoundAt = /* GraphQL */ `query InsectsByFoundAt(
   ) {
     items {
       id
-      species
       scientificName
       japaneseName
       family
@@ -1839,13 +1314,9 @@ export const insectsByFoundAt = /* GraphQL */ `query InsectsByFoundAt(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
@@ -1869,7 +1340,6 @@ export const insectsByPhotoID = /* GraphQL */ `query InsectsByPhotoID(
   ) {
     items {
       id
-      species
       scientificName
       japaneseName
       family
@@ -1881,13 +1351,9 @@ export const insectsByPhotoID = /* GraphQL */ `query InsectsByPhotoID(
       photoID
       createdAt
       updatedAt
-      _version
-      _deleted
-      _lastChangedAt
       __typename
     }
     nextToken
-    startedAt
     __typename
   }
 }
