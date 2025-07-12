@@ -12,8 +12,8 @@ chmod 400 ${KEY_PATH}/${YOUR_KEY}.pem
 
 # 3. コードをEC2へアップロード（リモートのホームディレクトリへ）
 rsync -avz -e "ssh -i ${KEY_PATH}/${YOUR_KEY}.pem" \
-  . \
-  ${EC2_USER}@${EC2_HOST}:bug_app/
+  assets \
+  ${EC2_USER}@${EC2_HOST}:bug_app/assets
 
 # 4. EC2にSSH接続し、Pythonコードを実行し、環境変数を使う
 ssh -t -i ${KEY_PATH}/${YOUR_KEY}.pem ${EC2_USER}@${EC2_HOST} << EOF

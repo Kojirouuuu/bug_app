@@ -110,9 +110,9 @@ def handler(event, context):
 
     try:
         req = _build_bedrock_request(b64_image)
-        logger.info("Invoking Bedrock model anthropic.claude-3-5-sonnet-20240620-v1:0")
+        logger.info("Invoking Bedrock model anthropic.claude-sonnet-4-20250514-v1:0")
         raw = bedrock.invoke_model(
-            modelId="anthropic.claude-3-5-sonnet-20240620-v1:0",
+            modelId="anthropic.claude-sonnet-4-20250514-v1:0",
             body=json.dumps(req),
         )
         resp = json.loads(raw["body"].read())
