@@ -26,5 +26,32 @@
         "bugAppAIApi": {}
       }
     }
+  },
+  "hdev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bugapp-hdev-a28fd-authRole",
+      "UnauthRoleArn": "arn:aws:iam::379371237609:role/amplify-bugapp-hdev-a28fd-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::379371237609:role/amplify-bugapp-hdev-a28fd-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-bugapp-hdev-a28fd-deployment",
+      "UnauthRoleName": "amplify-bugapp-hdev-a28fd-unauthRole",
+      "StackName": "amplify-bugapp-hdev-a28fd",
+      "StackId": "arn:aws:cloudformation:us-east-1:379371237609:stack/amplify-bugapp-hdev-a28fd/f66372d0-5ecb-11f0-9460-0afff54f33d1",
+      "AmplifyAppId": "d23jw3z03ee2xz"
+    },
+    "categories": {
+      "auth": {
+        "bugapp": {}
+      },
+      "function": {
+        "imageAnalysisAI": {
+          "deploymentBucketName": "amplify-bugapp-hdev-a28fd-deployment",
+          "s3Key": "amplify-builds/imageAnalysisAI-6355622f4b5633547a49-build.zip"
+        }
+      },
+      "api": {
+        "bugAppAIApi": {}
+      }
+    }
   }
 }
