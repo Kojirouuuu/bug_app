@@ -56,6 +56,6 @@ amplifytools.xcconfig
 **.sample
 #amplify-do-not-edit-end
 
-assets/jackpot.mp4
-assets/win.mp4
-assets/lose.mp4
+# assets/jackpot.mp4
+# assets/win.mp4
+# assets/lose.mp4

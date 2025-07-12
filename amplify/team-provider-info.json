@@ -50,7 +50,8 @@
         }
       },
       "api": {
-        "bugAppAIApi": {}
+        "bugAppAIApi": {},
+        "bugapp": {}
       }
     }
   }
