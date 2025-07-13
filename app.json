@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "bugapp",
-    "slug": "bugapp",
+    "name": "bolt-expo-nativewind",
+    "slug": "bolt-expo-nativewind",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "bugapp",
+    "scheme": "bolt-expo-nativewind",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.kojirouuuu.bugapp",
+      "bundleIdentifier": "com.kojirouuuu.bolt-expo-nativewind",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }

@@ -16,7 +16,7 @@
       "function": {
         "summarysi": {
           "deploymentBucketName": "amplify-bugapp-dev-94fcd-deployment",
-          "s3Key": "amplify-builds/summarysi-45445870725055655857-build.zip"
+          "s3Key": "amplify-builds/summarysi-304b6354324e6f587038-build.zip"
         }
       },
       "auth": {
