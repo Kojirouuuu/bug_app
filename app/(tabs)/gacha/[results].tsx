@@ -11,7 +11,7 @@ import {
 import { router, useLocalSearchParams } from 'expo-router';
 import { useRewardStore } from '@/store/rewardStore';
 import { useArticleStore } from '@/store/articleStore';
-import { Insect } from '@/src/API';
+import { ArticleForFrontend } from '@/types';
 
 const { width, height } = Dimensions.get('window');
 
@@ -21,7 +21,7 @@ export default function GachaResults() {
   const params = useLocalSearchParams();
   const [result, setResult] = useState<GachaResult>('lose');
   const [showResult, setShowResult] = useState(false);
-  const [rewardBug, setRewardBug] = useState<Bug | null>(null);
+  const [article, setArticle] = useState<ArticleForFrontend | null>(null);
   const [animation] = useState(new Animated.Value(0));
 
   const { addPoints } = useRewardStore();
@@ -45,44 +45,59 @@ export default function GachaResults() {
 
   const giveReward = (gachaResult: GachaResult) => {
     let points = 0;
-    let bug: Insect | null = null;
+    let article: ArticleForFrontend | null = null;
 
     switch (gachaResult) {
       case 'jackpot':
-        points = 1000;
-        bug = {
-          id: Date.now().toString(),
-          scientificName: 'Papilio machaon',
-          japaneseName: 'アゲハチョウ',
-          family: 'Papilionidae',
-          s3path:
+        article = {
+          article: {
+            photos: [],
+            insects: [
+              {
+                id: Date.now().toString(),
+                scientificName: 'Papilio machaon',
+                japaneseName: 'アゲハチョウ',
+                family: 'Papilionidae',
+                __typename: 'Insect',
+                foundAt: new Date().toISOString(),
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+              },
+            ],
+          },
+          image:
             'https://images.pexels.com/photos/672142/pexels-photo-672142.jpeg?auto=compress&cs=tinysrgb&w=400',
-          foundAt: new Date(),
-          notes: '大当たりで見つけた美しい蝶！',
+          summary: '大当たりで見つけた美しい蝶！',
         };
         break;
       case 'win':
-        points = 100;
-        bug = {
-          id: Date.now().toString(),
-          scientificName: 'Coccinella septempunctata',
-          japaneseName: 'ナナホシテントウ',
-          family: 'Coccinellidae',
-          s3path:
+        article = {
+          article: {
+            photos: [],
+            insects: [
+              {
+                id: Date.now().toString(),
+                scientificName: 'Coccinella septempunctata',
+                japaneseName: 'ナナホシテントウ',
+                family: 'Coccinellidae',
+                __typename: 'Insect',
+                foundAt: new Date().toISOString(),
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+              },
+            ],
+          },
+          image:
             'https://images.pexels.com/photos/416978/pexels-photo-416978.jpeg?auto=compress&cs=tinysrgb&w=400',
-          foundAt: new Date(),
-          notes: 'ガチャで見つけた幸運の虫！',
+          summary: 'ガチャで見つけた幸運の虫！',
         };
         break;
       case 'lose':
-        points = 10;
         break;
     }
 
-    addPoints(points);
-    if (bug) {
-      addInsect(bug);
-      setRewardBug(bug);
+    if (article) {
+      setArticle(article);
     }
   };
 
@@ -112,11 +127,11 @@ export default function GachaResults() {
   const getPointsText = () => {
     switch (result) {
       case 'jackpot':
-        return '+1000ポイント';
+        return '+URチケット';
       case 'win':
-        return '+100ポイント';
+        return '+SRチケット';
       case 'lose':
-        return '+10ポイント';
+        return '';
     }
   };
 
@@ -149,12 +164,14 @@ export default function GachaResults() {
           <Text style={styles.pointsText}>{getPointsText()}</Text>
         </View>
 
-        {showResult && rewardBug && (
+        {showResult && article && (
           <View style={styles.bugContainer}>
-            <Image source={{ uri: rewardBug.img }} style={styles.bugImage} />
-            <Text style={styles.bugName}>{rewardBug.japaneseName}</Text>
+            <Image source={{ uri: article.image }} style={styles.bugImage} />
+            <Text style={styles.bugName}>
+              {article.article.insects[0].japaneseName}
+            </Text>
             <Text style={styles.bugScientificName}>
-              {rewardBug.scientificName}
+              {article.article.insects[0].scientificName}
             </Text>
           </View>
         )}
