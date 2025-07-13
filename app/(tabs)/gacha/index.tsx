@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -11,9 +11,7 @@ export default function GachaScreen() {
 
   const handleDraw = async () => {
     if (!consumePoints(10)) return;
-    router.push({
-      pathname: '/gacha/movie',
-    });
+    router.push('/gacha/movie');
   };
 
   return (
@@ -25,7 +23,7 @@ export default function GachaScreen() {
           onPress={handleDraw}
           activeOpacity={0.8}
         >
-          <Ionicons name="gift" size={40} color={Colors.white} />
+          <Image source={require('@/assets/images/mushidama.png')} style={styles.buttonIcon}/>
           <Text style={styles.buttonText}>ガチャを回す (10pt)</Text>
         </TouchableOpacity>
       </View>
@@ -51,7 +49,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   button: {
-    backgroundColor: Colors.accent,
+    backgroundColor: '#3dba8e',
     borderRadius: BorderRadius.large,
     paddingHorizontal: Spacing.xl,
     paddingVertical: Spacing.lg,
@@ -59,6 +57,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: Spacing.sm,
     marginBottom: Spacing.lg,
+  },
+  buttonIcon: {
+    width: 32,
+    height: 32,
   },
   buttonText: {
     color: Colors.white,

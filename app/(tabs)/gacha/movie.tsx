@@ -51,38 +51,38 @@ export default function GachaMovie() {
 
   // 動画準備完了を監視
   useEffect(() => {
-    if ((status as string) === 'readyToPlay' && isLooping) {
+    if ((status as string) === 'readyToPlay') {
       setIsReady(true);
+      player.play();
     }
-  }, [status, isLooping]);
+  }, [status]);
 
-  // 準備できたら1/5区間ループ再生
+  // 動画の時間更新を監視
   useEventListener(player, 'timeUpdate', ({ currentTime }) => {
-    // 押下前のループ
-    if (isLooping && player.duration && currentTime >= player.duration / 5) {
-      player.currentTime = 0;
+    if (!player.duration) return;
+    
+    // ループ中は3.4秒でリセット
+    if (isLooping && currentTime >= 3.4) {
+      player.currentTime = 1.3;
+      player.play();
       return;
     }
-    // 押下後の完了判定 → 遷移
-    if (
-      !isLooping &&
-      player.duration &&
-      currentTime >= player.duration &&
-      !hasNavigated
-    ) {
+    
+    // ボタン押下後は最後まで再生して遷移
+    if (!isLooping && currentTime >= player.duration && !hasNavigated) {
       setHasNavigated(true);
       router.push(`/gacha/${gachaResult}`);
     }
   });
 
-  // 1/5区間でループ
+  // 3.4秒でループ
   useEffect(() => {
     if (
       isLooping &&
       player.duration > 0 &&
-      player.currentTime >= player.duration / 5
+      player.currentTime >= 3.4
     ) {
-      player.currentTime = 0;
+      player.currentTime = 3.4;
       player.play();
     }
   }, [player.currentTime, isLooping]);
@@ -121,10 +121,14 @@ export default function GachaMovie() {
       </TouchableWithoutFeedback>
       {isLooping && (
         <TouchableOpacity
-          onPress={() => setIsLooping(false)}
+          onPress={() => {
+            setIsLooping(false);
+            player.currentTime = 3.4;
+            player.play();
+          }}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>ガチャを回す</Text>
+          <Text style={styles.buttonText}></Text>
         </TouchableOpacity>
       )}
     </View>
@@ -141,16 +145,22 @@ const styles = StyleSheet.create({
     width: '100%', // 幅いっぱいに表示
     height: '100%', // 高さいっぱいに表示
   },
-  button: {
-    backgroundColor: '#3dba8e',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 8,
-    zIndex: 1000,
-    position: 'absolute',
-    bottom: 60,
-    alignSelf: 'center',
-  },
+button: {
+  backgroundColor: 'transparent',
+  paddingHorizontal: 20,
+  paddingVertical: 10,
+  borderRadius: 8,
+  zIndex: 1000,
+  position: 'absolute',
+  bottom: 60,
+  alignSelf: 'center',
+
+  // 追加: 画面全体に広げる
+  width: '100%',
+  height: '100%',
+  justifyContent: 'center',
+  alignItems: 'center',
+},
   buttonText: {
     color: 'white',
     fontSize: 16,

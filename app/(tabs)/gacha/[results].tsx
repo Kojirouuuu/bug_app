@@ -163,6 +163,12 @@ export default function GachaResults() {
 
         <View style={styles.pointsContainer}>
           <Text style={styles.pointsText}>{getPointsText()}</Text>
+          {result === 'jackpot' && (
+            <Image source={require('@/assets/images/rainbowticket.png')} style={styles.ticketIcon} />
+          )}
+          {result === 'win' && (
+            <Image source={require('@/assets/images/goldticket.png')} style={styles.ticketIcon} />
+          )}
         </View>
 
         {showResult && article && (
@@ -182,6 +188,7 @@ export default function GachaResults() {
             style={styles.button}
             onPress={() => router.push('/gacha/movie')}
           >
+            <Image source={require('@/assets/images/mushidama.png')} style={styles.buttonIcon} />
             <Text style={styles.buttonText}>もう一度ガチャを回す</Text>
           </TouchableOpacity>
 
@@ -233,6 +240,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 25,
     marginBottom: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+  },
+  ticketIcon: {
+    width: 32,
+    height: 32,
   },
   pointsText: {
     color: 'white',
@@ -270,6 +284,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 10,
     alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 10,
+  },
+  buttonIcon: {
+    width: 32,
+    height: 32,
+    padding: 8,
   },
   buttonText: {
     color: 'white',
