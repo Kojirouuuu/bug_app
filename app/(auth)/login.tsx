@@ -26,7 +26,14 @@ export default function LoginScreen() {
 
   const helpText = (
     <>
-      <Text style={{ fontSize: 14, color: '#666', textAlign: 'center', marginBottom: 8 }}>
+      <Text
+        style={{
+          fontSize: 14,
+          color: '#666',
+          textAlign: 'center',
+          marginBottom: 8,
+        }}
+      >
         アカウントをお持ちでない方：
         <Link
           href="/(auth)/signup"
@@ -71,6 +78,19 @@ export default function LoginScreen() {
         onChangeText={setPassword}
         secureTextEntry
       />
+      {/* ホームに戻るボタン追加 */}
+      <Text style={{ textAlign: 'center', marginTop: 16 }}>
+        <Link
+          href="/"
+          style={{
+            color: '#007AFF',
+            textDecorationLine: 'underline',
+            fontSize: 16,
+          }}
+        >
+          ホームに戻る
+        </Link>
+      </Text>
     </AuthFormLayout>
   );
 }

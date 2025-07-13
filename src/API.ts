@@ -4,8 +4,9 @@
 
 export type CreateUserInput = {
   id?: string | null,
+  email: string,
   name: string,
-  cognitosub?: string | null,
+  password: string,
   createdAt?: string | null,
   lastLogin?: string | null,
   region?: string | null,
@@ -14,8 +15,9 @@ export type CreateUserInput = {
 };
 
 export type ModelUserConditionInput = {
+  email?: ModelStringInput | null,
   name?: ModelStringInput | null,
-  cognitosub?: ModelStringInput | null,
+  password?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   lastLogin?: ModelStringInput | null,
   region?: ModelStringInput | null,
@@ -82,8 +84,9 @@ export type ModelIntInput = {
 export type User = {
   __typename: "User",
   id: string,
+  email: string,
   name: string,
-  cognitosub?: string | null,
+  password: string,
   createdAt: string,
   lastLogin?: string | null,
   region?: string | null,
@@ -233,8 +236,9 @@ export type ModelInsectConnection = {
 
 export type UpdateUserInput = {
   id: string,
+  email?: string | null,
   name?: string | null,
-  cognitosub?: string | null,
+  password?: string | null,
   createdAt?: string | null,
   lastLogin?: string | null,
   region?: string | null,
@@ -540,8 +544,9 @@ export type DeleteInsectInput = {
 
 export type ModelUserFilterInput = {
   id?: ModelIDInput | null,
+  email?: ModelStringInput | null,
   name?: ModelStringInput | null,
-  cognitosub?: ModelStringInput | null,
+  password?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
   lastLogin?: ModelStringInput | null,
   region?: ModelStringInput | null,
@@ -687,8 +692,9 @@ export enum ModelSortDirection {
 
 export type ModelSubscriptionUserFilterInput = {
   id?: ModelSubscriptionIDInput | null,
+  email?: ModelSubscriptionStringInput | null,
   name?: ModelSubscriptionStringInput | null,
-  cognitosub?: ModelSubscriptionStringInput | null,
+  password?: ModelSubscriptionStringInput | null,
   createdAt?: ModelSubscriptionStringInput | null,
   lastLogin?: ModelSubscriptionStringInput | null,
   region?: ModelSubscriptionStringInput | null,
@@ -850,8 +856,9 @@ export type CreateUserMutation = {
   createUser?:  {
     __typename: "User",
     id: string,
+    email: string,
     name: string,
-    cognitosub?: string | null,
+    password: string,
     createdAt: string,
     lastLogin?: string | null,
     region?: string | null,
@@ -886,8 +893,9 @@ export type UpdateUserMutation = {
   updateUser?:  {
     __typename: "User",
     id: string,
+    email: string,
     name: string,
-    cognitosub?: string | null,
+    password: string,
     createdAt: string,
     lastLogin?: string | null,
     region?: string | null,
@@ -922,8 +930,9 @@ export type DeleteUserMutation = {
   deleteUser?:  {
     __typename: "User",
     id: string,
+    email: string,
     name: string,
-    cognitosub?: string | null,
+    password: string,
     createdAt: string,
     lastLogin?: string | null,
     region?: string | null,
@@ -963,8 +972,9 @@ export type CreatePhotoMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1022,8 +1032,9 @@ export type UpdatePhotoMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1081,8 +1092,9 @@ export type DeletePhotoMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1415,8 +1427,9 @@ export type CreateGachaResultMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1467,8 +1480,9 @@ export type UpdateGachaResultMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1519,8 +1533,9 @@ export type DeleteGachaResultMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1572,8 +1587,9 @@ export type CreateTicketMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1614,8 +1630,9 @@ export type UpdateTicketMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1656,8 +1673,9 @@ export type DeleteTicketMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1702,8 +1720,9 @@ export type CreateInsectMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1751,8 +1770,9 @@ export type UpdateInsectMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1800,8 +1820,9 @@ export type DeleteInsectMutation = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1839,8 +1860,9 @@ export type GetUserQuery = {
   getUser?:  {
     __typename: "User",
     id: string,
+    email: string,
     name: string,
-    cognitosub?: string | null,
+    password: string,
     createdAt: string,
     lastLogin?: string | null,
     region?: string | null,
@@ -1878,8 +1900,9 @@ export type ListUsersQuery = {
     items:  Array< {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -1904,8 +1927,9 @@ export type GetPhotoQuery = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -2146,8 +2170,9 @@ export type GetGachaResultQuery = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -2222,8 +2247,9 @@ export type GetTicketQuery = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -2291,8 +2317,9 @@ export type GetInsectQuery = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -2350,6 +2377,34 @@ export type ListInsectsQuery = {
   } | null,
 };
 
+export type UsersByEmailQueryVariables = {
+  email: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelUserFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type UsersByEmailQuery = {
+  usersByEmail?:  {
+    __typename: "ModelUserConnection",
+    items:  Array< {
+      __typename: "User",
+      id: string,
+      email: string,
+      name: string,
+      password: string,
+      createdAt: string,
+      lastLogin?: string | null,
+      region?: string | null,
+      points: number,
+      rank?: string | null,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type UsersByNameQueryVariables = {
   name: string,
   sortDirection?: ModelSortDirection | null,
@@ -2364,35 +2419,9 @@ export type UsersByNameQuery = {
     items:  Array< {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
-      createdAt: string,
-      lastLogin?: string | null,
-      region?: string | null,
-      points: number,
-      rank?: string | null,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type UsersByCognitosubQueryVariables = {
-  cognitosub: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelUserFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type UsersByCognitosubQuery = {
-  usersByCognitosub?:  {
-    __typename: "ModelUserConnection",
-    items:  Array< {
-      __typename: "User",
-      id: string,
-      name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -2418,8 +2447,9 @@ export type UsersByRegionQuery = {
     items:  Array< {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -2445,8 +2475,9 @@ export type UsersByRankQuery = {
     items:  Array< {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3041,8 +3072,9 @@ export type OnCreateUserSubscription = {
   onCreateUser?:  {
     __typename: "User",
     id: string,
+    email: string,
     name: string,
-    cognitosub?: string | null,
+    password: string,
     createdAt: string,
     lastLogin?: string | null,
     region?: string | null,
@@ -3076,8 +3108,9 @@ export type OnUpdateUserSubscription = {
   onUpdateUser?:  {
     __typename: "User",
     id: string,
+    email: string,
     name: string,
-    cognitosub?: string | null,
+    password: string,
     createdAt: string,
     lastLogin?: string | null,
     region?: string | null,
@@ -3111,8 +3144,9 @@ export type OnDeleteUserSubscription = {
   onDeleteUser?:  {
     __typename: "User",
     id: string,
+    email: string,
     name: string,
-    cognitosub?: string | null,
+    password: string,
     createdAt: string,
     lastLogin?: string | null,
     region?: string | null,
@@ -3151,8 +3185,9 @@ export type OnCreatePhotoSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3209,8 +3244,9 @@ export type OnUpdatePhotoSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3267,8 +3303,9 @@ export type OnDeletePhotoSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3591,8 +3628,9 @@ export type OnCreateGachaResultSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3642,8 +3680,9 @@ export type OnUpdateGachaResultSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3693,8 +3732,9 @@ export type OnDeleteGachaResultSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3745,8 +3785,9 @@ export type OnCreateTicketSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3786,8 +3827,9 @@ export type OnUpdateTicketSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3827,8 +3869,9 @@ export type OnDeleteTicketSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3872,8 +3915,9 @@ export type OnCreateInsectSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3920,8 +3964,9 @@ export type OnUpdateInsectSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,
@@ -3968,8 +4013,9 @@ export type OnDeleteInsectSubscription = {
     user?:  {
       __typename: "User",
       id: string,
+      email: string,
       name: string,
-      cognitosub?: string | null,
+      password: string,
       createdAt: string,
       lastLogin?: string | null,
       region?: string | null,

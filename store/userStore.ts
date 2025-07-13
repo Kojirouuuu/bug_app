@@ -11,6 +11,7 @@ import {
 } from '@/lib/aws/auth';
 import { User as APIUser } from '@/src/API';
 import { useArticleStore } from './articleStore';
+import { useRewardStore } from './rewardStore';
 
 type UserStore = {
   user: Omit<APIUser, '__typename' | 'updatedAt' | 'createdAt'>;
@@ -46,7 +47,9 @@ export const useUserStore = create<UserStore>((set, get) => ({
   user: {
     id: '',
     name: '',
-    cognitosub: '',
+    email: '',
+    password: '',
+    createdAt: '',
     lastLogin: '',
     region: '',
     points: 0,
@@ -98,6 +101,13 @@ export const useUserStore = create<UserStore>((set, get) => ({
           console.error('Error loading article data:', articleError);
           // articleStoreのエラーはログインを妨げない
         }
+        // リワードデータのロード
+        try {
+          const rewardStore = useRewardStore.getState();
+          await rewardStore.loadUserReward(currentUser.id);
+        } catch (rewardError) {
+          // リワードデータのエラーは無視
+        }
       } else {
         set({ error: 'ユーザーが見つかりません', loading: false });
         return;
@@ -147,7 +157,8 @@ export const useUserStore = create<UserStore>((set, get) => ({
         user: {
           id: '',
           name: '',
-          cognitosub: '',
+          email: '',
+          password: '',
           lastLogin: '',
           region: '',
           points: 0,

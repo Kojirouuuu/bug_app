@@ -11,8 +11,9 @@ type GeneratedQuery<InputType, OutputType> = string & {
 export const getUser = /* GraphQL */ `query GetUser($id: ID!) {
   getUser(id: $id) {
     id
+    email
     name
-    cognitosub
+    password
     createdAt
     lastLogin
     region
@@ -47,8 +48,9 @@ export const listUsers = /* GraphQL */ `query ListUsers(
   listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -69,8 +71,9 @@ export const getPhoto = /* GraphQL */ `query GetPhoto($id: ID!) {
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -305,8 +308,9 @@ export const getGachaResult = /* GraphQL */ `query GetGachaResult($id: ID!) {
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -381,8 +385,9 @@ export const getTicket = /* GraphQL */ `query GetTicket($id: ID!) {
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -447,8 +452,9 @@ export const getInsect = /* GraphQL */ `query GetInsect($id: ID!) {
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -509,6 +515,41 @@ export const listInsects = /* GraphQL */ `query ListInsects(
   APITypes.ListInsectsQueryVariables,
   APITypes.ListInsectsQuery
 >;
+export const usersByEmail = /* GraphQL */ `query UsersByEmail(
+  $email: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelUserFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  usersByEmail(
+    email: $email
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      email
+      name
+      password
+      createdAt
+      lastLogin
+      region
+      points
+      rank
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.UsersByEmailQueryVariables,
+  APITypes.UsersByEmailQuery
+>;
 export const usersByName = /* GraphQL */ `query UsersByName(
   $name: String!
   $sortDirection: ModelSortDirection
@@ -525,8 +566,9 @@ export const usersByName = /* GraphQL */ `query UsersByName(
   ) {
     items {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -542,40 +584,6 @@ export const usersByName = /* GraphQL */ `query UsersByName(
 ` as GeneratedQuery<
   APITypes.UsersByNameQueryVariables,
   APITypes.UsersByNameQuery
->;
-export const usersByCognitosub = /* GraphQL */ `query UsersByCognitosub(
-  $cognitosub: String!
-  $sortDirection: ModelSortDirection
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  usersByCognitosub(
-    cognitosub: $cognitosub
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      name
-      cognitosub
-      createdAt
-      lastLogin
-      region
-      points
-      rank
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.UsersByCognitosubQueryVariables,
-  APITypes.UsersByCognitosubQuery
 >;
 export const usersByRegion = /* GraphQL */ `query UsersByRegion(
   $region: String!
@@ -593,8 +601,9 @@ export const usersByRegion = /* GraphQL */ `query UsersByRegion(
   ) {
     items {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -627,8 +636,9 @@ export const usersByRank = /* GraphQL */ `query UsersByRank(
   ) {
     items {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region

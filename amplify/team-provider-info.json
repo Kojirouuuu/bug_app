@@ -43,15 +43,43 @@
       "function": {
         "imageAnalysisAI": {
           "deploymentBucketName": "amplify-bugapp-hdev-a28fd-deployment",
-          "s3Key": "amplify-builds/imageAnalysisAI-30724931384b6f766e4e-build.zip"
+          "s3Key": "amplify-builds/imageAnalysisAI-56794a766e63476d5634-build.zip"
         }
       },
       "api": {
         "bugAppAIApi": {},
         "bugapp": {}
       },
+      "storage": {
+        "bugApp": {}
+      }
+    }
+  },
+  "newdev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bugapp-newdev-e9fe9-authRole",
+      "UnauthRoleArn": "arn:aws:iam::266735802934:role/amplify-bugapp-newdev-e9fe9-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::266735802934:role/amplify-bugapp-newdev-e9fe9-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-bugapp-newdev-e9fe9-deployment",
+      "UnauthRoleName": "amplify-bugapp-newdev-e9fe9-unauthRole",
+      "StackName": "amplify-bugapp-newdev-e9fe9",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:266735802934:stack/amplify-bugapp-newdev-e9fe9/b3deb3b0-5fa3-11f0-8a7a-0a8ca23f9e07",
+      "AmplifyAppId": "dv22i3sohr1hf"
+    },
+    "categories": {
+      "function": {
+        "imageAnalysisAI": {
+          "deploymentBucketName": "amplify-bugapp-newdev-e9fe9-deployment",
+          "s3Key": "amplify-builds/imageAnalysisAI-56794a766e63476d5634-build.zip"
+        }
+      },
       "auth": {
-        "bugapp050fc913": {}
+        "bugapp4be9cef7": {}
+      },
+      "api": {
+        "bugAppAIApi": {},
+        "bugapp": {}
       },
       "storage": {
         "bugApp": {}

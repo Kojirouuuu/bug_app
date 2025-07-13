@@ -46,18 +46,18 @@ export const signInWithCognito = async (email: string, password: string) => {
   }
 };
 
-export const getCurrentUserFromDynamo = async (name: string) => {
+export const getCurrentUserFromDynamo = async (email: string) => {
   try {
-    const currentUser = await getCurrentUser();
-    console.log('currentUser', currentUser);
-    const cognitoId = currentUser.userId;
-    if (!cognitoId) {
-      throw new Error('Cognito ID not found');
-    }
-    let userData = await getUserFromDynamo(cognitoId);
+    // const currentUser = await getCurrentUser();
+    // console.log('currentUser', currentUser);
+    // const cognitoId = currentUser.userId;
+    // if (!cognitoId) {
+    //   throw new Error('Cognito ID not found');
+    // }
+    let userData = await getUserFromDynamo(email);
     if (!userData) {
-      await createUserToDynamo(name, cognitoId);
-      userData = await getUserFromDynamo(cognitoId);
+      await createUserToDynamo(email);
+      userData = await getUserFromDynamo(email);
     }
     return userData;
   } catch (error) {
@@ -74,7 +74,7 @@ export const getUserFromDynamo = async (cognitoId: string) => {
       query: listUsers,
       variables: {
         filter: {
-          cognitosub: {
+          email: {
             eq: cognitoId,
           },
         },
@@ -279,42 +279,38 @@ export const resendConfirmationCode = async (email: string) => {
   }
 };
 
-export const createUserToDynamo = async (
-  name: string,
-  cognitoId: string | null
-) => {
-  if (cognitoId !== null) {
-    const input: CreateUserInput = {
-      name: name || 'anonymous',
-      cognitosub: cognitoId,
-      region: '東京都',
-      points: 100,
-      rank: 'rank1',
-    };
-    try {
-      const res = await client.graphql({
-        query: createUser,
-        variables: {
-          input,
-        },
-        authMode: 'apiKey',
-      });
+export const createUserToDynamo = async (email: string) => {
+  const input: CreateUserInput = {
+    name: email || 'anonymous',
+    email: email,
+    password: '',
+    region: '東京都',
+    points: 100,
+    rank: 'rank1',
+  };
+  try {
+    const res = await client.graphql({
+      query: createUser,
+      variables: {
+        input,
+      },
+      authMode: 'apiKey',
+    });
 
-      if ((res as any).errors) {
-        console.error('DynamoDB createUser error:', (res as any).errors);
-        throw new Error(
-          'DynamoDB createUser error: ' + JSON.stringify((res as any).errors)
-        );
-      }
-    } catch (dynamoError) {
-      console.error('DynamoDB createUser exception:', dynamoError);
+    if ((res as any).errors) {
+      console.error('DynamoDB createUser error:', (res as any).errors);
       throw new Error(
-        'DynamoDB createUser exception: ' +
-          (dynamoError instanceof Error
-            ? dynamoError.message
-            : String(dynamoError))
+        'DynamoDB createUser error: ' + JSON.stringify((res as any).errors)
       );
     }
+  } catch (dynamoError) {
+    console.error('DynamoDB createUser exception:', dynamoError);
+    throw new Error(
+      'DynamoDB createUser exception: ' +
+        (dynamoError instanceof Error
+          ? dynamoError.message
+          : String(dynamoError))
+    );
   }
 };
 

@@ -11,8 +11,9 @@ type GeneratedSubscription<InputType, OutputType> = string & {
 export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: ModelSubscriptionUserFilterInput) {
   onCreateUser(filter: $filter) {
     id
+    email
     name
-    cognitosub
+    password
     createdAt
     lastLogin
     region
@@ -45,8 +46,9 @@ export const onCreateUser = /* GraphQL */ `subscription OnCreateUser($filter: Mo
 export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: ModelSubscriptionUserFilterInput) {
   onUpdateUser(filter: $filter) {
     id
+    email
     name
-    cognitosub
+    password
     createdAt
     lastLogin
     region
@@ -79,8 +81,9 @@ export const onUpdateUser = /* GraphQL */ `subscription OnUpdateUser($filter: Mo
 export const onDeleteUser = /* GraphQL */ `subscription OnDeleteUser($filter: ModelSubscriptionUserFilterInput) {
   onDeleteUser(filter: $filter) {
     id
+    email
     name
-    cognitosub
+    password
     createdAt
     lastLogin
     region
@@ -117,8 +120,9 @@ export const onCreatePhoto = /* GraphQL */ `subscription OnCreatePhoto($filter: 
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -174,8 +178,9 @@ export const onUpdatePhoto = /* GraphQL */ `subscription OnUpdatePhoto($filter: 
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -231,8 +236,9 @@ export const onDeletePhoto = /* GraphQL */ `subscription OnDeletePhoto($filter: 
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -559,8 +565,9 @@ export const onCreateGachaResult = /* GraphQL */ `subscription OnCreateGachaResu
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -611,8 +618,9 @@ export const onUpdateGachaResult = /* GraphQL */ `subscription OnUpdateGachaResu
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -663,8 +671,9 @@ export const onDeleteGachaResult = /* GraphQL */ `subscription OnDeleteGachaResu
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -714,8 +723,9 @@ export const onCreateTicket = /* GraphQL */ `subscription OnCreateTicket($filter
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -754,8 +764,9 @@ export const onUpdateTicket = /* GraphQL */ `subscription OnUpdateTicket($filter
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -794,8 +805,9 @@ export const onDeleteTicket = /* GraphQL */ `subscription OnDeleteTicket($filter
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -838,8 +850,9 @@ export const onCreateInsect = /* GraphQL */ `subscription OnCreateInsect($filter
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -885,8 +898,9 @@ export const onUpdateInsect = /* GraphQL */ `subscription OnUpdateInsect($filter
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -932,8 +946,9 @@ export const onDeleteInsect = /* GraphQL */ `subscription OnDeleteInsect($filter
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region

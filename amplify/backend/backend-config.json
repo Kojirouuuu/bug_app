@@ -34,7 +34,7 @@
     }
   },
   "auth": {
-    "bugapp050fc913": {
+    "bugapp4be9cef7": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {

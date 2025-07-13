@@ -14,8 +14,9 @@ export const createUser = /* GraphQL */ `mutation CreateUser(
 ) {
   createUser(input: $input, condition: $condition) {
     id
+    email
     name
-    cognitosub
+    password
     createdAt
     lastLogin
     region
@@ -51,8 +52,9 @@ export const updateUser = /* GraphQL */ `mutation UpdateUser(
 ) {
   updateUser(input: $input, condition: $condition) {
     id
+    email
     name
-    cognitosub
+    password
     createdAt
     lastLogin
     region
@@ -88,8 +90,9 @@ export const deleteUser = /* GraphQL */ `mutation DeleteUser(
 ) {
   deleteUser(input: $input, condition: $condition) {
     id
+    email
     name
-    cognitosub
+    password
     createdAt
     lastLogin
     region
@@ -129,8 +132,9 @@ export const createPhoto = /* GraphQL */ `mutation CreatePhoto(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -189,8 +193,9 @@ export const updatePhoto = /* GraphQL */ `mutation UpdatePhoto(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -249,8 +254,9 @@ export const deletePhoto = /* GraphQL */ `mutation DeletePhoto(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -593,8 +599,9 @@ export const createGachaResult = /* GraphQL */ `mutation CreateGachaResult(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -646,8 +653,9 @@ export const updateGachaResult = /* GraphQL */ `mutation UpdateGachaResult(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -699,8 +707,9 @@ export const deleteGachaResult = /* GraphQL */ `mutation DeleteGachaResult(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -753,8 +762,9 @@ export const createTicket = /* GraphQL */ `mutation CreateTicket(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -796,8 +806,9 @@ export const updateTicket = /* GraphQL */ `mutation UpdateTicket(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -839,8 +850,9 @@ export const deleteTicket = /* GraphQL */ `mutation DeleteTicket(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -886,8 +898,9 @@ export const createInsect = /* GraphQL */ `mutation CreateInsect(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -936,8 +949,9 @@ export const updateInsect = /* GraphQL */ `mutation UpdateInsect(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
@@ -986,8 +1000,9 @@ export const deleteInsect = /* GraphQL */ `mutation DeleteInsect(
     userID
     user {
       id
+      email
       name
-      cognitosub
+      password
       createdAt
       lastLogin
       region
