@@ -6,6 +6,7 @@ import { useFrameworkReady } from '@/hooks/useFrameworkReady';
 import { Colors } from '@/constants/colors';
 import { Amplify } from 'aws-amplify';
 import config from '../src/amplifyconfiguration.json';
+import 'react-native-get-random-values';
 
 Amplify.configure(config);
 
