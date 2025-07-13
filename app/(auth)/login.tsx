@@ -10,7 +10,7 @@ export default function LoginScreen() {
   const { login, loading, error, cognitoIdVerrification, isAuthenticated } =
     useUserStore();
 
-  const [email, setEmail] = useState('bugappuser@example.com');
+  const [email, setEmail] = useState('user@example.com');
   const [password, setPassword] = useState('12345678');
 
   const handleLogin = async () => {

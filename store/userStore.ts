@@ -73,15 +73,18 @@ export const useUserStore = create<UserStore>((set, get) => ({
   ) => {
     set({ loading: true, error: null });
     try {
-      await signOutFromCognito();
+      // await signOutFromCognito();
       console.log('signOutFromCognito');
 
-      const isSignInComplete = await signInWithCognito(email, password);
-      console.log('isSignInComplete', isSignInComplete);
-      if (isSignInComplete) {
+      // const isSignInComplete = await signInWithCognito(email, password);
+      // console.log('isSignInComplete', isSignInComplete);
+      if (true) {
         // TODO: dynamoDBからユーザー情報を取得する時に引数がemailなのか？
+        console.log('nameVerification', get().nameVerification);
+        console.log('email', email);
         const currentUser = await getCurrentUserFromDynamo(
-          get().nameVerification || ''
+          email,
+          get().nameVerification || '佐藤'
         );
         console.log('currentUser', currentUser);
 
@@ -128,6 +131,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
         cognitoIdVerrification: result.userId,
         loading: false,
         emailForVerification: email,
+        nameVerification: name,
       });
     } catch (err: unknown) {
       if (err instanceof Error) {

@@ -175,7 +175,7 @@ export default function ProfileScreen() {
           <View style={styles.avatar}>
             <Ionicons name="person" size={48} color={Colors.white} />
           </View>
-          <Text style={styles.username}>虫博士</Text>
+          <Text style={styles.username}>{user.name || '名無し'}</Text>
           <View style={styles.ticketsContainer}>
             <View style={styles.ticketItem}>
               <View style={styles.imageFrame}>
@@ -186,7 +186,7 @@ export default function ProfileScreen() {
                 />
               </View>
               <Text style={styles.ticketLabel}>ポイント</Text>
-              <Text style={styles.ticketValue}>{points}</Text>
+              <Text style={styles.ticketValue}>{user.points}</Text>
             </View>
             <View style={styles.ticketItem}>
               <View style={styles.imageFrame}>
@@ -197,7 +197,9 @@ export default function ProfileScreen() {
                 />
               </View>
               <Text style={styles.ticketLabel}>URチケット</Text>
-              <Text style={styles.ticketValue}>{points}</Text>
+              <Text style={styles.ticketValue}>
+                {user.tickets?.items.length}
+              </Text>
             </View>
             <View style={styles.ticketItem}>
               <View style={styles.imageFrame}>
@@ -208,7 +210,9 @@ export default function ProfileScreen() {
                 />
               </View>
               <Text style={styles.ticketLabel}>SRチケット</Text>
-              <Text style={styles.ticketValue}>{points}</Text>
+              <Text style={styles.ticketValue}>
+                {user.tickets?.items.length}
+              </Text>
             </View>
           </View>
         </View>

@@ -34,6 +34,11 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
+
+# assets/jackpot.mp4
+# assets/win.mp4
+# assets/lose.mp4
+
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
@@ -55,7 +60,3 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
-
-# assets/jackpot.mp4
-# assets/win.mp4
-# assets/lose.mp4

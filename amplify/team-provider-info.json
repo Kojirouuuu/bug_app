@@ -1,88 +1,33 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-bugapp-dev-505e8-authRole",
-      "UnauthRoleArn": "arn:aws:iam::266735802934:role/amplify-bugapp-dev-505e8-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::266735802934:role/amplify-bugapp-dev-505e8-authRole",
-      "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-bugapp-dev-505e8-deployment",
-      "UnauthRoleName": "amplify-bugapp-dev-505e8-unauthRole",
-      "StackName": "amplify-bugapp-dev-505e8",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:266735802934:stack/amplify-bugapp-dev-505e8/0e48edb0-5ba4-11f0-b4a3-06392c9b4051",
-      "AmplifyAppId": "dv22i3sohr1hf",
-      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-bugapp-dev-505e8-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
-    },
-    "categories": {
-      "function": {
-        "imageAnalysisAI": {
-          "deploymentBucketName": "amplify-bugapp-dev-505e8-deployment",
-          "s3Key": "amplify-builds/imageAnalysisAI-6355622f4b5633547a49-build.zip"
-        }
-      },
-      "auth": {
-        "bugapp": {}
-      },
-      "api": {
-        "bugAppAIApi": {}
-      }
-    }
-  },
-  "hdev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-bugapp-hdev-a28fd-authRole",
-      "UnauthRoleArn": "arn:aws:iam::379371237609:role/amplify-bugapp-hdev-a28fd-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::379371237609:role/amplify-bugapp-hdev-a28fd-authRole",
+      "AuthRoleName": "amplify-bugapp-dev-94fcd-authRole",
+      "UnauthRoleArn": "arn:aws:iam::379371237609:role/amplify-bugapp-dev-94fcd-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::379371237609:role/amplify-bugapp-dev-94fcd-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-bugapp-hdev-a28fd-deployment",
-      "UnauthRoleName": "amplify-bugapp-hdev-a28fd-unauthRole",
-      "StackName": "amplify-bugapp-hdev-a28fd",
-      "StackId": "arn:aws:cloudformation:us-east-1:379371237609:stack/amplify-bugapp-hdev-a28fd/f66372d0-5ecb-11f0-9460-0afff54f33d1",
-      "AmplifyAppId": "d23jw3z03ee2xz"
+      "DeploymentBucketName": "amplify-bugapp-dev-94fcd-deployment",
+      "UnauthRoleName": "amplify-bugapp-dev-94fcd-unauthRole",
+      "StackName": "amplify-bugapp-dev-94fcd",
+      "StackId": "arn:aws:cloudformation:us-east-1:379371237609:stack/amplify-bugapp-dev-94fcd/c3f0ad80-5fa8-11f0-aa2e-1253111ff9ed",
+      "AmplifyAppId": "d347x739g1ypp3",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-bugapp-dev-94fcd-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "function": {
-        "imageAnalysisAI": {
-          "deploymentBucketName": "amplify-bugapp-hdev-a28fd-deployment",
-          "s3Key": "amplify-builds/imageAnalysisAI-56794a766e63476d5634-build.zip"
-        }
-      },
-      "api": {
-        "bugAppAIApi": {},
-        "bugapp": {}
-      },
-      "storage": {
-        "bugApp": {}
-      }
-    }
-  },
-  "newdev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-bugapp-newdev-e9fe9-authRole",
-      "UnauthRoleArn": "arn:aws:iam::266735802934:role/amplify-bugapp-newdev-e9fe9-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::266735802934:role/amplify-bugapp-newdev-e9fe9-authRole",
-      "Region": "ap-northeast-1",
-      "DeploymentBucketName": "amplify-bugapp-newdev-e9fe9-deployment",
-      "UnauthRoleName": "amplify-bugapp-newdev-e9fe9-unauthRole",
-      "StackName": "amplify-bugapp-newdev-e9fe9",
-      "StackId": "arn:aws:cloudformation:ap-northeast-1:266735802934:stack/amplify-bugapp-newdev-e9fe9/b3deb3b0-5fa3-11f0-8a7a-0a8ca23f9e07",
-      "AmplifyAppId": "dv22i3sohr1hf"
-    },
-    "categories": {
-      "function": {
-        "imageAnalysisAI": {
-          "deploymentBucketName": "amplify-bugapp-newdev-e9fe9-deployment",
-          "s3Key": "amplify-builds/imageAnalysisAI-56794a766e63476d5634-build.zip"
+        "summarysi": {
+          "deploymentBucketName": "amplify-bugapp-dev-94fcd-deployment",
+          "s3Key": "amplify-builds/summarysi-45445870725055655857-build.zip"
         }
       },
       "auth": {
-        "bugapp4be9cef7": {}
-      },
-      "api": {
-        "bugAppAIApi": {},
-        "bugapp": {}
+        "bugappf31f48a2": {}
       },
       "storage": {
-        "bugApp": {}
+        "s3a462e6f3": {}
+      },
+      "api": {
+        "bugapp": {},
+        "AIsummary": {}
       }
     }
   }

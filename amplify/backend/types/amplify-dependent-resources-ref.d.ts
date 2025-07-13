@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
   "api": {
-    "bugAppAIApi": {
+    "AIsummary": {
       "ApiId": "string",
       "ApiName": "string",
       "RootUrl": "string"
@@ -12,7 +12,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "auth": {
-    "bugapp4be9cef7": {
+    "bugappf31f48a2": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -23,7 +23,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
-    "imageAnalysisAI": {
+    "summarysi": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
@@ -32,7 +32,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "bugApp": {
+    "s3a462e6f3": {
       "BucketName": "string",
       "Region": "string"
     }

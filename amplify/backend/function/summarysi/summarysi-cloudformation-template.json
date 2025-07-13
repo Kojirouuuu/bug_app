@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "imageAnalysisAI",
+            "summarysi",
             {
               "Fn::Join": [
                 "",
                 [
-                  "imageAnalysisAI",
+                  "summarysi",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "bugappLambdaRoled16b9304",
+            "bugappLambdaRolec8c52c3b",
             {
               "Fn::Join": [
                 "",
                 [
-                  "bugappLambdaRoled16b9304",
+                  "bugappLambdaRolec8c52c3b",
                   "-",
                   {
                     "Ref": "env"
@@ -164,32 +164,6 @@
           ]
         }
       }
-    },
-    "CustomLambdaExecutionPolicy": {
-      "Type": "AWS::IAM::Policy",
-      "Properties": {
-        "PolicyName": "custom-lambda-execution-policy",
-        "PolicyDocument": {
-          "Version": "2012-10-17",
-          "Statement": [
-            {
-              "Action": [
-                "bedrock:InvokeModel"
-              ],
-              "Resource": [
-                "arn:aws:bedrock:us-east-1::foundation-model/anthropic.claude-3-5-sonnet-20240620-v1:0"
-              ],
-              "Effect": "Allow"
-            }
-          ]
-        },
-        "Roles": [
-          {
-            "Ref": "LambdaExecutionRole"
-          }
-        ]
-      },
-      "DependsOn": "LambdaExecutionRole"
     }
   },
   "Outputs": {

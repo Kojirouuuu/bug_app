@@ -46,7 +46,7 @@ export const signInWithCognito = async (email: string, password: string) => {
   }
 };
 
-export const getCurrentUserFromDynamo = async (email: string) => {
+export const getCurrentUserFromDynamo = async (email: string, name: string) => {
   try {
     // const currentUser = await getCurrentUser();
     // console.log('currentUser', currentUser);
@@ -54,9 +54,11 @@ export const getCurrentUserFromDynamo = async (email: string) => {
     // if (!cognitoId) {
     //   throw new Error('Cognito ID not found');
     // }
+    console.log('email', email);
     let userData = await getUserFromDynamo(email);
+    console.log('userData', userData);
     if (!userData) {
-      await createUserToDynamo(email);
+      await createUserToDynamo(email, name);
       userData = await getUserFromDynamo(email);
     }
     return userData;
@@ -67,15 +69,16 @@ export const getCurrentUserFromDynamo = async (email: string) => {
 };
 
 // インデックスを活用した高速なユーザー検索
-export const getUserFromDynamo = async (cognitoId: string) => {
+export const getUserFromDynamo = async (email: string) => {
   try {
     // cognitosubインデックスを使用した高速検索
+    console.log('getUserFromDynamo email', email);
     const result = await client.graphql({
       query: listUsers,
       variables: {
         filter: {
           email: {
-            eq: cognitoId,
+            eq: email,
           },
         },
         limit: 1, // 1件のみ取得して高速化
@@ -279,11 +282,11 @@ export const resendConfirmationCode = async (email: string) => {
   }
 };
 
-export const createUserToDynamo = async (email: string) => {
+export const createUserToDynamo = async (email: string, name: string) => {
   const input: CreateUserInput = {
-    name: email || 'anonymous',
+    name: name,
     email: email,
-    password: '',
+    password: '123456',
     region: '東京都',
     points: 100,
     rank: 'rank1',

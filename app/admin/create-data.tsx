@@ -60,7 +60,8 @@ export default function CreateDataScreen() {
     try {
       await createNewUser({
         name: userData.name,
-        cognitosub: userData.cognitosub || undefined,
+        email: userData.email || undefined,
+        password: '',
         createdAt: new Date().toISOString(),
         region: userData.region || undefined,
         points: parseInt(userData.points) || 0,
@@ -69,7 +70,8 @@ export default function CreateDataScreen() {
       Alert.alert('成功', 'ユーザーが作成されました');
       setUserData({
         name: '',
-        cognitosub: '',
+        email: '',
+        createdAt: '',
         region: '',
         points: '0',
         rank: '',

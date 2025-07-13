@@ -1,6 +1,6 @@
 {
   "api": {
-    "bugAppAIApi": {
+    "AIsummary": {
       "dependsOn": [
         {
           "attributes": [
@@ -8,7 +8,7 @@
             "Arn"
           ],
           "category": "function",
-          "resourceName": "imageAnalysisAI"
+          "resourceName": "summarysi"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -21,9 +21,7 @@
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDate": "2026-07-12T09:35:34.763Z",
-              "apiKeyExpirationDays": 365,
-              "description": "bug_app_graphql_api"
+              "apiKeyExpirationDays": 7
             },
             "authenticationType": "API_KEY"
           }
@@ -34,7 +32,7 @@
     }
   },
   "auth": {
-    "bugapp4be9cef7": {
+    "bugappf31f48a2": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -62,32 +60,32 @@
     }
   },
   "function": {
-    "imageAnalysisAI": {
+    "summarysi": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     }
   },
   "parameters": {
-    "AMPLIFY_function_imageAnalysisAI_deploymentBucketName": {
+    "AMPLIFY_function_summarysi_deploymentBucketName": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "imageAnalysisAI"
+          "resourceName": "summarysi"
         }
       ]
     },
-    "AMPLIFY_function_imageAnalysisAI_s3Key": {
+    "AMPLIFY_function_summarysi_s3Key": {
       "usedBy": [
         {
           "category": "function",
-          "resourceName": "imageAnalysisAI"
+          "resourceName": "summarysi"
         }
       ]
     }
   },
   "storage": {
-    "bugApp": {
+    "s3a462e6f3": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"

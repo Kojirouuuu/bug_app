@@ -1,6 +1,5 @@
 {
   "AppSyncApiName": "bugapp",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2025-07-12T09:35:40.379Z"
+  "DynamoDBEnableServerSideEncryption": false
 }
