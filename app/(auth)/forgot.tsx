@@ -21,11 +21,6 @@ export default function ForgotScreen() {
         : Alert.alert('メールアドレスを入力してください');
       return;
     }
-Platform.OS === 'web'
-        ? window.alert('メールアドレスを入力してください')
-        : Alert.alert('メールアドレスを入力してください');
-      return;
-    }
     try {
       await resetPassword(email);
       setIsReset(true);
@@ -53,23 +48,6 @@ Platform.OS === 'web'
         ? window.alert('パスワードの再設定に失敗しました')
         : Alert.alert('エラー', 'パスワードの再設定に失敗しました');
     }
-  };
-
-  const helpText = !isReset ? (
-    <>
-      アカウントをお持ちでない方：
-    setIsReset(true);
-  };
-
-  const handleConfirmResetPassword = async () => {
-    if (!newPassword || !confirmationCode) {
-      Platform.OS === 'web'
-        ? window.alert('新規パスワードと確認コードを入力してください')
-        : Alert.alert('新規パスワードと確認コードを入力してください');
-      return;
-    }
-    await confirmResetPassword(email, newPassword, confirmationCode);
-    router.replace('/(auth)/login');
   };
 
   const helpText = !isReset ? (
