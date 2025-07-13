@@ -26,13 +26,13 @@ export default function GachaMovie() {
     // ガチャ結果を決定
     const random = Math.random() * 100;
     if (random < 1) {
-      setVideoSource(require('@/assets/jackpot.mp4')); // 1%の確率で大当たり
+      setVideoSource(require('@/assets/movies/jackpot.mp4')); // 1%の確率で大当たり
       setGachaResult('jackpot');
     } else if (random < 20) {
-      setVideoSource(require('@/assets/win.mp4')); // 19%の確率で当たり
+      setVideoSource(require('@/assets/movies/win.mp4')); // 19%の確率で当たり
       setGachaResult('win');
     } else {
-      setVideoSource(require('@/assets/lose.mp4')); // 80%の確率で外れ
+      setVideoSource(require('@/assets/movies/lose.mp4')); // 80%の確率で外れ
       setGachaResult('lose');
     }
     setIsCalculating(false);
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     height: '100%', // 高さいっぱいに表示
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#3dba8e',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 8,
