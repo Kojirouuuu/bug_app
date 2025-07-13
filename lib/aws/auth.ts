@@ -199,18 +199,11 @@ export const getUsersByRegion = async (region: string, limit: number = 50) => {
       authMode: 'apiKey',
     });
 
-authMode: 'apiKey',
-    });
-
     // Use a template literal with JSON.stringify to safely log the result
     console.log(
-      `Users by region result: ${JSON.stringify(result.data.listUsers.items.length)} users found`
-    );
-    return result.data.listUsers.items;
-  } catch (error) {
-      'Users by region result:',
-      result.data.listUsers.items.length,
-      'users found'
+      `Users by region result: ${JSON.stringify(
+        result.data.listUsers.items.length
+      )} users found`
     );
     return result.data.listUsers.items;
   } catch (error) {

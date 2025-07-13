@@ -1,5 +1,6 @@
 import { getUrl } from '@aws-amplify/storage';
 import { Photo } from '@/src/API';
+import * as he from 'he';
 
 export const getPhotoImageByPhoto = async (photo: Photo) => {
   let imageUrl = '';
@@ -24,10 +25,9 @@ export const getSummaryMarkdownByPhoto = async (photo: Photo) => {
   let summaryMarkdown = '';
   try {
     if (!photo.summaryPath) {
-try {
-    if (!photo.summaryPath) {
-      // Import the 'he' package for HTML entity encoding
-      console.warn(`写真 "${he.encode(photo.id)}" のsummaryPathが設定されていません`); // import he
+      console.warn(
+        `写真 "${he.encode(photo.id)}" のsummaryPathが設定されていません`
+      );
       summaryMarkdown = '';
     } else {
       const result = await getUrl({
@@ -36,23 +36,7 @@ try {
       summaryMarkdown = (result as any).url.href;
     }
   } catch (e) {
-    console.error(`写真 "${he.encode(photo.id)}" のsummaryPath取得に失敗:`, e); // import he
-    summaryMarkdown = '';
-  }
-      summaryMarkdown = '';
-    } else {
-      const result = await getUrl({
-        path: photo.summaryPath,
-      });
-      summaryMarkdown = (result as any).url.href;
-    }
-  } catch (e) {
-summaryMarkdown = (result as any).url.href;
-    }
-  } catch (e) {
-    console.error('写真のsummaryPath取得に失敗:', e);
-    summaryMarkdown = '';
-  }
+    console.error(`写真 "${he.encode(photo.id)}" のsummaryPath取得に失敗:`, e);
     summaryMarkdown = '';
   }
   return summaryMarkdown;
