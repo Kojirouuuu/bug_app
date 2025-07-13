@@ -1,5 +1,8 @@
 // Mock API functions - replace with real AWS integrations later
 import { AnalyzeResult, ChatTurn } from '@/types';
+import { API, graphqlOperation } from 'aws-amplify';
+import { rollGacha } from '@/src/graphql/mutations';
+import { v4 as uuidv4 } from 'uuid';
 
 // Mock delay to simulate API calls
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -100,7 +103,9 @@ export async function chatWithFriend(message: string): Promise<ChatTurn[]> {
       role: "friend", 
       message: friendQuestions[Math.floor(Math.random() * friendQuestions.length)]
     },
-  ];}
+  ];
+}
+
 // Mock posting of discovery data to backend
 export async function postDiscovery(imageUri: string, location: { lat: number; lon: number }) {
   await delay(500);
@@ -108,13 +113,35 @@ export async function postDiscovery(imageUri: string, location: { lat: number; l
   return { pointsAwarded: 5 };
 }
 
-// Mock gacha draw
-export async function drawGacha(): Promise<'大当たり' | 'あたり' | 'ハズレ'> {
-  await delay(800);
-  const roll = Math.random();
-  if (roll < 0.1) return '大当たり';
-  if (roll < 0.4) return 'あたり';
-  return 'ハズレ';
+// Updated Gacha draw function that uses the rollGacha mutation
+export async function drawGacha(userId: string, gachaId: string): Promise<'大当たり' | 'あたり' | 'ハズレ'> {
+  try {
+    // Generate a client-side UUID for idempotency
+    const resultId = uuidv4();
+    
+    // Call the rollGacha mutation
+    const result = await API.graphql(
+      graphqlOperation(rollGacha, {
+        gachaID: gachaId,
+        userID: userId,
+        clientGeneratedId: resultId // This would be used in a real implementation for idempotency
+      })
+    );
+    
+    // Determine the result based on the ticket type
+    const ticketType = result.data.rollGacha.obtainedTicket.type;
+    
+    if (ticketType === 'LEGENDARY_GACHA_TICKET') {
+      return '大当たり';
+    } else if (ticketType === 'RARE_GACHA_TICKET') {
+      return 'あたり';
+    } else {
+      return 'ハズレ';
+    }
+  } catch (error) {
+    console.error('Error rolling gacha:', error);
+    throw error;
+  }
 }
 
 // Mock nearby bug recommendation

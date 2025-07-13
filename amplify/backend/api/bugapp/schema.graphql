@@ -4,6 +4,10 @@ input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
 
+type Mutation {
+  rollGacha(gachaID: ID!, userID: ID!): GachaResult!
+}
+
 # 昆虫観察記録
 type InsectObservation @model {
   id: ID!

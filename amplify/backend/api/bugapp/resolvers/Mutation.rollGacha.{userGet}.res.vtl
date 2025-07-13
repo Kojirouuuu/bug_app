@@ -1,0 +1,101 @@
+## [Start] Handle User GetItem response. **
+#if(!$util.isNull($ctx.result))
+  ## Check if the User has enough points
+  #set($userPoints = $ctx.result.points)
+  #set($gachaCostPoints = $ctx.stash.gachaCostPoints)
+  
+  #if($userPoints < $gachaCostPoints)
+    $util.error("Insufficient points to roll this gacha", "INSUFFICIENT_POINTS")
+  #end
+  
+  ## Store the user's current points
+  $util.qr($ctx.stash.put("userPoints", $userPoints))
+  
+  ## Generate a random ticket type from available tickets
+  #set($availableTickets = $ctx.stash.availableTickets)
+  #set($randomIndex = $util.math.floor($util.math.random() * $availableTickets.size()))
+  #set($ticketType = $availableTickets[$randomIndex])
+  $util.qr($ctx.stash.put("ticketType", $ticketType))
+  
+  ## Generate a unique ID for the Ticket
+  #set($ticketID = $util.autoId())
+  $util.qr($ctx.stash.put("ticketID", $ticketID))
+  
+  ## Set up the current timestamp
+  #set($now = $util.time.nowISO8601())
+  $util.qr($ctx.stash.put("now", $now))
+  
+  ## Set up the transaction items
+  #set($transactItems = [])
+  
+  ## 1. Update User points
+  #set($userUpdate = {
+    "operation": "UpdateItem",
+    "key": {
+      "id": $util.dynamodb.toDynamoDBJson($ctx.args.userID)
+    },
+    "update": {
+      "expression": "SET points = points - :costPoints",
+      "expressionValues": {
+        ":costPoints": $util.dynamodb.toDynamoDBJson($gachaCostPoints)
+      }
+    },
+    "condition": {
+      "expression": "points >= :costPoints",
+      "expressionValues": {
+        ":costPoints": $util.dynamodb.toDynamoDBJson($gachaCostPoints)
+      }
+    },
+    "tableName": "User-${ctx.stash.apiId}"
+  })
+  $util.qr($transactItems.add($userUpdate))
+  
+  ## 2. Create GachaResult
+  #set($gachaResult = {
+    "operation": "PutItem",
+    "key": {
+      "id": $util.dynamodb.toDynamoDBJson($ctx.stash.gachaResultID)
+    },
+    "attributeValues": {
+      "userID": $util.dynamodb.toDynamoDBJson($ctx.args.userID),
+      "gachaID": $util.dynamodb.toDynamoDBJson($ctx.args.gachaID),
+      "exchangedPoints": $util.dynamodb.toDynamoDBJson($gachaCostPoints),
+      "resultAt": $util.dynamodb.toDynamoDBJson($now),
+      "gachaResultObtainedTicketId": $util.dynamodb.toDynamoDBJson($ticketID),
+      "createdAt": $util.dynamodb.toDynamoDBJson($now),
+      "updatedAt": $util.dynamodb.toDynamoDBJson($now),
+      "__typename": $util.dynamodb.toDynamoDBJson("GachaResult")
+    },
+    "tableName": "GachaResult-${ctx.stash.apiId}"
+  })
+  $util.qr($transactItems.add($gachaResult))
+  
+  ## 3. Create Ticket
+  #set($ticket = {
+    "operation": "PutItem",
+    "key": {
+      "id": $util.dynamodb.toDynamoDBJson($ticketID)
+    },
+    "attributeValues": {
+      "type": $util.dynamodb.toDynamoDBJson($ticketType),
+      "userID": $util.dynamodb.toDynamoDBJson($ctx.args.userID),
+      "gachaResultID": $util.dynamodb.toDynamoDBJson($ctx.stash.gachaResultID),
+      "isUsed": $util.dynamodb.toDynamoDBJson(false),
+      "createdAt": $util.dynamodb.toDynamoDBJson($now),
+      "updatedAt": $util.dynamodb.toDynamoDBJson($now),
+      "__typename": $util.dynamodb.toDynamoDBJson("Ticket")
+    },
+    "tableName": "Ticket-${ctx.stash.apiId}"
+  })
+  $util.qr($transactItems.add($ticket))
+  
+  ## Execute the transaction
+  {
+    "version": "2018-05-29",
+    "operation": "TransactWriteItems",
+    "transactItems": $util.toJson($transactItems)
+  }
+#else
+  $util.error("User not found", "USER_NOT_FOUND")
+#end
+## [End] Handle User GetItem response. **

@@ -1,0 +1,15 @@
+## [Start] Handle TransactWriteItems response. **
+#if($ctx.error)
+  $util.error($ctx.error.message, $ctx.error.type)
+#end
+
+## Now fetch the complete GachaResult to return
+{
+  "version": "2018-05-29",
+  "operation": "GetItem",
+  "key": {
+    "id": $util.dynamodb.toDynamoDBJson($ctx.stash.gachaResultID)
+  },
+  "tableName": "GachaResult-${ctx.stash.apiId}"
+}
+## [End] Handle TransactWriteItems response. **

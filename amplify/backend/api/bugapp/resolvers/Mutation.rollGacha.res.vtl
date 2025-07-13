@@ -1,0 +1,26 @@
+## [Start] Handle GetItem response. **
+#if(!$util.isNull($ctx.result))
+  ## Check if the Gacha is active
+  #if($ctx.result.isActive == false)
+    $util.error("Gacha is not active", "GACHA_NOT_ACTIVE")
+  #end
+  
+  ## Store the Gacha cost and available tickets
+  $util.qr($ctx.stash.put("gachaCostPoints", $ctx.result.costPoints))
+  $util.qr($ctx.stash.put("availableTickets", $ctx.result.availableTickets))
+  
+  ## Now get the User to check if they have enough points
+  #set($userGetRequest = {
+    "version": "2018-05-29",
+    "operation": "GetItem",
+    "key": {
+      "id": $util.dynamodb.toDynamoDBJson($ctx.args.userID)
+    },
+    "tableName": "User-${ctx.stash.apiId}"
+  })
+  
+  #return($userGetRequest)
+#else
+  $util.error("Gacha not found", "GACHA_NOT_FOUND")
+#end
+## [End] Handle GetItem response. **

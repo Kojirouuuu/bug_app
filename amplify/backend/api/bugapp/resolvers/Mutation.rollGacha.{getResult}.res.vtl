@@ -1,0 +1,86 @@
+## [Start] Return the GachaResult. **
+#if(!$util.isNull($ctx.result))
+  ## Get the Ticket
+  #set($ticketID = $ctx.result.gachaResultObtainedTicketId)
+  #set($ticketGetRequest = {
+    "version": "2018-05-29",
+    "operation": "GetItem",
+    "key": {
+      "id": $util.dynamodb.toDynamoDBJson($ticketID)
+    },
+    "tableName": "Ticket-${ctx.stash.apiId}"
+  })
+  
+  ## Get the User
+  #set($userID = $ctx.result.userID)
+  #set($userGetRequest = {
+    "version": "2018-05-29",
+    "operation": "GetItem",
+    "key": {
+      "id": $util.dynamodb.toDynamoDBJson($userID)
+    },
+    "tableName": "User-${ctx.stash.apiId}"
+  })
+  
+  ## Get the Gacha
+  #set($gachaID = $ctx.result.gachaID)
+  #set($gachaGetRequest = {
+    "version": "2018-05-29",
+    "operation": "GetItem",
+    "key": {
+      "id": $util.dynamodb.toDynamoDBJson($gachaID)
+    },
+    "tableName": "Gacha-${ctx.stash.apiId}"
+  })
+  
+  ## Execute batch get
+  #set($batchGetRequest = {
+    "version": "2018-05-29",
+    "operation": "BatchGetItem",
+    "tables": {
+      "Ticket-${ctx.stash.apiId}": {
+        "keys": [
+          {
+            "id": $util.dynamodb.toDynamoDBJson($ticketID)
+          }
+        ]
+      },
+      "User-${ctx.stash.apiId}": {
+        "keys": [
+          {
+            "id": $util.dynamodb.toDynamoDBJson($userID)
+          }
+        ]
+      },
+      "Gacha-${ctx.stash.apiId}": {
+        "keys": [
+          {
+            "id": $util.dynamodb.toDynamoDBJson($gachaID)
+          }
+        ]
+      }
+    }
+  })
+  
+  #set($batchResult = $util.dynamodb.batchGetItem($batchGetRequest))
+  
+  ## Process batch results
+  #if(!$util.isNull($batchResult) && !$util.isNull($batchResult.data))
+    #set($ticket = $batchResult.data["Ticket-${ctx.stash.apiId}"][0])
+    #set($user = $batchResult.data["User-${ctx.stash.apiId}"][0])
+    #set($gacha = $batchResult.data["Gacha-${ctx.stash.apiId}"][0])
+    
+    ## Construct the response
+    #set($result = $ctx.result)
+    $util.qr($result.put("obtainedTicket", $ticket))
+    $util.qr($result.put("user", $user))
+    $util.qr($result.put("gacha", $gacha))
+    
+    $util.toJson($result)
+  #else
+    $util.toJson($ctx.result)
+  #end
+#else
+  $util.error("Failed to retrieve GachaResult", "INTERNAL_SERVER_ERROR")
+#end
+## [End] Return the GachaResult. **
