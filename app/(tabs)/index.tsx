@@ -1,19 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useBugStore } from '@/store/bugStore';
+import { useArticleStore } from '@/store/articleStore';
+import { ArticleForFrontend } from '@/types';
 import { useRewardStore } from '@/store/rewardStore';
 import { getNearbyBugs } from '@/services/mockApi';
 import BugCard from '@/components/BugCard';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 export default function HomeScreen() {
-  const { bugs } = useBugStore();
+  const { articles } = useArticleStore();
   const { boostLevel } = useRewardStore();
   const [nearby, setNearby] = useState<string[]>([]);
-  const recentBugs = bugs.slice(0, 3);
+  const recentBugs = articles.slice(0, 3);
 
   const handleCapture = () => {
     router.push('/capture');
@@ -34,6 +41,9 @@ export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top', 'bottom']}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
+        <TouchableOpacity onPress={() => router.push('/admin/create-data')}>
+          <Text>test画面へ</Text>
+        </TouchableOpacity>
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>虫図鑑</Text>
@@ -54,7 +64,7 @@ export default function HomeScreen() {
         <View style={styles.section}>
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>最近の発見</Text>
-            {bugs.length > 3 && (
+            {articles.length > 3 && (
               <TouchableOpacity onPress={handleViewAll}>
                 <Text style={styles.viewAllText}>すべて見る</Text>
               </TouchableOpacity>
@@ -62,11 +72,11 @@ export default function HomeScreen() {
           </View>
 
           {recentBugs.length > 0 ? (
-            recentBugs.map((bug) => (
+            recentBugs.map((article: ArticleForFrontend) => (
               <BugCard
-                key={bug.id}
-                bug={bug}
-                onPress={() => handleBugPress(bug.id)}
+                key={article.article.insects[0].id}
+                article={article}
+                onPress={() => handleBugPress(article.article.insects[0].id)}
                 showDate
               />
             ))
@@ -90,7 +100,9 @@ export default function HomeScreen() {
               <Text style={styles.sectionTitle}>近くで見つかるかも?</Text>
             </View>
             {nearby.map((name, idx) => (
-              <Text key={idx} style={styles.recommendItem}>• {name}</Text>
+              <Text key={idx} style={styles.recommendItem}>
+                • {name}
+              </Text>
             ))}
           </View>
         )}
@@ -182,4 +194,5 @@ const styles = StyleSheet.create({
     fontSize: Typography.medium,
     color: Colors.darkGray,
     marginBottom: Spacing.xs,
-  },});
+  },
+});

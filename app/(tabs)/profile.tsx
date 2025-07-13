@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   View,
@@ -11,21 +11,80 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { router } from 'expo-router';
-import { useBugStore } from '@/store/bugStore';
+import { useRouter } from 'expo-router';
+import { useArticleStore } from '@/store/articleStore';
 import { useSettingsStore } from '@/store/settingsStore';
 import { useRewardStore } from '@/store/rewardStore';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
+import { useUserStore } from '@/store/userStore';
+import { User } from '@/src/API';
 
 export default function ProfileScreen() {
-  const { bugs } = useBugStore();
+  const articleStore = useArticleStore();
+  const router = useRouter();
+  const { user, isAuthenticated } = useUserStore();
   const { friendGender, setFriendGender } = useSettingsStore();
   const { points } = useRewardStore();
+  const [isLoading, setIsLoading] = useState(true);
+  const [userData, setUserData] = useState<User[]>([]);
+  const [isNavigationReady, setIsNavigationReady] = useState(false);
+
+  // ストアが初期化されているかチェック
+  const articles = articleStore?.articles || [];
+
+  useEffect(() => {
+    // ナビゲーションの準備状態を確認
+    const checkNavigationReady = () => {
+      try {
+        // ナビゲーションが利用可能かチェック
+        if (router && typeof router.replace === 'function') {
+          setIsNavigationReady(true);
+        }
+      } catch (error) {
+        console.log('Navigation not ready yet:', error);
+      }
+    };
+
+    // 少し遅延させてナビゲーションの準備を待つ
+    const timer = setTimeout(checkNavigationReady, 100);
+    return () => clearTimeout(timer);
+  }, [router]);
+
+  useEffect(() => {
+    // ナビゲーションが準備できていない場合は待つ
+    if (!isNavigationReady) {
+      return;
+    }
+
+    // 認証状態をチェック
+    if (isAuthenticated === false) {
+      router.replace('/(auth)/login');
+      return;
+    }
+
+    // ローディング状態を解除
+    setIsLoading(false);
+  }, [isAuthenticated, isNavigationReady, router]);
+
+  // ナビゲーションが準備できていない場合はローディングを表示
+  if (!isNavigationReady) {
+    return <ActivityIndicator size="large" color={Colors.primary} />;
+  }
+
+  // 認証されていない場合は何も表示しない（リダイレクト中）
+  if (isAuthenticated === false) {
+    return null;
+  }
+
+  // ローディング中
+  if (isLoading) {
+    return <ActivityIndicator size="large" color={Colors.primary} />;
+  }
 
   const stats = [
-    { icon: 'bug', label: '発見した虫', value: bugs.length },
-    { icon: 'camera', label: '撮影回数', value: bugs.length },
-    { icon: 'book', label: '図鑑の項目', value: bugs.length },
+    { icon: 'bug', label: '発見した虫', value: articles.length },
+    { icon: 'camera', label: '撮影回数', value: articles.length },
+    { icon: 'book', label: '図鑑の項目', value: articles.length },
   ];
 
   const achievements = [
@@ -33,32 +92,43 @@ export default function ProfileScreen() {
       id: 'first-discovery',
       icon: 'star',
       title: 'はじめての発見',
-      description: bugs.length > 0 ? '達成済み' : '最初の虫を発見しよう',
-      isUnlocked: bugs.length > 0,
+      description: articles.length > 0 ? '達成済み' : '最初の虫を発見しよう',
+      isUnlocked: articles.length > 0,
     },
     {
       id: 'bug-apprentice',
       icon: 'trophy',
       title: '虫博士見習い',
       description:
-        bugs.length >= 5 ? '達成済み' : `5匹発見しよう (${bugs.length}/5)`,
-      isUnlocked: bugs.length >= 5,
+        articles.length >= 5
+          ? '達成済み'
+          : `5匹発見しよう (${articles.length}/5)`,
+      isUnlocked: articles.length >= 5,
     },
     {
       id: 'note-taker',
       icon: 'document-text',
       title: 'メモマスター',
       description:
-        bugs.filter((bug) => bug.notes && bug.notes.trim().length > 0).length >=
-        3
+        articles.filter(
+          (article) =>
+            article.article.insects[0]?.notes &&
+            article.article.insects[0].notes.trim().length > 0
+        ).length >= 3
           ? '達成済み'
           : `3匹にメモを書こう (${
-              bugs.filter((bug) => bug.notes && bug.notes.trim().length > 0)
-                .length
+              articles.filter(
+                (article) =>
+                  article.article.insects[0]?.notes &&
+                  article.article.insects[0].notes.trim().length > 0
+              ).length
             }/3)`,
       isUnlocked:
-        bugs.filter((bug) => bug.notes && bug.notes.trim().length > 0).length >=
-        3,
+        articles.filter(
+          (article) =>
+            article.article.insects[0]?.notes &&
+            article.article.insects[0].notes.trim().length > 0
+        ).length >= 3,
     },
     {
       id: 'curious-explorer',
@@ -189,21 +259,21 @@ export default function ProfileScreen() {
           <View style={styles.levelCard}>
             <View style={styles.levelHeader}>
               <Text style={styles.levelTitle}>
-                レベル {Math.floor(bugs.length / 3) + 1}
+                レベル {Math.floor(articles.length / 3) + 1}
               </Text>
-              <Text style={styles.levelProgress}>{bugs.length % 3}/3</Text>
+              <Text style={styles.levelProgress}>{articles.length % 3}/3</Text>
             </View>
             <View style={styles.progressBarContainer}>
               <View
                 style={[
                   styles.progressBar,
-                  { width: `${((bugs.length % 3) / 3) * 100}%` },
+                  { width: `${((articles.length % 3) / 3) * 100}%` },
                 ]}
               />
             </View>
             <Text style={styles.levelDescription}>
-              {bugs.length < 3
-                ? `あと${3 - (bugs.length % 3)}匹でレベルアップ！`
+              {articles.length < 3
+                ? `あと${3 - (articles.length % 3)}匹でレベルアップ！`
                 : '次のレベルまであと少し！'}
             </Text>
           </View>

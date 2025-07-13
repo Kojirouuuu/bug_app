@@ -25,7 +25,7 @@ import { ChatTurn } from '@/types';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 import { Insect } from '@/src/API';
 
-export default function ChatScreen() {
+export default function TestScreen() {
   const {
     bugName,
     imageUri,
@@ -46,7 +46,7 @@ export default function ChatScreen() {
 
   // Check if this bug is already in the collection
   const isAlreadySaved = bugName
-    ? insects.some((insect) => insect.japaneseName === bugName)
+    ? insects.some((insect: Insect) => insect.japaneseName === bugName)
     : false;
 
   const suggestedQuestions =
@@ -126,36 +126,6 @@ export default function ChatScreen() {
       Alert.alert('既に保存済み', 'この虫は既に図鑑に保存されています。');
       return;
     }
-
-    // Create mock bug data based on the bug name
-    const mockBugData = {
-      scientificName:
-        bugName === 'ダンゴムシ'
-          ? 'Armadillidium vulgare'
-          : bugName === 'ナナホシテントウ'
-          ? 'Coccinella septempunctata'
-          : bugName === 'モンシロチョウ'
-          ? 'Pieris rapae'
-          : 'Unknown species',
-      japaneseName: bugName || '不明な虫',
-      family:
-        bugName === 'ダンゴムシ'
-          ? 'Armadillidiidae'
-          : bugName === 'ナナホシテントウ'
-          ? 'Coccinellidae'
-          : bugName === 'モンシロチョウ'
-          ? 'Pieridae'
-          : 'Unknown family',
-      img:
-        imageUri ||
-        `https://images.pexels.com/photos/${Math.floor(
-          Math.random() * 1000000
-        )}/pexels-photo-${Math.floor(
-          Math.random() * 1000000
-        )}.jpeg?auto=compress&cs=tinysrgb&w=400`,
-    };
-
-    addInsect(mockBugData as unknown as Insect);
 
     Alert.alert(
       '図鑑に保存しました！',

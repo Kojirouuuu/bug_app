@@ -12,7 +12,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "auth": {
-    "bugapp": {
+    "bugapp050fc913": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -28,6 +28,12 @@ export type AmplifyDependentResourcesAttributes = {
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",
       "Name": "string",
+      "Region": "string"
+    }
+  },
+  "storage": {
+    "bugApp": {
+      "BucketName": "string",
       "Region": "string"
     }
   }

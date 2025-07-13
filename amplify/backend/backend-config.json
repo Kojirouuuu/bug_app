@@ -21,7 +21,9 @@
           "additionalAuthenticationProviders": [],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+              "apiKeyExpirationDate": "2026-07-12T09:35:34.763Z",
+              "apiKeyExpirationDays": 365,
+              "description": "bug_app_graphql_api"
             },
             "authenticationType": "API_KEY"
           }
@@ -32,7 +34,8 @@
     }
   },
   "auth": {
-    "bugapp": {
+    "bugapp050fc913": {
+      "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
@@ -47,14 +50,15 @@
           "EMAIL"
         ],
         "socialProviders": [],
-        "usernameAttributes": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "verificationMechanisms": [
           "EMAIL"
         ]
       },
       "providerPlugin": "awscloudformation",
-      "service": "Cognito",
-      "serviceType": "managed"
+      "service": "Cognito"
     }
   },
   "function": {
@@ -80,6 +84,13 @@
           "resourceName": "imageAnalysisAI"
         }
       ]
+    }
+  },
+  "storage": {
+    "bugApp": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }

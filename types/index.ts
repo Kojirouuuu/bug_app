@@ -1,4 +1,11 @@
 // Mock data types for the Bug Encyclopedia app
+import { Photo, Insect } from '@/src/API';
+
+export type Article = {
+  photos: Photo[];
+  insects: Insect[];
+};
+
 export type AnalyzeResult = {
   scientificName: string;
   japaneseName: string;
@@ -6,35 +13,18 @@ export type AnalyzeResult = {
   img: string;
 };
 
-export type ChatTurn = { 
-  role: "doctor" | "child" | "friend"; 
-  message: string; 
-};
-
-export type Bug = {
-  id: string;
-  scientificName: string;
-  japaneseName: string;
-  family: string;
-  img: string;
-  discoveredAt: Date;
-  notes?: string;
-};
-
-export type BugStore = {
-  bugs: Bug[];
-  addBug: (bug: Omit<Bug, 'id' | 'discoveredAt'>) => void;
-  updateBugNotes: (id: string, notes: string) => void;
-  getBugById: (id: string) => Bug | undefined;
+export type ChatTurn = {
+  role: 'doctor' | 'child' | 'friend';
+  message: string;
 };
 
 export type SettingsStore = {
   friendGender: 'boy' | 'girl';
-  setFriendGender: (gender: 'boy' | 'girl') => void;};
-export type RewardStore = {
-  points: number;
-  boostLevel: number;
-  addPoints: (amount: number) => void;
-  consumePoints: (amount: number) => boolean;
-  setBoost: (level: number) => void;
+  setFriendGender: (gender: 'boy' | 'girl') => void;
+};
+
+export type ArticleForFrontend = {
+  article: Article;
+  image: string;
+  summary: string;
 };

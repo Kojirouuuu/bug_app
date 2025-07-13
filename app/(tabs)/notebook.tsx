@@ -3,12 +3,12 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { useBugStore } from '@/store/bugStore';
+import { useArticleStore } from '@/store/articleStore';
 import BugCard from '@/components/BugCard';
 import { Colors, Typography, Spacing } from '@/constants/colors';
 
 export default function NotebookScreen() {
-  const { bugs } = useBugStore();
+  const { articles } = useArticleStore();
 
   const handleBugPress = (bugId: string) => {
     router.push(`/detail?id=${bugId}`);
@@ -20,27 +20,23 @@ export default function NotebookScreen() {
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>虫図鑑</Text>
-          <Text style={styles.subtitle}>
-            発見した虫: {bugs.length}匹
-          </Text>
+          <Text style={styles.subtitle}>発見した虫: {articles.length}匹</Text>
         </View>
 
         {/* Bug List */}
-        {bugs.length > 0 ? (
-          bugs.map((bug) => (
+        {articles.length > 0 ? (
+          articles.map((article) => (
             <BugCard
-              key={bug.id}
-              bug={bug}
-              onPress={() => handleBugPress(bug.id)}
+              key={article.article.insects[0].id}
+              article={article}
+              onPress={() => handleBugPress(article.article.insects[0].id)}
               showDate
             />
           ))
         ) : (
           <View style={styles.emptyState}>
             <Ionicons name="book-outline" size={64} color={Colors.gray} />
-            <Text style={styles.emptyStateText}>
-              まだ虫を発見していません
-            </Text>
+            <Text style={styles.emptyStateText}>まだ虫を発見していません</Text>
             <Text style={styles.emptyStateSubtext}>
               ホーム画面から虫を撮影して図鑑を作りましょう！
             </Text>
