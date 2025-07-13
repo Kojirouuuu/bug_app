@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Alert,
-  ActivityIndicator,
+  Image,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -174,8 +174,42 @@ export default function ProfileScreen() {
           <View style={styles.avatar}>
             <Ionicons name="person" size={48} color={Colors.white} />
           </View>
-          <Text style={styles.username}>{user.name}</Text>
-          <Text style={styles.points}>ポイント: {user.points}</Text>
+          <Text style={styles.username}>虫博士</Text>
+          <View style={styles.ticketsContainer}>
+            <View style={styles.ticketItem}>
+              <View style={styles.imageFrame}>
+                <Image
+                  source={require('@/assets/images/mushidama.png')}
+                  style={styles.profileImage}
+                  resizeMode="cover"
+                />
+              </View>
+              <Text style={styles.ticketLabel}>ポイント</Text>
+              <Text style={styles.ticketValue}>{points}</Text>
+            </View>
+            <View style={styles.ticketItem}>
+              <View style={styles.imageFrame}>
+                <Image
+                  source={require('@/assets/images/rainbowticket.png')}
+                  style={styles.profileImage}
+                  resizeMode="cover"
+                />
+              </View>
+              <Text style={styles.ticketLabel}>URチケット</Text>
+              <Text style={styles.ticketValue}>{points}</Text>
+            </View>
+            <View style={styles.ticketItem}>
+              <View style={styles.imageFrame}>
+                <Image
+                  source={require('@/assets/images/goldticket.png')}
+                  style={styles.profileImage}
+                  resizeMode="cover"
+                />
+              </View>
+              <Text style={styles.ticketLabel}>SRチケット</Text>
+              <Text style={styles.ticketValue}>{points}</Text>
+            </View>
+          </View>
         </View>
 
         {/* Stats */}
@@ -297,10 +331,39 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.darkGray,
   },
-  points: {
+  ticketsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: Spacing.md,
+    paddingHorizontal: Spacing.sm,
+  },
+  ticketItem: {
+    alignItems: 'center',
+    flex: 1,
+    marginHorizontal: Spacing.md,
+  },
+  imageFrame: {
+    borderWidth: 2,
+    borderColor: '#3dba8e',
+    borderRadius: BorderRadius.medium,
+    padding: 4,
+    marginVertical: Spacing.xs,
+  },
+  profileImage: {
+    width: 60,
+    height: 60,
+    borderRadius: BorderRadius.small,
+  },
+  ticketLabel: {
+    fontSize: 12,
+    color: Colors.darkGray,
+    textAlign: 'center',
+    marginTop: Spacing.xs,
+    marginBottom: Spacing.xs,
+  },
+  ticketValue: {
     fontSize: Typography.medium,
     color: Colors.accent,
-    marginTop: Spacing.sm,
     fontWeight: '600',
   },
   statsContainer: {
