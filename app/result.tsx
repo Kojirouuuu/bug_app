@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
@@ -15,12 +16,19 @@ import LoadingSpinner from '@/components/LoadingSpinner';
 import { AnalyzeResult } from '@/types';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 import { createSummary } from '@/lib/AI/summary';
+import { v4 as uuidv4 } from 'uuid';
+import { uploadInsectImage } from '@/lib/aws/storage';
+import { getCurrentLocation } from '@/lib/location';
+import { generateClient } from '@aws-amplify/api';
+import { createInsectObservation } from '@/src/graphql/mutations';
 
 export default function ResultScreen() {
   const { imageUri } = useLocalSearchParams<{ imageUri: string }>();
   const [result, setResult] = useState<AnalyzeResult | null>(null);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
   const { addInsect } = useArticleStore();
+  const client = generateClient();
 
   useEffect(() => {
     if (imageUri) {
@@ -49,21 +57,58 @@ export default function ResultScreen() {
     }
   };
 
-  const handleSaveBug = () => {
-    if (result) {
+  const handleSaveBug = async () => {
+    if (!result) return;
+    
+    try {
+      setSaving(true);
+      
+      // 1. Get current GPS coordinates
+      const coordinates = await getCurrentLocation();
+      
+      // 2. Upload image to S3
+      const { key, bucket } = await uploadInsectImage(imageUri, result.japaneseName);
+      
+      // 3. Create InsectObservation record in AppSync
+      const observationId = uuidv4();
+      const observationInput = {
+        id: observationId,
+        insectName: result.japaneseName,
+        scientificName: result.scientificName,
+        latitude: coordinates.latitude,
+        longitude: coordinates.longitude,
+        photoKey: key,
+        observedAt: new Date().toISOString(),
+        userID: 'current-user-id', // TODO: Replace with actual user ID
+        location: 'Captured location', // TODO: Reverse geocode to get location name
+        notes: '',
+      };
+      
+      await client.graphql({
+        query: createInsectObservation,
+        variables: { input: observationInput },
+      });
+      
+      // 4. Add to local store for immediate UI update
       addInsect({
         scientificName: result.scientificName,
         japaneseName: result.japaneseName,
         family: result.family,
         s3path: result.img,
       });
-
+      
+      // 5. Show success message
       Alert.alert('保存完了', '虫図鑑に追加されました！', [
         {
           text: 'OK',
           onPress: () => router.push('/(tabs)/profile'),
         },
       ]);
+    } catch (error) {
+      console.error('Error saving bug:', error);
+      Alert.alert('エラー', '保存に失敗しました。もう一度お試しください。');
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -138,9 +183,16 @@ export default function ResultScreen() {
             style={styles.saveButton}
             onPress={handleSaveBug}
             activeOpacity={0.8}
+            disabled={saving}
           >
-            <Ionicons name="bookmark" size={24} color={Colors.white} />
-            <Text style={styles.saveButtonText}>図鑑に保存</Text>
+            {saving ? (
+              <ActivityIndicator color={Colors.white} size="small" />
+            ) : (
+              <>
+                <Ionicons name="bookmark" size={24} color={Colors.white} />
+                <Text style={styles.saveButtonText}>図鑑に保存</Text>
+              </>
+            )}
           </TouchableOpacity>
         </View>
       </View>
