@@ -1,0 +1,21 @@
+## [Start] Prepare DynamoDB Calls. **
+$util.qr($ctx.stash.put("typeName", "Mutation"))
+$util.qr($ctx.stash.put("fieldName", "rollGacha"))
+
+## Get input arguments
+#set($gachaID = $ctx.args.gachaID)
+#set($userID = $ctx.args.userID)
+
+## Set up a unique ID for the GachaResult
+#set($gachaResultID = $util.autoId())
+$util.qr($ctx.stash.put("gachaResultID", $gachaResultID))
+
+## First, get the Gacha to check if it's active and get the cost
+{
+  "version": "2018-05-29",
+  "operation": "GetItem",
+  "key": {
+    "id": $util.dynamodb.toDynamoDBJson($gachaID)
+  },
+  "tableName": "Gacha-${ctx.stash.apiId}"
+}

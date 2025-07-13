@@ -6,6 +6,7 @@ export type RewardStore = {
   addPoints: (amount: number) => void;
   consumePoints: (amount: number) => boolean;
   setBoost: (level: number) => void;
+  setPoints: (points: number) => void;
 };
 
 export const useRewardStore = create<RewardStore>((set, get) => ({
@@ -18,4 +19,5 @@ export const useRewardStore = create<RewardStore>((set, get) => ({
     return true;
   },
   setBoost: (level) => set({ boostLevel: level }),
+  setPoints: (points) => set({ points }),
 }));

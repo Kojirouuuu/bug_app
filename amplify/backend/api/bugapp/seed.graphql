@@ -1,0 +1,69 @@
+# Seed data for testing the Gacha functionality
+
+# Create a test user with 100 points
+mutation CreateTestUser {
+  createUser(input: {
+    id: "user-123"
+    name: "Test User"
+    points: 100
+    createdAt: "2023-01-01T00:00:00.000Z"
+  }) {
+    id
+    name
+    points
+  }
+}
+
+# Create an active gacha with 30 points cost
+mutation CreateActiveGacha {
+  createGacha(input: {
+    id: "gacha-123"
+    name: "Test Gacha"
+    costPoints: 30
+    availableTickets: ["COMMON_GACHA_TICKET", "RARE_GACHA_TICKET", "LEGENDARY_GACHA_TICKET"]
+    isActive: true
+  }) {
+    id
+    name
+    costPoints
+    availableTickets
+    isActive
+  }
+}
+
+# Create an inactive gacha for testing
+mutation CreateInactiveGacha {
+  createGacha(input: {
+    id: "gacha-456"
+    name: "Inactive Gacha"
+    costPoints: 20
+    availableTickets: ["COMMON_GACHA_TICKET", "RARE_GACHA_TICKET"]
+    isActive: false
+  }) {
+    id
+    name
+    costPoints
+    availableTickets
+    isActive
+  }
+}
+
+# How to use:
+# 1. Start the Amplify mock API: amplify mock api
+# 2. Run these mutations in the GraphQL explorer
+# 3. Test the rollGacha mutation with:
+#
+# mutation RollGacha {
+#   rollGacha(gachaID: "gacha-123", userID: "user-123") {
+#     id
+#     userID
+#     gachaID
+#     exchangedPoints
+#     obtainedTicket {
+#       id
+#       type
+#       userID
+#     }
+#     resultAt
+#   }
+# }

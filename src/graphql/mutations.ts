@@ -8,6 +8,43 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
+export const rollGacha = /* GraphQL */ `mutation RollGacha(
+  $gachaID: ID!
+  $userID: ID!
+  $clientGeneratedId: ID
+) {
+  rollGacha(gachaID: $gachaID, userID: $userID, clientGeneratedId: $clientGeneratedId) {
+    id
+    userID
+    user {
+      id
+      name
+      points
+      __typename
+    }
+    gachaID
+    gacha {
+      id
+      name
+      costPoints
+      __typename
+    }
+    exchangedPoints
+    obtainedTicket {
+      id
+      type
+      userID
+      __typename
+    }
+    resultAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.RollGachaMutationVariables,
+  APITypes.RollGachaMutation
+>;
+
 export const createUser = /* GraphQL */ `mutation CreateUser(
   $input: CreateUserInput!
   $condition: ModelUserConditionInput
