@@ -12,6 +12,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useRewardStore } from '@/store/rewardStore';
 import { useArticleStore } from '@/store/articleStore';
 import { ArticleForFrontend } from '@/types';
+import { Colors } from '@/constants/colors';
 
 const { width, height } = Dimensions.get('window');
 
@@ -117,7 +118,7 @@ export default function GachaResults() {
         };
       case 'lose':
         return {
-          title: '外れ...',
+          title: 'はずれ...',
           subtitle: 'また挑戦してみよう！',
           color: '#6C757D',
         };
@@ -131,7 +132,7 @@ export default function GachaResults() {
       case 'win':
         return '+SRチケット';
       case 'lose':
-        return '';
+        return '獲得チケットなし';
     }
   };
 
@@ -201,13 +202,13 @@ export default function GachaResults() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1a1a1a',
+    backgroundColor: Colors.background,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
   },
   resultContainer: {
-    backgroundColor: '#2a2a2a',
+    backgroundColor: Colors.white,
     borderRadius: 20,
     padding: 30,
     alignItems: 'center',
@@ -222,12 +223,12 @@ const styles = StyleSheet.create({
   },
   resultSubtitle: {
     fontSize: 18,
-    color: '#ffffff',
+    color: '#4b4b4bff',
     marginBottom: 30,
     textAlign: 'center',
   },
   pointsContainer: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#3dba8e',
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 25,
@@ -251,7 +252,7 @@ const styles = StyleSheet.create({
   bugName: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#000000',
     marginBottom: 5,
   },
   bugScientificName: {
@@ -264,11 +265,16 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#3dba8e',
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 10,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    elevation: 4,
   },
   buttonText: {
     color: 'white',
@@ -278,9 +284,9 @@ const styles = StyleSheet.create({
   secondaryButton: {
     backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: '#007AFF',
+    borderColor: '#3dba8e',
   },
   secondaryButtonText: {
-    color: '#007AFF',
+    color: '#3dba8e',
   },
 });
