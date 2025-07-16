@@ -12,6 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useArticleStore } from '@/store/articleStore';
+import { useGachaStore } from '@/store/gachaStore';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { AnalyzeResult } from '@/types';
 import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
@@ -28,6 +29,7 @@ export default function ResultScreen() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const { addInsect } = useArticleStore();
+  const { performGacha, discoveredInsects } = useGachaStore();
   const client = generateClient();
 
   useEffect(() => {
@@ -63,33 +65,12 @@ export default function ResultScreen() {
     try {
       setSaving(true);
       
-      // 1. Get current GPS coordinates
-      const coordinates = await getCurrentLocation();
+      // ガチャを実行
+      const userId = 'user-1';
+      const gachaId = 'basic-gacha';
+      const gachaResult = await performGacha(gachaId, userId);
       
-      // 2. Upload image to S3
-      const { key, bucket } = await uploadInsectImage(imageUri, result.japaneseName);
-      
-      // 3. Create InsectObservation record in AppSync
-      const observationId = uuidv4();
-      const observationInput = {
-        id: observationId,
-        insectName: result.japaneseName,
-        scientificName: result.scientificName,
-        latitude: coordinates.latitude,
-        longitude: coordinates.longitude,
-        photoKey: key,
-        observedAt: new Date().toISOString(),
-        userID: 'current-user-id', // TODO: Replace with actual user ID
-        location: 'Captured location', // TODO: Reverse geocode to get location name
-        notes: '',
-      };
-      
-      await client.graphql({
-        query: createInsectObservation,
-        variables: { input: observationInput },
-      });
-      
-      // 4. Add to local store for immediate UI update
+      // 発見した昆虫を追加
       addInsect({
         scientificName: result.scientificName,
         japaneseName: result.japaneseName,
@@ -97,8 +78,14 @@ export default function ResultScreen() {
         s3path: result.img,
       });
       
-      // 5. Show success message
-      Alert.alert('保存完了', '虫図鑑に追加されました！', [
+      // 結果に応じてメッセージを表示
+      const message = gachaResult.result === 'jackpot' ? 
+        '大当たり！レアな虫を発見しました！' :
+        gachaResult.result === 'win' ?
+        '当たり！新しい虫を発見しました！' :
+        '虫図鑑に追加されました！';
+      
+      Alert.alert('保存完了', message, [
         {
           text: 'OK',
           onPress: () => router.push('/(tabs)/profile'),

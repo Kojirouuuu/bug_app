@@ -175,7 +175,7 @@ export default function ProfileScreen() {
           <View style={styles.avatar}>
             <Ionicons name="person" size={48} color={Colors.white} />
           </View>
-          <Text style={styles.username}>虫博士</Text>
+          <Text style={styles.username}>{username}</Text>
           <View style={styles.ticketsContainer}>
             <View style={styles.ticketItem}>
               <View style={styles.imageFrame}>

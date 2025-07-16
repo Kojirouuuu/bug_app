@@ -18,6 +18,7 @@ interface AuthFormLayoutProps {
   disabled?: boolean;
   error?: string;
   helpText?: React.ReactNode;
+  
 }
 
 export default function AuthFormLayout({

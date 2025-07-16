@@ -3,26 +3,12 @@
 input AMPLIFY {
   globalAuthRule: AuthRule = { allow: public }
 } # FOR TESTING ONLY!
-
-# 昆虫観察記録
-type InsectObservation @model {
-  id: ID!
-  insectName: String!
-  scientificName: String
-  latitude: Float!
-  longitude: Float!
-  photoKey: String!
-  observedAt: AWSDateTime!
-  userID: ID! @index(name: "byUser")
-  user: User @belongsTo(fields: ["userID"])
-  location: String
-  notes: String
-}
 # ユーザー情報
 type User @model {
   id: ID!
+  email: String! @index(name: "byEmail")
   name: String! @index(name: "byName")
-  cognitosub: String @index(name: "byCognitoSub")
+  password: String!
   createdAt: AWSDateTime!
   lastLogin: AWSDateTime
   region: String @index(name: "byRegion")
