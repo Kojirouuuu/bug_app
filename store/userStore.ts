@@ -75,6 +75,7 @@ export const useUserStore = create<UserStore>((set, get) => ({
 
       const isSignInComplete = await signInWithCognito(email, password);
       console.log('isSignInComplete', isSignInComplete);
+  
       if (isSignInComplete) {
         // TODO: dynamoDBからユーザー情報を取得する時に引数がemailなのか？
         const currentUser = await getCurrentUserFromDynamo(

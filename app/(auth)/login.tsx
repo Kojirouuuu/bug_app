@@ -55,25 +55,25 @@ export default function LoginScreen() {
       loading={loading}
       error={error || undefined}
       helpText={helpText}
-      children={
+      children={(
         <>
-          <AuthFormField
-            label="メールアドレス"
-            placeholder="example@example.com"
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <AuthFormField
-            label="パスワード"
-            placeholder="パスワードを入力"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry
-          />
-        </>
-      }
-    />
+        <AuthFormField
+        label="メールアドレス"
+        placeholder="example@example.com"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <AuthFormField
+        label="パスワード"
+        placeholder="パスワードを入力"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      </>
+      )}
+    />      
   );
 }

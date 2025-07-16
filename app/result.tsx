@@ -21,7 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { uploadInsectImage } from '@/lib/aws/storage';
 import { getCurrentLocation } from '@/lib/location';
 import { generateClient } from '@aws-amplify/api';
-import { createInsectObservation } from '@/src/graphql/mutations';
+//import { createInsectObservation } from '@/src/graphql/mutations';
 
 export default function ResultScreen() {
   const { imageUri } = useLocalSearchParams<{ imageUri: string }>();

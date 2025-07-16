@@ -11,7 +11,7 @@ import { Colors, Typography, Spacing, BorderRadius } from '@/constants/colors';
 
 interface AuthFormLayoutProps {
   title: string;
-  children: React.ReactNode;
+  children: React.ReactNode
   buttonText: string;
   onButtonPress: () => void;
   loading?: boolean;
